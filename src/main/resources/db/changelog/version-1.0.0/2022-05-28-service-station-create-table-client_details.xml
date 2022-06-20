@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'client_details'"
+               author="Grigorovich">
+        <sql>
+            create table client_details
+            (
+                client_details_id           int auto_increment,
+                client_details_num_passport varchar(50),
+                constraint client_details_pk
+                    primary key (client_details_id),
+                constraint client_client_details_fk
+                    foreign key (client_details_id)
+                        references client (client_id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

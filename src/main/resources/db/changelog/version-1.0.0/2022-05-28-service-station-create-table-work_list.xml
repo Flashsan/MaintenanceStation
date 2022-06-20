@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'work_list'"
+               author="Grigorovich">
+        <sql>
+            create table work_list
+            (
+                work_list_id    int auto_increment,
+                work_list_name  varchar(50),
+                work_list_coast varchar(50),
+                orders_id       int,
+                constraint work_list_pk
+                    primary key (work_list_id),
+                constraint work_list_orders_fk
+                    foreign key (orders_id)
+                        references orders (orders_id)
+                        ON DELETE SET NULL
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'mechanic_work_list'"
+               author="Grigorovich">
+        <sql>
+            create table mechanic_work_list
+            (
+                mechanic_id  int,
+                work_list_id int,
+                constraint mechanic_work_list_pk
+                    primary key (mechanic_id, work_list_id),
+                constraint mechanic_pk
+                    foreign key (mechanic_id)
+                        references mechanic (mechanic_id)
+                        ON DELETE CASCADE,
+                constraint work_list_pk
+                    foreign key (work_list_id)
+                        references work_list (work_list_id)
+                        ON DELETE CASCADE
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,15 +1,44 @@
 package com.it.academy.maintenancestation.entity;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
-public class Administrator {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+public class Administrator implements Serializable {
+
+    /**
+     * id entity administrator.
+     */
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
+    @Column(
+            name = "administrator_id"
+    )
     private Integer administratorId;
+
+    /**
+     * name entity administrator.
+     */
+    @Column(
+            name = "administrator_name"
+    )
     private String administratorName;
+
+    /**
+     * lastname entity administrator.
+     */
+    @Column(
+            name = "administrator_last_name"
+    )
     private String administratorLastName;
 
-
-    //    @OneToMany(mappedBy = "administrator", fetch = FetchType.LAZY)
-//    private List<Orders> orders;
 }

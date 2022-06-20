@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-add test data to table 'car_details'"
+               author="Grigorovich">
+        <sql>
+            insert into car_details(car_details_type_engine,
+                                    car_details_value_engine,
+                                    car_details_type_transmission,
+                                    car_details_type_body,
+                                    car_details_year_of_issue)
+            values ("Дизель", "2000", "МКПП", "седан", "2008"),
+                   ("Бензин", "1800", "АКПП", "универсал", "2013"),
+                   ("Дизель", "2500", "МКПП", "универсал", "2007")
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>

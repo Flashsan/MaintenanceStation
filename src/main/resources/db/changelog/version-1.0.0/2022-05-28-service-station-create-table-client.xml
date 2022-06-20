@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'client'"
+               author="Grigorovich">
+        <sql>
+            create table client
+            (
+                client_id               int auto_increment,
+                client_name      varchar(50),
+                client_last_name varchar(50),
+                constraint client_pk primary key (client_id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

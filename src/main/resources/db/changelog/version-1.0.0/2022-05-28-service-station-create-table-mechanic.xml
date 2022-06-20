@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'mechanic'"
+               author="Grigorovich">
+        <sql>
+            create table mechanic
+            (
+                mechanic_id              int auto_increment,
+                mechanic_name            varchar(50),
+                mechanic_last_name       varchar(50),
+                constraint mechanic_pk
+                    primary key (mechanic_id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
