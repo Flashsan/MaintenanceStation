@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Builder
+@Table(name = "administrator")
 public class Administrator implements Serializable {
 
     /**

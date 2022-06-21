@@ -1,20 +1,27 @@
 package com.it.academy.maintenancestation.controller;
 
+import com.it.academy.maintenancestation.entity.Administrator;
+import com.it.academy.maintenancestation.service.AdministratorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
-@RestController
-@RequestMapping("/administrator")
-//@SessionAttributes("administrator")
+@Controller
 public class AdministratorController {
 
-    @GetMapping("/showAllAdministrator")
-    public String showAllAdministrator(Model model){
-//        model.addAttribute("administrators" );
-        return null;
+    @Autowired
+    private AdministratorService administratorService;
+
+    @RequestMapping("/")
+    public String viewAllAdministrator(Model model) {
+        List<Administrator> administratorList =
+                administratorService.listAllAdministrators();
+        model.addAttribute("administratorList", administratorList);
+        return "index";
     }
 
 }

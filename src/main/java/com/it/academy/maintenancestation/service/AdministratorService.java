@@ -3,6 +3,7 @@ package com.it.academy.maintenancestation.service;
 import com.it.academy.maintenancestation.entity.Administrator;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * AdministratorService
@@ -17,7 +18,7 @@ public interface AdministratorService {
      *
      * @return all administrators
      */
-    List<Administrator> showAllAdministrators();
+    List<Administrator> listAllAdministrators();
 
     /**
      * service - find administrator by id
@@ -25,28 +26,14 @@ public interface AdministratorService {
      * @param administratorId
      * @return administrator by id
      */
-    Administrator findAdministratorById(Integer administratorId);
+    Optional<Administrator> findAdministratorById(Integer administratorId);
 
     /**
      * service - create administrator
      *
-     * @param name
-     * @param lastName
+     * @param administrator
      */
-    void saveAdministrator(
-            String name,
-            String lastName);
-
-    /**
-     * service - update information about administrator
-     *
-     * @param administratorId
-     * @param name
-     * @param lastName
-     */
-    void updateAdministrator(Integer administratorId,
-                                      String name,
-                                      String lastName);
+    void saveAdministrator(Administrator administrator);
 
     /**
      * service - delete administrator by id
