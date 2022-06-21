@@ -20,7 +20,7 @@ public class AdministratorServiceImpl
 
     @Override
     public List<Administrator> listAllAdministrators() {
-        return (List<Administrator>) administratorRepository.findAll();
+        return administratorRepository.findAll();
     }
 
     @Override

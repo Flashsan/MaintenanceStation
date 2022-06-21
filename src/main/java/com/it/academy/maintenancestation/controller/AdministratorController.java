@@ -18,10 +18,16 @@ public class AdministratorController {
 
     @RequestMapping("/")
     public String viewAllAdministrator(Model model) {
-        List<Administrator> administratorList =
-                administratorService.listAllAdministrators();
-        model.addAttribute("administratorList", administratorList);
+        model.addAttribute("administrator", administratorService.listAllAdministrators());
         return "index";
     }
+
+    @RequestMapping("/new")
+    public String showNewFormCreateAdministrator(Model model) {
+        Administrator administrator = new Administrator();
+        model.addAttribute("admistrator", administrator);
+        return "new_administrator";
+    }
+
 
 }

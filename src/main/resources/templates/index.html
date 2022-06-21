@@ -10,7 +10,7 @@
     <h1>Administrator list</h1>
     <a href="/new">Create New Administrator</a>
     <br/><br/>
-    <table >
+    <table>
         <thead>
         <tr>
             <th>Administrator ID</th>
@@ -20,10 +20,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="administrators:${admimistratorList}">
-            <td th:text="${administrators.id}">Administrator ID</td>
-            <td th:text="${administrators.name}">Name</td>
-            <td th:text="${administrators.lastName}">LastName</td><td>
+        <tr th:each="administrator:${administrator}">
+            <td th:text="${administrator.administratorId}">Administrator ID</td>
+            <td th:text="${administrator.administratorName}">Name</td>
+            <td th:text="${administrator.administratorLastName}">LastName</td>
+            <td>
                 <a th:href="@{'/edit/' + ${administrator.administratorId}}">Edit</a>
                 &nbsp;&nbsp;&nbsp;
                 <a th:href="@{'/delete/' + ${administrator.administratorId}}">Delete</a>
