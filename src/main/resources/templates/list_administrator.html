@@ -20,14 +20,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="administrator:${administrator}">
-            <td th:text="${administrator.administratorId}">Administrator ID</td>
-            <td th:text="${administrator.administratorName}">Name</td>
-            <td th:text="${administrator.administratorLastName}">LastName</td>
+        <tr th:each="administratorDto:${administrator}">
+            <td th:text="${administratorDto.id}">Administrator ID</td>
+            <td th:text="${administratorDto.name}">Name</td>
+<!--            <td th:text="${administrator.lastName}">LastName</td>-->
             <td>
-                <a th:href="@{'/edit/' + ${administrator.administratorId}}">Edit</a>
+                <a th:href="@{'/edit/' + ${administratorDto.id}}">Edit</a>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="@{'/delete/' + ${administrator.administratorId}}">Delete</a>
+                <a th:href="@{'/delete/' + ${administratorDto.id}}">Delete</a>
             </td>
         </tr>
         </tbody>

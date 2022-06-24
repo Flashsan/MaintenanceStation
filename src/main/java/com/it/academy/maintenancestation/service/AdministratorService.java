@@ -1,5 +1,6 @@
 package com.it.academy.maintenancestation.service;
 
+import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.entity.Administrator;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface AdministratorService {
      *
      * @return all administrators
      */
-    List<Administrator> listAllAdministrators();
+    List<AdministratorDto> listAllAdministrators();
 
     /**
      * service - find administrator by id

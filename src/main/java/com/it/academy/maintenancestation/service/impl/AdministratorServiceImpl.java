@@ -1,14 +1,17 @@
 package com.it.academy.maintenancestation.service.impl;
 
+import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.entity.Administrator;
 import com.it.academy.maintenancestation.repository.AdministratorRepository;
 import com.it.academy.maintenancestation.service.AdministratorService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -17,10 +20,16 @@ public class AdministratorServiceImpl
 
     @Autowired
     private AdministratorRepository administratorRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public List<Administrator> listAllAdministrators() {
-        return administratorRepository.findAll();
+    public List<AdministratorDto> listAllAdministrators() {
+        List<Administrator> administratorList =
+                administratorRepository.findAll();
+        return administratorList.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -36,5 +45,10 @@ public class AdministratorServiceImpl
     @Override
     public void deleteAdministratorById(Integer administratorId) {
         administratorRepository.deleteById(administratorId);
+    }
+
+    private AdministratorDto convertToDto(Administrator administrator) {
+        AdministratorDto administratorDto = modelMapper.map(administrator, AdministratorDto.class);
+        return administratorDto;
     }
 }
