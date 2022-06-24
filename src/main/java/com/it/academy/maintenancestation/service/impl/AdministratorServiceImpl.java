@@ -24,8 +24,8 @@ public class AdministratorServiceImpl
     }
 
     @Override
-    public Optional<Administrator> findAdministratorById(Integer administratorId) {
-        return administratorRepository.findById(administratorId);
+    public Administrator findAdministratorById(Integer administratorId) {
+        return administratorRepository.findById(administratorId).get();
     }
 
     @Override

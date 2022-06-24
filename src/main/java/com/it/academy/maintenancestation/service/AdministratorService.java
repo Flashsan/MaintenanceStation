@@ -26,7 +26,7 @@ public interface AdministratorService {
      * @param administratorId
      * @return administrator by id
      */
-    Optional<Administrator> findAdministratorById(Integer administratorId);
+    Administrator findAdministratorById(Integer administratorId);
 
     /**
      * service - create administrator
