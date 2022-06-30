@@ -2,44 +2,38 @@ package com.it.academy.maintenancestation.controller;
 
 import com.it.academy.maintenancestation.entity.Administrator;
 import com.it.academy.maintenancestation.service.AdministratorService;
-import com.it.academy.maintenancestation.service.impl.AdministratorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@Import(AdministratorServiceImpl.class)
+@RequestMapping("/administrator")
 public class AdministratorController {
 
     @Autowired
     private AdministratorService administratorService;
 
 
-    @RequestMapping("/")
-    public String viewAllAdministrator(Model model) {
+    @RequestMapping("/listAdministrators")
+    public String listAdministrators(Model model) {
         model.addAttribute("administrator", administratorService.listAllAdministrators());
-        return "list_administrator";
+        return "administrator";
     }
 
-    @RequestMapping("/new")
-    public String showNewFormCreateAdministrator(Model model) {
-        Administrator administrator = new Administrator();
-        model.addAttribute("admistrator", administrator);
-        return "new_administrator";
+    @PostMapping("/newAdministrator")
+    public String newAdministrator(Administrator administrator) {
+        administratorService.newAdministrator(administrator);
+        return "redirect:/administrator/list_administrator";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveAdministrator(@ModelAttribute("administrator") Administrator administrator) {
-        administratorService.saveAdministrator(administrator);
-        return "redirect:/";
-    }
+//    @RequestMapping(value = "/save", method = RequestMethod.POST)
+//    public String saveAdministrator(@ModelAttribute("administrator") Administrator administrator) {
+//        administratorService.saveAdministrator(administrator);
+//        return "redirect:/";
+//    }
 
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditAdministratorPage(@PathVariable(name = "id") int id) {

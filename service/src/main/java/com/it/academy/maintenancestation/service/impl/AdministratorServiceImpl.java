@@ -7,6 +7,7 @@ import com.it.academy.maintenancestation.repository.AdministratorRepository;
 import com.it.academy.maintenancestation.service.AdministratorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class AdministratorServiceImpl
 
 
     @Override
-    public void saveAdministrator(Administrator administrator) {
+    public void newAdministrator(Administrator administrator) {
         administratorRepository.save(administrator);
     }
 

@@ -3,6 +3,7 @@ package com.it.academy.maintenancestation.service;
 
 import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.entity.Administrator;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public interface AdministratorService {
      *
      * @param administrator
      */
-    void saveAdministrator(Administrator administrator);
+    void newAdministrator(Administrator administrator);
 
     /**
      * service - delete administrator by id
@@ -42,4 +43,5 @@ public interface AdministratorService {
      * @param administratorId
      */
     void deleteAdministratorById(Integer administratorId);
+
 }
