@@ -6,21 +6,19 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "administrator")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
-@Table(name = "administrator")
 public class Administrator implements Serializable {
 
     /**
      * id entity administrator.
      */
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "administrator_id"
     )
@@ -41,5 +39,8 @@ public class Administrator implements Serializable {
             name = "administrator_last_name"
     )
     private String administratorLastName;
+//
+//    @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Orders> ordersList;
 
 }

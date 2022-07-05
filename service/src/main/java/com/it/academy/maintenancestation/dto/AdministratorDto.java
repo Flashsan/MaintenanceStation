@@ -1,19 +1,19 @@
 package com.it.academy.maintenancestation.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+//@Builder
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Getter
+//@Setter
 public class AdministratorDto {
 
-    private Integer id;
-    private String name;
-    private String lastName;
+//    private Integer idAdministrator;
+//    private String nameAdministrator;
+//    private String lastNameAdministrator;
+//    private List<OrdersDto> orderDtoList;
 
 }
