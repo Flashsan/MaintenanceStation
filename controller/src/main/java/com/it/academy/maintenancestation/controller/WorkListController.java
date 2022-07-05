@@ -26,7 +26,8 @@ public class WorkListController {
 
     @GetMapping("/listWorkList")
     public String listWorkList(Model model) {
-        model.addAttribute("workListDtoList", workListService.listAllWorkList());
+        List<WorkListDto> workListDtosList =  workListService.listAllWorkList();
+        model.addAttribute("workListDtosList", workListDtosList);
         return "workList";
     }
 }

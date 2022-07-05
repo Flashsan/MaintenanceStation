@@ -38,10 +38,12 @@ public class WorkListServiceImpl
         exportFromDBWorkList.stream()
                 .forEach(workList -> {
                     WorkListDto workListDto = workListConverter.toDto(workList);
+                    System.out.println(workListDto.toString());
                     workListDtos.add(workListDto);
                 });
         return workListDtos;
-    }    }
+    }
+}
 //    @Override
 //    public WorkListDto addWorkList(WorkListDto workListDto) {
 //        WorkList workList = new WorkList();
