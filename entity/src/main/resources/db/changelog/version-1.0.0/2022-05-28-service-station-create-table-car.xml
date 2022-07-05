@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'car'"
+               author="Grigorovich">
+        <sql>
+            create table car
+            (
+                car_id     int auto_increment,
+                car_model  varchar(50),
+                car_color  varchar(50),
+                car_number varchar(50),
+                client_id  int,
+                constraint car_pk
+                    primary key (car_id),
+                constraint car_client_fk
+                    foreign key (client_id)
+                        references client (client_id)
+                        ON DELETE CASCADE
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

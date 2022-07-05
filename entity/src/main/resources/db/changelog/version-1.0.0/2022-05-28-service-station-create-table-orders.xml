@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'orders'"
+               author="Grigorovich">
+        <sql>
+            create table orders
+            (
+                orders_id                int auto_increment,
+                orders_description       varchar(50),
+                car_id                   int,
+                orders_inspection_result varchar(50),
+                administrator_id         int,
+                constraint orders_pk
+                    primary key (orders_id),
+                constraint orders_administrator_fk
+                    foreign key (administrator_id)
+                        references administrator (administrator_id)
+                        ON DELETE SET NULL,
+                constraint orders_car_fk
+                    foreign key (car_id)
+                        references car (car_id)
+                        ON DELETE SET NULL
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

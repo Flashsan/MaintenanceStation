@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <!--tables-->
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-client.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-client_details.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-car.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-car_details.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-administrator.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-orders.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-work_list.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-spare_part.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-mechanic.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-mechanic_details.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-work_list_mechanic.xml"/>
+
+    <!--   test data -->
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-client.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-client_details.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-car.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-car_details.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-administrator.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-orders.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-work_list.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-spare_part.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-mechanic.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-mechanic_details.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-work_list_mechanic.xml"/>
+</databaseChangeLog>
