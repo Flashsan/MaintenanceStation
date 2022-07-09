@@ -1,10 +1,9 @@
 package com.it.academy.maintenancestation.dto;
 
+import com.it.academy.maintenancestation.entity.Mechanic;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Builder
 @NoArgsConstructor
@@ -16,7 +15,14 @@ public class WorkListDto {
     private Integer workListId;
     private String workListName;
     private String workListCoast;
-//    private Set<String> mechanics = new HashSet<>();
+    private Set<MechanicDto> mechanic = new HashSet<>();
 
-
+    @Override
+    public String toString() {
+        return "WorkListDto{" +
+                "workListId=" + workListId +
+                ", workListName='" + workListName + '\'' +
+                ", workListCoast='" + workListCoast + '\'' +
+                '}';
+    }
 }

@@ -3,43 +3,57 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
-    <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../static/main.js" th:src="@{/main.js}"></script>
-    <meta charset="utf-8"/>
-    <title>List Administrators</title>
+    <div th:replace="fragments :: html_head(type='none')"/>
+    <link rel="stylesheet" href="static/videoo-bg.css">
+    <script type="text/javascript" th:src="@{/videoo-bg.css}" src="../static/videoo-bg.css"></script>
 </head>
-<body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Service Station</a>
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/administrator/listAdministrators">Administrators</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/orders/listOrders">Orders</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/workList/listWorkList">WorkList</a>
-            </li>
-        </ul>
+<body>
+<div th:replace="fragments::menu"/>
+</div>
+
+<header>
+<!--    &lt;!&ndash; This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS &ndash;&gt;-->
+<!--    <div class="overlay"></div>-->
+
+<!--    &lt;!&ndash; The HTML5 video element that will create the background video on the header &ndash;&gt;-->
+<!--    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">-->
+<!--        <source src="gvidoWorkShop.mp4" type="video/mp4">-->
+<!--    </video>-->
+
+<!--    <video autoplay muted loop id="myVideo">-->
+<!--        <source src="gvidoWorkShop.mp4" type="video/mp4">-->
+<!--    </video>-->
+
+    <img src="Gvido.jpg" />
+
+    <!-- The header content -->
+    <div class="container h-100">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-black-50">
+                <h1 class="display-3">Maintenance station</h1>
+                <p class="lead mb-0">Наши мастера - залог функционирования вашего автомобиля</p>
+            </div>
+        </div>
     </div>
-</nav>
+</header>
+<div class="container">
+<!-- Page section example for content below the video header -->
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <p>Если Вы оказались здесь, значит, Вам необходима диагностика, ТО или ремонт автомобиля в Минске.</p>
+                <p>Наш автосервис работает с любыми марками и моделями автомобилей: немецких, французских, российских,
+                    испанских, японских и американских производителей.</p>
+                <p>Особо отметим наш внушительный опыт работы с автомобилями концерна VAG (Audi, Volkswagen, Skoda,
+                    Seat, Porsche и Bentley).</p>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+<div th:replace="fragments::footer"/>
 
 </body>
 </html>

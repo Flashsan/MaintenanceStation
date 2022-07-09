@@ -1,64 +1,70 @@
 package com.it.academy.maintenancestation.controller;
 
-
 import com.it.academy.maintenancestation.dto.MechanicDto;
 import com.it.academy.maintenancestation.dto.WorkListDto;
-import com.it.academy.maintenancestation.entity.Mechanic;
-import com.it.academy.maintenancestation.repository.MechanicRepository;
 import com.it.academy.maintenancestation.service.MechanicService;
 import com.it.academy.maintenancestation.service.WorkListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/workList")
+//@SessionAttributes("workList")
 public class WorkListController {
+
+    public static final String WORK_LIST_DTOS_LIST = "workListDtosList";
+    public static final String WORK_LIST = "workList";
+    public static final String REDIRECT_TO_WORK_LIST = "redirect:/workList/";
+
 
     @Autowired
     private WorkListService workListService;
 
-    @GetMapping("/listWorkList")
+    @Autowired
+    private MechanicService mechanicService;
+
+    @GetMapping("/")
     public String listWorkList(Model model) {
-        List<WorkListDto> workListDtosList =  workListService.listAllWorkList();
-        model.addAttribute("workListDtosList", workListDtosList);
-        return "workList";
+        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.listAllWorkList());
+        return WORK_LIST;
     }
+
+    @GetMapping("/addFormWorkList")
+    public String showCreateNewWorkListForm(Model model) {
+        List<MechanicDto> mechanicList = mechanicService.listAllMechanics();
+        model.addAttribute("mechanicListDtosList", mechanicList);
+        model.addAttribute("workListDto", new WorkListDto());
+        return "workListAddEdit";
+    }
+
+
+    @PostMapping(value = "/addWorkList")
+    public String addWorkList(@ModelAttribute("workListDto") @Valid WorkListDto workListDto) {
+        workListService.addWorkList(workListDto);
+        return REDIRECT_TO_WORK_LIST;
+    }
+
+    @RequestMapping("/editWorkList/{id}")
+    public String editWorkList(@PathVariable("id") Integer id, Model model) {
+        WorkListDto workListDto = workListService.findById(id);
+        model.addAttribute("workListDto", workListDto);
+        List<MechanicDto> mechanicList = mechanicService.listAllMechanics();
+        model.addAttribute("mechanicListDtosList", mechanicList);
+        return "workListAddEdit";
+    }
+
+    @RequestMapping(value = "/deleteWorkList/{id}")
+    public String deleteWorkList(@PathVariable("id") Integer workListId) {
+        workListService.deleteWorkListById(workListId);
+        return REDIRECT_TO_WORK_LIST;
+    }
+
 }
-//    @GetMapping("/newWorkList")
-//    public String showCreateNewWorkListForm(Model model) {
-//        List<MechanicDto> mechanicList = mechanicService.listAllMechanics();
-//        model.addAttribute("mechanicList", mechanicList);
-//        model.addAttribute("workListDto", new WorkListDto());
-//        return "workList_form";
-//    }
-//
-//    @PostMapping("/save")
-//    public String saveWorkList(WorkListDto workListDto) {
-//        workListService.save(workListDto);
-//        return "redirect:/workList";
-//    }
-//
-//    @GetMapping("/edit/{id}")
-//    public String showEditWorkListForm(@PathVariable("id") Integer id, Model model) {
-//        MechanicDto mechanicDto = workListService.findById(id).get();
-//        model.addAttribute("mechanicDto", mechanicDto);
-//        List<MechanicDto> mechanicList = mechanicService.listAllMechanics();
-//        model.addAttribute("mechanicList", mechanicList);
-//        return "workList_form";
-//    }
-//
-//    @GetMapping("/delete/{id}")
-//    public String showEditWorkListForm(@PathVariable("id") Integer id, Model model) {
-//        workListService.delete(id);
-//        return "redirect:/workList";
-//    }
-//
 
 

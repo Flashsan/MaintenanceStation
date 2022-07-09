@@ -2,32 +2,39 @@
  *
  */
 
-$('document').ready(function() {
+$(document).ready(function () {
 
-    $('.table .btn-warning').on('click',function(event){
-
-        event.preventDefault();
-
-        var href= $(this).attr('href');
-
-        $.get(href, function(student, status){
-            $('#IdEdit').val(student.id);
-            $('#nameEdit').val(student.name);
-            $('#departmentEdit').val(student.department);
-            $('#updatedByEdit').val(student.updatedBy);
-            $('#updatedOnEdit').val(student.updatedOn.substr(0,10));
-        });
-
-        $('#editModal').modal();
-
-    });
-
-    $('.table #deleteButton').on('click',function(event) {
+    //for delete workList
+    $('.table .delBtn').on('click', function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
-        $('#deleteModal #delRef').attr('href', href);
-        $('#deleteModal').modal();
-
+        $('#removeModalCenter #delRef').attr('href', href);
+        $('#removeModalCenter').modal();
     });
+
+
+    // $('.nBtn, .table .eBtn').on('click', function (event) {
+    //     event.preventDefault();
+    //     var href = $(this).attr('href');
+    //     var text = $(this).text();
+    //
+    //     //for update user
+    //     if (text == 'Edit') {
+    //         $.get(href, function (workListDto, status) {
+    //             $('.myFormEdit #workListId').val(workListDto.workListId);
+    //             $('.myFormEdit #workListName').val(workListDto.workListName);
+    //             $('.myFormEdit #workListCoast').val(workListDto.workListCoast);
+    //             // $('.myFormEdit #mechanic').val(workListDto.mechanic);
+    //         });
+    //         $('.myFormUpdate #modalEditWorkList').modal();
+    //         //for creating workList
+    //     } else {
+    //         $('.myFormCreate #workListName').val('');
+    //         $('.myFormCreate #workListCoast').val('');
+    //         $('.createWorkList #mechanic').val('');
+    //         $('.myFormCreate #modalCreateWorkList').modal();
+    //     }
+    // });
+
 
 });

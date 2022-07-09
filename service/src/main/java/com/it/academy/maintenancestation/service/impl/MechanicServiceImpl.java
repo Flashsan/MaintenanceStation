@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,17 +23,31 @@ public class MechanicServiceImpl
     @Autowired
     private MechanicRepository mechanicRepository;
 
-//    @Resource
+    //    @Resource
     @Autowired
     private MechanicConverter mechanicConverter;
 
     @Override
     public List<MechanicDto> listAllMechanics() {
-        List<Mechanic> mechanicList =
+        List<Mechanic> exportFromDBMechanic =
                 mechanicRepository.findAll();
-        return mechanicList.stream()
-                .map(mechanicConverter::toDto)
-                .collect(Collectors.toList());
+        List<MechanicDto> mechanicDtos = new ArrayList<>();
+        exportFromDBMechanic.stream()
+                .forEach(mechanic -> {
+                    MechanicDto mechanicDto = mechanicConverter.toDto(mechanic);
+                    mechanicDtos.add(mechanicDto);
+                });
+        return mechanicDtos;
+    }
+
+    @Override
+    public MechanicDto findById(Integer mechanicId) {
+        return mechanicConverter.toDto(
+                mechanicRepository
+                        .findById(mechanicId)
+                        .get()
+        );
+
     }
 }
 //

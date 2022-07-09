@@ -4,7 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "mechanic")
@@ -26,9 +29,8 @@ public class Mechanic implements Serializable {
     @Column(name = "mechanic_last_name")
     private String mechanicLastName;
 
-
-//    @ManyToMany(mappedBy = "mechanic")
-//    private Set<WorkList> workList = new HashSet<>();
+    @ManyToMany(mappedBy = "mechanic")
+    private Set<WorkList> workList = new HashSet<>();
 
 //
 //    @OneToOne(

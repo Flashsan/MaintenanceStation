@@ -4,16 +4,16 @@ import lombok.*;
 
 import java.util.Set;
 
-//@Builder
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Getter
-//@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class OrdersDto {
 
-//    private Integer iDMechanic;
-//    private String nameMechanic;
-//    private String lastNameMechanic;
-//    private Set<WorkListDto> workListsMechanicDto;
+    private Integer iDMechanic;
+    private String nameMechanic;
+    private String lastNameMechanic;
+    private Set<WorkListDto> workListsMechanicDto;
 
 }

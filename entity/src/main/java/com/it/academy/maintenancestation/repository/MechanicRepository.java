@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
 @Import(Mechanic.class)
 public interface MechanicRepository
         extends JpaRepository<Mechanic, Integer> {
- //   public Mechanic findByName(String mechanicName);
 
 }
