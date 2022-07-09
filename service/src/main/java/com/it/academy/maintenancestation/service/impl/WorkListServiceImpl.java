@@ -8,6 +8,9 @@ import com.it.academy.maintenancestation.repository.MechanicRepository;
 import com.it.academy.maintenancestation.repository.WorkListRepository;
 import com.it.academy.maintenancestation.service.WorkListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,6 +29,12 @@ public class WorkListServiceImpl
 
     @Autowired
     private WorkListConverter workListConverter;
+
+    public Paged<WorkList> getPage(int pageNumber, int size) {
+        PageRequest request = PageRequest.of(pageNumber - 1, size, new Sort(Sort.Direction.ASC, "id"));
+        Page<WorkList> workListPage = workListRepository.findAll(request);
+        return new Paged<>(workListPage, Paging.of(workListPage.getTotalPages(), pageNumber, size));
+    }
 
     @Override
     public List<WorkListDto> listAllWorkList() {

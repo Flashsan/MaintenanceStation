@@ -29,11 +29,24 @@ public class WorkListController {
     @Autowired
     private MechanicService mechanicService;
 
+    @GetMapping
+    public String workList(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                           @RequestParam(value = "size", required = false, defaultValue = "5") int size, Model model) {
+        model.addAttribute("workList", workListService.getPage(pageNumber, size));
+        return "workList";
+    }
+
     @GetMapping("/")
     public String listWorkList(Model model) {
         model.addAttribute(WORK_LIST_DTOS_LIST, workListService.listAllWorkList());
         return WORK_LIST;
     }
+
+//    @GetMapping("/")
+//    public String listWorkList(Model model) {
+//        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.listAllWorkList());
+//        return WORK_LIST;
+//    }
 
     @GetMapping("/addFormWorkList")
     public String showCreateNewWorkListForm(Model model) {

@@ -5,8 +5,8 @@
 
 
 <body>
-    <div th:replace="fragments::menu">Static header</div>
-    <div class="container">
+<div th:replace="fragments::menu">Static header</div>
+<div class="container">
     <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
     <button type="button" class="btn btn-success" onclick='location.href="/workList/addFormWorkList"'>
         Add New WorkList
@@ -44,6 +44,28 @@
     </table>
     <hr/>
 
+    <nav aria-label="Page navigation" class="paging">
+        <ul class="pagination" th:if="${posts.page.totalPages > 1}">
+            <li class="page-item" th:classappend="${!posts.paging.isPrevEnabled()? 'disabled' : ''}">
+                <a class="page-link" th:href="@{'/?pageNumber=' + ${posts.paging.pageNumber - 1}}"
+                   tabindex="-1">Previous</a>
+            </li>
+            <th:block th:each="item : ${posts.paging.getItems()}">
+                <li class="page-item" th:classappend="${item.index == posts.paging.pageNumber? 'active' : ''}"
+                    th:if="${item.pageItemType.name() == 'PAGE'}">
+                    <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"
+                       th:text="${item.index}"></a>
+                </li>
+                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                    <a class="page-link" href="#">...</a>
+                </li>
+            </th:block>
+            <li class="page-item" th:classappend="${!posts.paging.isNextEnabled()? 'disabled' : ''}">
+                <a class="page-link" th:href="@{'/?pageNumber=' + ${posts.paging.pageNumber + 1}}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
     <!-- #Modal for removing WorkList -->
     <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
          aria-hidden="true">
@@ -69,6 +91,6 @@
     </div>
     <!-- #End modal form for removing WorkList -->
 </div>
-    <div th:replace="fragments::footer">Static footer</div>
+<div th:replace="fragments::footer">Static footer</div>
 </body>
 </html>
