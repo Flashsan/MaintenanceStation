@@ -1,4 +1,4 @@
-package com.it.academy.maintenancestation.service.impl;
+package com.it.academy.maintenancestation.pagination;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

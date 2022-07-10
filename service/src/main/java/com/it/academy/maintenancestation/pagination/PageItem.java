@@ -1,6 +1,5 @@
-package com.it.academy.maintenancestation.service.impl;
+package com.it.academy.maintenancestation.pagination;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.*;
 
 @Builder

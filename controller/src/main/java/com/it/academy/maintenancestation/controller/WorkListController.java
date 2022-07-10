@@ -29,16 +29,10 @@ public class WorkListController {
     @Autowired
     private MechanicService mechanicService;
 
-    @GetMapping
+    @GetMapping("/")
     public String workList(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
                            @RequestParam(value = "size", required = false, defaultValue = "5") int size, Model model) {
-        model.addAttribute("workList", workListService.getPage(pageNumber, size));
-        return "workList";
-    }
-
-    @GetMapping("/")
-    public String listWorkList(Model model) {
-        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.listAllWorkList());
+        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.getPage(pageNumber, size));
         return WORK_LIST;
     }
 

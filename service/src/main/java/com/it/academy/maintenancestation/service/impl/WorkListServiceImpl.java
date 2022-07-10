@@ -4,7 +4,8 @@ package com.it.academy.maintenancestation.service.impl;
 import com.it.academy.maintenancestation.converter.WorkListConverter;
 import com.it.academy.maintenancestation.dto.WorkListDto;
 import com.it.academy.maintenancestation.entity.WorkList;
-import com.it.academy.maintenancestation.repository.MechanicRepository;
+import com.it.academy.maintenancestation.pagination.Paged;
+import com.it.academy.maintenancestation.pagination.Paging;
 import com.it.academy.maintenancestation.repository.WorkListRepository;
 import com.it.academy.maintenancestation.service.WorkListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -30,9 +29,13 @@ public class WorkListServiceImpl
     @Autowired
     private WorkListConverter workListConverter;
 
+    @Override
     public Paged<WorkList> getPage(int pageNumber, int size) {
-        PageRequest request = PageRequest.of(pageNumber - 1, size, new Sort(Sort.Direction.ASC, "id"));
+        PageRequest request = PageRequest.of(pageNumber - 1, size,Sort.unsorted());
         Page<WorkList> workListPage = workListRepository.findAll(request);
+        Page<WorkListDto> workListDtoPage = (Page<WorkListDto>) workListPage.stream()
+                .map(workListConverter::toDto)
+                .collect(Collectors.toList());
         return new Paged<>(workListPage, Paging.of(workListPage.getTotalPages(), pageNumber, size));
     }
 
@@ -44,7 +47,6 @@ public class WorkListServiceImpl
         exportFromDBWorkList.stream()
                 .forEach(workList -> {
                     WorkListDto workListDto = workListConverter.toDto(workList);
-                    System.out.println(workListDto.toString());
                     workListDtos.add(workListDto);
                 });
         return workListDtos;
