@@ -25,6 +25,9 @@
                 <label class="col-form-label col-sm-4">Administrator Name:</label>
                 <div class="col-sm-8">
                     <input type="text" th:field="*{administratorName}" class="form-control" required/>
+                    <div style="color:red" th:if="${#fields.hasErrors('administratorName')}"
+                         th:errors="*{administratorName}">Name error
+                    </div>
                 </div>
             </div>
 
@@ -32,6 +35,8 @@
                 <label class="col-form-label col-sm-4">Administrator LastName:</label>
                 <div class="col-sm-8">
                     <input type="text" th:field="*{administratorLastName}" class="form-control" required/>
+                    <div style="color:red" th:if="${#fields.hasErrors('administratorLastName')}"
+                         th:errors="*{administratorLastName}">LastName error</div>
                 </div>
             </div>
 

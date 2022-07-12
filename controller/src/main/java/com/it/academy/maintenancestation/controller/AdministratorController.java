@@ -5,7 +5,10 @@ import com.it.academy.maintenancestation.service.AdministratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/administrator")
@@ -27,15 +30,23 @@ public class AdministratorController {
     }
 
     @PostMapping("/saveAdministrator")
-    public String saveAdministrator(@ModelAttribute("newAdministrator") AdministratorDto administratorDto) {
+    public String saveAdministrator(@ModelAttribute("newAdministrator")
+                                    @Valid AdministratorDto administratorDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "administratorAddEdit";
+        }
         administratorService.addAdministrator(administratorDto);
         return "redirect:/administrator/";
     }
 
     @GetMapping("/editAdministrator/{id}")
     public String showEditFormAdministrator(@PathVariable(name = "id") Integer administratorId,
-                                            Model model) {
-        AdministratorDto administratorDto = administratorService.findAdministratorById(administratorId);
+                                            Model model,
+                                            @Valid AdministratorDto administratorDto, BindingResult bindingResult) {
+        administratorDto = administratorService.findAdministratorById(administratorId);
+        if (bindingResult.hasErrors()) {
+            return "administratorAddEdit";
+        }
         model.addAttribute("AddEditAdministratorDto", administratorDto);
         return "administratorAddEdit";
     }
