@@ -1,53 +1,50 @@
 package com.it.academy.maintenancestation.controller;
 
-import com.it.academy.maintenancestation.entity.Administrator;
+import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.service.AdministratorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 
 @Controller
 @RequestMapping("/administrator")
+@RequiredArgsConstructor
 public class AdministratorController {
 
-    @Autowired
-    private AdministratorService administratorService;
+    private final AdministratorService administratorService;
 
+    @GetMapping("/")
+    public String listAdministrators(Model model) {
+        model.addAttribute("administratorDtoList", administratorService.listAllAdministrators());
+        return "administrator";
+    }
+
+    @GetMapping("/addFormAdministrator")
+    public String showCreateFormNewAdministrator(Model model) {
+        model.addAttribute("AddEditAdministratorDto", new AdministratorDto());
+        return "administratorAddEdit";
+    }
+
+    @PostMapping("/saveAdministrator")
+    public String saveAdministrator(@ModelAttribute("newAdministrator") AdministratorDto administratorDto) {
+        administratorService.addAdministrator(administratorDto);
+        return "redirect:/administrator/";
+    }
+
+    @GetMapping("/editAdministrator/{id}")
+    public String showEditFormAdministrator(@PathVariable(name = "id") Integer administratorId,
+                                            Model model) {
+        AdministratorDto administratorDto = administratorService.findAdministratorById(administratorId);
+        model.addAttribute("AddEditAdministratorDto", administratorDto);
+        return "administratorAddEdit";
+    }
+
+    @GetMapping("/deleteAdministrator/{id}")
+    public String deleteAdministrator(@PathVariable(name = "id") Integer administratorId) {
+        administratorService.deleteAdministratorById(administratorId);
+        return "redirect:/administrator/";
+    }
 }
-//    @RequestMapping("/listAdministrators")
-//    public String listAdministrators(Model model) {
-//        model.addAttribute("administrator", administratorService.listAllAdministrators());
-//        return "administrator";
-//    }
-
-//    @PostMapping("/newAdministrator")
-//    public String newAdministrator(Administrator administrator) {
-//        administratorService.newAdministrator(administrator);
-//        return "redirect:/administrator/list_administrator";
-//    }
-
-//    @RequestMapping(value = "/save", method = RequestMethod.POST)
-//    public String saveAdministrator(@ModelAttribute("administrator") Administrator administrator) {
-//        administratorService.saveAdministrator(administrator);
-//        return "redirect:/";
-//    }
-
-//    @RequestMapping("/edit/{id}")
-//    public ModelAndView showEditAdministratorPage(@PathVariable(name = "id") int id) {
-//        ModelAndView modelAndView = new ModelAndView("edit_administrator");
-//        Administrator administrator = administratorService.findAdministratorById(id);
-//        modelAndView.addObject("administrator", administrator);
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping("delete/{id}")
-//    public String deleteAdministrator(@PathVariable(name = "id") int id) {
-//        administratorService.deleteAdministratorById(id);
-//        return "redirect:/";
-//    }
-
 
 

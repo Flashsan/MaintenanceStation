@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:actionth="http://www.w3.org/1999/xhtml">
+<link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+
+<head th:replace="fragments ::html_head(type='none')"/>
+
+<body>
+
+<div class="container text-center">
+    <div th:if="${AddEditAdministratorDto.administratorId == null}">
+        <h1>Create New Administrator</h1>
+    </div>
+
+    <div th:unless="${AddEditAdministratorDto.administratorId == null}">
+        <h1>Edit Administrator</h1>
+    </div>
+
+    <form action="#" th:action="@{/administrator/saveAdministrator}" th:object="${AddEditAdministratorDto}"
+          method="post">
+        <input type="hidden" th:field="*{administratorId}"/>
+
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Administrator Name:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{administratorName}" class="form-control" required/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Administrator LastName:</label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{administratorLastName}" class="form-control" required/>
+                </div>
+            </div>
+
+            <!--            <div class="form-group row">-->
+            <!--                <label class="col-form-label col-sm-4">Spare parts:</label>-->
+            <!--                <div class="col-sm-6 text-left">-->
+            <!--                    <th:block th:each="sparePartDto:${sparePartDtosList}">-->
+            <!--                        <div>-->
+            <!--                            <input type="checkbox" th:field="*{sparePart}"-->
+            <!--                                   th:value="${sparePartDto.sparePartId}" class="m-2"/>-->
+            <!--                            <td th:text="${sparePartDto.sparePartNamePart}">Spare part</td>-->
+
+            <!--                        </div>-->
+            <!--                    </th:block>-->
+            <!--                </div>-->
+        </div>
+
+        <div class="text-center p-3">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/administrator/" class="btn btn-danger">Back</a>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 package com.it.academy.maintenancestation.service.impl;
 
 
-import com.it.academy.maintenancestation.converter.MechanicConverter;
+import com.it.academy.maintenancestation.converter.impl.MechanicConverter;
 import com.it.academy.maintenancestation.dto.MechanicDto;
 import com.it.academy.maintenancestation.entity.Mechanic;
 import com.it.academy.maintenancestation.repository.MechanicRepository;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -35,7 +34,6 @@ public class MechanicServiceImpl
         exportFromDBMechanic.stream()
                 .forEach(mechanic -> {
                     MechanicDto mechanicDto = mechanicConverter.toDto(mechanic);
-                    mechanicDtos.add(mechanicDto);
                 });
         return mechanicDtos;
     }
@@ -49,15 +47,14 @@ public class MechanicServiceImpl
         );
 
     }
+
+    @Override
+    public void addMechanic(MechanicDto mechanicDto) {
+
+    }
+
+    @Override
+    public void deleteMechanicById(Integer mechanicId) {
+
+    }
 }
-//
-//    @Override
-//    public MechanicDto addMechanic(MechanicDto mechanicDto) {
-//        return null;
-//    }
-//
-//    @Override
-//    public MechanicDto updateMechanic(Integer mechanicId, MechanicDto mechanicDto) {
-//        return null;
-//    }
-//}//

@@ -3,7 +3,7 @@
 <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
 <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
 
-<head th:replace="fragments :: html_head"/>
+<head th:replace="fragments ::html_head(type='none')"/>
 
 <body>
 
@@ -36,17 +36,30 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-4">Mechanics:</label>
+                <label class="col-form-label col-sm-4">Spare parts:</label>
                 <div class="col-sm-6 text-left">
-                    <th:block th:each="mechanicDto:${mechanicListDtosList}">
+                    <th:block th:each="sparePartDto:${sparePartDtosList}">
                         <div>
-                            <input type="checkbox" th:field="*{mechanic}" th:text="${mechanicDto.mechanicName}"
-                                   th:value="${mechanicDto.mechanicId}" class="m-2"/>
-                            <td th:text="${mechanicDto.mechanicLastName}"></td>
+                            <input type="checkbox" th:field="*{sparePart}"
+                                   th:value="${sparePartDto.sparePartId}" class="m-2"/>
+                            <td th:text="${sparePartDto.sparePartNamePart}">Spare part</td>
 
                         </div>
                     </th:block>
                 </div>
+
+                <!--            <div class="form-group row">-->
+                <!--                <label class="col-form-label col-sm-4">Mechanics:</label>-->
+                <!--                <div class="col-sm-6 text-left">-->
+                <!--                    <th:block th:each="mechanicDto:${mechanicListDtosList}">-->
+                <!--                        <div>-->
+                <!--                            <input type="checkbox" th:field="*{mechanic}" th:text="${mechanicDto.mechanicName}"-->
+                <!--                                   th:value="${mechanicDto.mechanicId}" class="m-2"/>-->
+                <!--                            <td th:text="${mechanicDto.mechanicLastName}"></td>-->
+
+                <!--                        </div>-->
+                <!--                    </th:block>-->
+                <!--                </div>-->
             </div>
 
             <div class="text-center p-3">

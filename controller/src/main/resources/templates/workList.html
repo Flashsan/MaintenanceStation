@@ -17,6 +17,7 @@
             <th scope="col">№</th>
             <th scope="col">Name</th>
             <th scope="col">Coast</th>
+            <th scope="col">List spare part</th>
             <th scope="col">Mechanics</th>
             <th scope="col">Actions</th>
         </tr>
@@ -27,12 +28,18 @@
             <td th:text="${workListDto.workListName}">Name</td>
             <td th:text="${workListDto.workListCoast}">Coast</td>
             <td>
-        <span th:each="mechanic,irerStat:${workListDto.mechanic}">
-        <span th:text="${mechanic.mechanicName}"/>
-        <span th:text="${mechanic.mechanicLastName}"/>
-        <th:block th:if="${!irerStat.last}">,</th:block>
-        </span>
+                <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">
+                    <span th:text="${sparePartDto.sparePartNamePart}"/>
+                        <th:block th:if="${!irerStat.last}">,</th:block><br></span>
             </td>
+
+            <!--            <td>-->
+            <!--        <span th:each="mechanic,irerStat:${workListDto.mechanic}">-->
+            <!--        <span th:text="${mechanic.mechanicName}"/>-->
+            <!--        <span th:text="${mechanic.mechanicLastName}"/>-->
+            <!--        <th:block th:if="${!irerStat.last}">,</th:block>-->
+            <!--        </span>-->
+            <!--            </td>-->
             <td>&nbsp;
                 <a th:href="@{/workList/editWorkList/{id}(id=${workListDto.workListId})}"
                    class="btn btn-primary eBtn">Edit</a>
@@ -44,55 +51,55 @@
     </table>
     <hr/>
 
-    <!-- #Pagination -->
-    <nav aria-label="Page navigation" class="paging">
-        <ul class="pagination" th:if="${workListDtosList.page.totalPages > 1}">
-            <li class="page-item" th:classappend="${!workListDtosList.paging.isPrevEnabled()? 'disabled' : ''}">
-                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber - 1}}"
-                   tabindex="-1">Previous</a>
-            </li>
-            <th:block th:each="item : ${workListDtosList.paging.getItems()}">
-                <li class="page-item"
-                    th:classappend="${item.index == workListDtosList.paging.pageNumber? 'active' : ''}"
-                    th:if="${item.pageItemType.name() == 'PAGE'}">
-                    <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"
-                       th:text="${item.index}"></a>
-                </li>
-                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
-                    <a class="page-link" href="#">...</a>
-                </li>
-            </th:block>
-            <li class="page-item" th:classappend="${!workListDtosList.paging.isNextEnabled()? 'disabled' : ''}">
-                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber + 1}}">Next</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- #End pagination -->
+    <!--    &lt;!&ndash; #Pagination &ndash;&gt;-->
+    <!--    <nav aria-label="Page navigation" class="paging">-->
+    <!--        <ul class="pagination" th:if="${workListDtosList.page.totalPages > 1}">-->
+    <!--            <li class="page-item" th:classappend="${!workListDtosList.paging.isPrevEnabled()? 'disabled' : ''}">-->
+    <!--                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber - 1}}"-->
+    <!--                   tabindex="-1">Previous</a>-->
+    <!--            </li>-->
+    <!--            <th:block th:each="item : ${workListDtosList.paging.getItems()}">-->
+    <!--                <li class="page-item"-->
+    <!--                    th:classappend="${item.index == workListDtosList.paging.pageNumber? 'active' : ''}"-->
+    <!--                    th:if="${item.pageItemType.name() == 'PAGE'}">-->
+    <!--                    <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"-->
+    <!--                       th:text="${item.index}"></a>-->
+    <!--                </li>-->
+    <!--                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">-->
+    <!--                    <a class="page-link" href="#">...</a>-->
+    <!--                </li>-->
+    <!--            </th:block>-->
+    <!--            <li class="page-item" th:classappend="${!workListDtosList.paging.isNextEnabled()? 'disabled' : ''}">-->
+    <!--                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber + 1}}">Next</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--    </nav>-->
+    <!--    &lt;!&ndash; #End pagination &ndash;&gt;-->
 
-    <!-- #Modal for removing WorkList -->
-    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="alert alert-danger">
-                        Are You sure You want to delete this WorkList?
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="" class="btn btn-danger" id="delRef">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- #End modal form for removing WorkList -->
+    <!--    &lt;!&ndash; #Modal for removing WorkList &ndash;&gt;-->
+    <!--    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"-->
+    <!--         aria-hidden="true">-->
+    <!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
+    <!--            <div class="modal-content">-->
+    <!--                <div class="modal-header">-->
+    <!--                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>-->
+    <!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+    <!--                        <span aria-hidden="true">&times;</span>-->
+    <!--                    </button>-->
+    <!--                </div>-->
+    <!--                <div class="modal-body">-->
+    <!--                    <p class="alert alert-danger">-->
+    <!--                        Are You sure You want to delete this WorkList?-->
+    <!--                    </p>-->
+    <!--                </div>-->
+    <!--                <div class="modal-footer">-->
+    <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+    <!--                    <a href="" class="btn btn-danger" id="delRef">Delete</a>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    &lt;!&ndash; #End modal form for removing WorkList &ndash;&gt;-->
 </div>
 <div th:replace="fragments::footer">Static footer</div>
 </body>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(type='none')"/>
+
+
+<body>
+<div th:replace="fragments::menu">Static header</div>
+<div class="container">
+    <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
+    <button type="button" class="btn btn-success" onclick='location.href="/workList/addFormMechanic"'>
+        Add New Mechanic
+    </button>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Experience</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="mechanicDto, countLine:${MechanicDtoList}">
+            <td th:text="${countLine.index + 1}">Count Line</td>
+            <td th:text="${mechanicDto.mechanicName}">Name</td>
+            <td th:text="${mechanicDto.mechanicLastName}">Name</td>
+            <!--            <td th:text="${mechanicDto.mechanicExperience}">Experience</td>-->
+            <!--            <td th:text="${mechanicDto.mechanicSalary}">Salary</td>-->
+            <!--&lt;!&ndash;            <td>&ndash;&gt;-->
+            <!--        <span th:each="mechanic,irerStat:${workListDto.mechanic}">-->
+            <!--        <span th:text="${mechanic.mechanicName}"/>-->
+            <!--        <span th:text="${mechanic.mechanicLastName}"/>-->
+            <!--        <th:block th:if="${!irerStat.last}">,</th:block>-->
+            <!--        </span>-->
+            <!--            </td>-->
+            <td>&nbsp;
+                <a th:href="@{/mechanic/editMechanic/{id}(id=${mechanicDto.mechanicId})}"
+                   class="btn btn-primary eBtn">Edit</a>
+                <a th:href="@{/workList/deleteMechanic/{id}(id=${mechanicDto.mechanicId})}"
+                   class="btn btn-danger delBtn">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr/>
+
+<!--    &lt;!&ndash; #Pagination &ndash;&gt;-->
+<!--    <nav aria-label="Page navigation" class="paging">-->
+<!--        <ul class="pagination" th:if="${workListDtosList.page.totalPages > 1}">-->
+<!--            <li class="page-item" th:classappend="${!workListDtosList.paging.isPrevEnabled()? 'disabled' : ''}">-->
+<!--                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber - 1}}"-->
+<!--                   tabindex="-1">Previous</a>-->
+<!--            </li>-->
+<!--            <th:block th:each="item : ${workListDtosList.paging.getItems()}">-->
+<!--                <li class="page-item"-->
+<!--                    th:classappend="${item.index == workListDtosList.paging.pageNumber? 'active' : ''}"-->
+<!--                    th:if="${item.pageItemType.name() == 'PAGE'}">-->
+<!--                    <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"-->
+<!--                       th:text="${item.index}"></a>-->
+<!--                </li>-->
+<!--                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">-->
+<!--                    <a class="page-link" href="#">...</a>-->
+<!--                </li>-->
+<!--            </th:block>-->
+<!--            <li class="page-item" th:classappend="${!workListDtosList.paging.isNextEnabled()? 'disabled' : ''}">-->
+<!--                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber + 1}}">Next</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--    &lt;!&ndash; #End pagination &ndash;&gt;-->
+
+    <!-- #Modal for removing WorkList -->
+    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger">
+                        Are You sure You want to delete this Mechanic?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="" class="btn btn-danger" id="delRef">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #End modal form for removing WorkList -->
+</div>
+<div th:replace="fragments::footer">Static footer</div>
+</body>
+</html>

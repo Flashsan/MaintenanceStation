@@ -29,15 +29,17 @@ public class Mechanic implements Serializable {
     @Column(name = "mechanic_last_name")
     private String mechanicLastName;
 
+    @OneToOne(
+            mappedBy = "mechanic",
+            cascade = CascadeType.ALL
+    )
+    private MechanicDetails mechanicDetails;
+
     @ManyToMany(mappedBy = "mechanic")
     private Set<WorkList> workList = new HashSet<>();
 
-//
-//    @OneToOne(
-//            mappedBy = "mechanic",
-//            cascade = CascadeType.ALL
-//    )
-//    private MechanicDetails mechanicDetails;
-//
+
+
+
 
 }

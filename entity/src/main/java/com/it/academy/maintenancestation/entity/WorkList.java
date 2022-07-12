@@ -1,13 +1,10 @@
 package com.it.academy.maintenancestation.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -41,12 +38,8 @@ public class WorkList implements Serializable {
     )
     private Set<Mechanic> mechanic = new HashSet<>();
 
-    public void addMechanic(Mechanic mechanicAdd) {
-        this.mechanic.add(mechanicAdd);
-    }
-
-//    @OneToMany(mappedBy = "workList")
-//    private Set<SparePart> sparePart;
+    @OneToMany(mappedBy = "workList")
+    private Set<SparePart> sparePart;
 
 //    @ManyToOne
 //    @JoinColumn(name = "orders_id")

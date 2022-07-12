@@ -10,10 +10,8 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Administrator implements Serializable {
-
     /**
      * id entity administrator.
      */
@@ -39,7 +37,7 @@ public class Administrator implements Serializable {
             name = "administrator_last_name"
     )
     private String administratorLastName;
-//
+
 //    @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private List<Orders> ordersList;
 

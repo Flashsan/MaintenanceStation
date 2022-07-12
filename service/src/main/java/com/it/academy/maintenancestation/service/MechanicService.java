@@ -1,6 +1,7 @@
 package com.it.academy.maintenancestation.service;
 
 import com.it.academy.maintenancestation.dto.MechanicDto;
+import com.it.academy.maintenancestation.dto.WorkListDto;
 import com.it.academy.maintenancestation.entity.Mechanic;
 
 import java.util.List;
@@ -14,16 +15,12 @@ import java.util.Optional;
  */
 public interface MechanicService {
 
-    /**
-     * service - show all mechanic
-     *
-     * @return all mechanic
-     */
     List<MechanicDto> listAllMechanics();
 
     MechanicDto findById(Integer mechanicId);
 
-//    MechanicDto addMechanic(MechanicDto mechanicDto);
-//    public MechanicDto updateMechanic(Integer mechanicId, MechanicDto mechanicDto);
+    void addMechanic(MechanicDto mechanicDto);
+
+    void deleteMechanicById(Integer mechanicId);
 
 }
