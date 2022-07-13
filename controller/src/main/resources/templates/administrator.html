@@ -18,6 +18,7 @@
             <th scope="col">№</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
+            <th scope="col">List accepted orders</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -26,6 +27,11 @@
             <td th:text="${countLine.index + 1}">Count Line</td>
             <td th:text="${administratorDto.administratorName}">Name</td>
             <td th:text="${administratorDto.administratorLastName}">LastName</td>
+            <td>
+                <span th:each="odersDto,irerStat:${administratorDto.orders}">
+                    <span th:text="${odersDto.ordersDescription}"/>
+                        <th:block th:if="${!irerStat.last}">,</th:block><br></span>
+            </td>
             <td>&nbsp;
                 <a th:href="@{/administrator/editAdministrator/{id}(id=${administratorDto.administratorId})}"
                    class="btn btn-primary eBtn">Edit</a>
@@ -59,8 +65,8 @@
             </div>
         </div>
     </div>
-
     <!--     #End modal form for removing WorkList &ndash;&gt;&ndash;&gt;-->
+
 </div>
 <div th:replace="fragments::footer">Static footer</div>
 

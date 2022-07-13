@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "administrator")
@@ -40,7 +41,13 @@ public class Administrator implements Serializable {
     )
     private String administratorLastName;
 
-//    @OneToMany(mappedBy = "administrator", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Orders> ordersList;
+    /**
+     * Administrator list of orders.
+     */
+    @OneToMany(
+            mappedBy = "administrator",
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            fetch = FetchType.LAZY)
+    private List<Orders> orders;
 
 }

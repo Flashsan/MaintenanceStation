@@ -2,6 +2,7 @@ package com.it.academy.maintenancestation.controller;
 
 import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.service.AdministratorService;
+import com.it.academy.maintenancestation.service.OrdersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class AdministratorController {
 
     private final AdministratorService administratorService;
+    private final OrdersService ordersService;
 
     @GetMapping("/")
     public String listAdministrators(Model model) {
@@ -25,13 +27,14 @@ public class AdministratorController {
 
     @GetMapping("/addFormAdministrator")
     public String showCreateFormNewAdministrator(Model model) {
-        model.addAttribute("AddEditAdministratorDto", new AdministratorDto());
+        model.addAttribute("addEditAdministratorDto", new AdministratorDto());
         return "administratorAddEdit";
     }
 
     @PostMapping("/saveAdministrator")
     public String saveAdministrator(@ModelAttribute("newAdministrator")
-                                    @Valid AdministratorDto administratorDto, BindingResult bindingResult) {
+                                    @Valid AdministratorDto administratorDto,
+                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "administratorAddEdit";
         }
@@ -47,7 +50,7 @@ public class AdministratorController {
         if (bindingResult.hasErrors()) {
             return "administratorAddEdit";
         }
-        model.addAttribute("AddEditAdministratorDto", administratorDto);
+        model.addAttribute("addEditAdministratorDto", administratorDto);
         return "administratorAddEdit";
     }
 

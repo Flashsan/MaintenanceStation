@@ -25,9 +25,9 @@ public class Orders implements Serializable{
     @Column(name = "orders_inspection_result")
     private String ordersInspectionResult;
 
-//    @ManyToOne
-//    @JoinColumn(name = "administrator_id")
-//    private Administrator administrator;
+    @ManyToOne
+    @JoinColumn(name = "administrator_id")
+    private Administrator administrator;
 //
 ////    @OneToMany(mappedBy = "orders")
 ////    private Set<WorkList> workList;

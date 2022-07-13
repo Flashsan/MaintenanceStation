@@ -33,19 +33,19 @@
                         <th:block th:if="${!irerStat.last}">,</th:block><br></span>
             </td>
 
-            <!--            <td>-->
-            <!--        <span th:each="mechanic,irerStat:${workListDto.mechanic}">-->
-            <!--        <span th:text="${mechanic.mechanicName}"/>-->
-            <!--        <span th:text="${mechanic.mechanicLastName}"/>-->
-            <!--        <th:block th:if="${!irerStat.last}">,</th:block>-->
-            <!--        </span>-->
-            <!--            </td>-->
-            <td>&nbsp;
-                <a th:href="@{/workList/editWorkList/{id}(id=${workListDto.workListId})}"
-                   class="btn btn-primary eBtn">Edit</a>
-                <a th:href="@{/workList/deleteWorkList/{id}(id=${workListDto.workListId})}"
-                   class="btn btn-danger delBtn">Delete</a>
-            </td>
+        <!--            <td>-->
+        <!--        <span th:each="mechanic,irerStat:${workListDto.mechanic}">-->
+        <!--        <span th:text="${mechanic.mechanicName}"/>-->
+        <!--        <span th:text="${mechanic.mechanicLastName}"/>-->
+        <!--        <th:block th:if="${!irerStat.last}">,</th:block>-->
+        <!--        </span>-->
+        <!--            </td>-->
+        <td>&nbsp;
+            <a th:href="@{/workList/editWorkList/{id}(id=${workListDto.workListId})}"
+               class="btn btn-primary eBtn">Edit</a>
+            <a th:href="@{/workList/deleteWorkList/{id}(id=${workListDto.workListId})}"
+               class="btn btn-danger delBtn">Delete</a>
+        </td>
         </tr>
         </tbody>
     </table>

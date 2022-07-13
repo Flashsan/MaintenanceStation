@@ -2,7 +2,6 @@ package com.it.academy.maintenancestation.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -22,5 +21,7 @@ public class AdministratorDto implements Serializable {
     @NotEmpty(message = "LastName shouldn't be empty!")
     @Size(min = 2, max = 50, message = "LastName should be between 2 and 50 characters!")
     private String administratorLastName;
+
+    private List<OrdersDto> orders;
 
 }
