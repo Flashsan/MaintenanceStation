@@ -1,5 +1,6 @@
 package com.it.academy.maintenancestation.service;
 
+import com.it.academy.maintenancestation.dto.AdministratorDetailsDto;
 import com.it.academy.maintenancestation.dto.AdministratorDto;
 
 import java.util.List;

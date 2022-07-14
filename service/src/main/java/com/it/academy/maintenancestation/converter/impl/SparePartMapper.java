@@ -24,27 +24,27 @@ public class SparePartMapper
         this.workListRepository = workListRepository;
     }
 
-    @PostConstruct
-    public void setupMapper() {
-        mapper.createTypeMap(SparePart.class, SparePartDto.class)
-                .addMappings(m -> m.skip(SparePartDto::setWorkListId)).setPostConverter(toDtoConverter());
-        mapper.createTypeMap(SparePartDto.class, SparePart.class)
-                .addMappings(m -> m.skip(SparePart::setWorkList)).setPostConverter(toEntityConverter());
-    }
-
-    @Override
-    void mapSpecificFieldsEntityToDto(SparePart source, SparePartDto destination) {
-        destination.setWorkListId(getId(source));
-    }
-
-    private Integer getId(SparePart source) {
-        return Objects.isNull(source) || Objects.isNull(source.getWorkList()) ? null : source.getSparePartId();
-    }
-
-    @Override
-    void mapSpecificFieldsDtoToEntity(SparePartDto source, SparePart destination) {
-        destination.setWorkList(workListRepository.findById(source.getWorkListId()).orElse(null));
-    }
+//    @PostConstruct
+//    public void setupMapper() {
+//        mapper.createTypeMap(SparePart.class, SparePartDto.class)
+//                .addMappings(m -> m.skip(SparePartDto::setWorkListId)).setPostConverter(toDtoConverter());
+//        mapper.createTypeMap(SparePartDto.class, SparePart.class)
+//                .addMappings(m -> m.skip(SparePart::setWorkList)).setPostConverter(toEntityConverter());
+//    }
+//
+//    @Override
+//    void mapSpecificFieldsEntityToDto(SparePart source, SparePartDto destination) {
+//        destination.setWorkListId(getId(source));
+//    }
+//
+//    private Integer getId(SparePart source) {
+//        return Objects.isNull(source) || Objects.isNull(source.getWorkList()) ? null : source.getSparePartId();
+//    }
+//
+//    @Override
+//    void mapSpecificFieldsDtoToEntity(SparePartDto source, SparePart destination) {
+//        destination.setWorkList(workListRepository.findById(source.getWorkListId()).orElse(null));
+//    }
 
 
 }

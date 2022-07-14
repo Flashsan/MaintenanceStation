@@ -25,7 +25,7 @@ public class Client implements Serializable  {
 
     @Column(name = "client_last_name")
     private String clientLastName;
-//
+
 //        @OneToOne(
 //            mappedBy = "client",
 //            cascade = CascadeType.ALL

@@ -12,7 +12,7 @@
             insert into administrator(administrator_name, administrator_last_name)
             values ("Александр", "Иларионович"),
                    ("Вадим", "Владиславович"),
-                   ("Тамара", "Владимировна")
+                   ("Тамара", "Владимировна");
         </sql>
     </changeSet>
 </databaseChangeLog>

@@ -12,6 +12,7 @@
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-car.xml"/>
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-car_details.xml"/>
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-administrator.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-administrator_details.xml"/>
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-orders.xml"/>
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-work_list.xml"/>
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-spare_part.xml"/>
@@ -25,6 +26,7 @@
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-car.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-car_details.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-administrator.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-for-table-administrator_details.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-orders.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-work_list.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-spare_part.xml"/>

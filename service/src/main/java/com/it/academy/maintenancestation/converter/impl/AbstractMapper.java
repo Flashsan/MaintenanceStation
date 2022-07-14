@@ -33,28 +33,5 @@ public abstract class AbstractMapper<E, D> implements Mapper<E, D> {
         return Objects.isNull(entity) ? null : modelMapper.map(entity, dtoClass);
     }
 
-    Converter<E, D> toDtoConverter() {
-        return context -> {
-            E source = context.getSource();
-            D destination = context.getDestination();
-            mapSpecificFieldsEntityToDto(source, destination);
-            return context.getDestination();
-        };
-    }
-
-    Converter<D, E> toEntityConverter() {
-        return context -> {
-            D source = context.getSource();
-            E destination = context.getDestination();
-            mapSpecificFieldsDtoToEntity(source, destination);
-            return context.getDestination();
-        };
-    }
-
-    void mapSpecificFieldsEntityToDto(E source, D destination) {
-    }
-
-    void mapSpecificFieldsDtoToEntity(D source, E destination) {
-    }
 
 }

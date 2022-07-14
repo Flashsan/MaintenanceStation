@@ -21,7 +21,7 @@ public class ClientDetails implements Serializable   {
             strategy = "foreign",
             parameters = @Parameter(name = "property", value = "client")
     )
-    @GeneratedValue(generator = "one-to-one(client-client_details")
+    @GeneratedValue(generator = "one-to-one(client-client_details)")
     @Column(name = "client_details_id")
     private Integer clientDetailsId;
 
