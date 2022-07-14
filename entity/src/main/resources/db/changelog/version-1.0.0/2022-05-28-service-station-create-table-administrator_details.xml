@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'car_details'"
+               author="Grigorovich">
+        <sql>
+            create table administrator_details
+            (
+                administrator_details_id         int auto_increment,
+                administrator_details_experience varchar(50),
+                constraint administrator_details_pk
+                    primary key (administrator_details_id),
+                constraint administrator_administrator_details_fk
+                    foreign key (administrator_details_id)
+                        references administrator (administrator_id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,19 +1,13 @@
 package com.it.academy.maintenancestation.controller;
 
-import com.it.academy.maintenancestation.dto.AdministratorDetailsDto;
 import com.it.academy.maintenancestation.dto.AdministratorDto;
-import com.it.academy.maintenancestation.entity.Administrator;
-import com.it.academy.maintenancestation.entity.AdministratorDetails;
 import com.it.academy.maintenancestation.service.AdministratorDetailsService;
 import com.it.academy.maintenancestation.service.AdministratorService;
 import com.it.academy.maintenancestation.service.OrdersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/administrator")
@@ -21,8 +15,6 @@ import javax.validation.Valid;
 public class AdministratorController {
 
     private final AdministratorService administratorService;
-    private final AdministratorDetailsService administratorDetailsService;
-    private final OrdersService ordersService;
 
     @GetMapping("/")
     public String listAdministrators(Model model) {
@@ -49,8 +41,8 @@ public class AdministratorController {
                                             Model model) {
         AdministratorDto administrator = administratorService.findAdministratorById(administratorId);
         administrator.toString();
-        model.addAttribute("editAdministratorDto", administratorService.findAdministratorById(administratorId));
-        return "administratorEdit";
+        model.addAttribute("administratorDto", administratorService.findAdministratorById(administratorId));
+        return "administratorAddEdit";
     }
 
     @GetMapping("/deleteAdministrator/{id}")
