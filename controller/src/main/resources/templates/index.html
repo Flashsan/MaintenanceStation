@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">>
 
 <head>
     <div th:replace="fragments :: html_head(type='none')"/>
@@ -25,6 +26,14 @@
 <!--        <source src="gvidoWorkShop.mp4" type="video/mp4">-->
 <!--    </video>-->
 
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="src/main/resources/bg/gvidoWorkShop.mp4"></iframe>
+    </div>
+
     <img src="/bk/Gvido.jpg" />
     <img th:src="@{~/templates/bk/Gvido.jpg}" alt=""/>
 
@@ -38,6 +47,11 @@
         </div>
     </div>
 </header>
+
+<h1>Welcome!</h1>
+
+<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+
 <div class="container">
 <!-- Page section example for content below the video header -->
 <section class="my-5">

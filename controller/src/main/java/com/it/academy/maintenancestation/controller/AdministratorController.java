@@ -1,9 +1,7 @@
 package com.it.academy.maintenancestation.controller;
 
 import com.it.academy.maintenancestation.dto.AdministratorDto;
-import com.it.academy.maintenancestation.service.AdministratorDetailsService;
 import com.it.academy.maintenancestation.service.AdministratorService;
-import com.it.academy.maintenancestation.service.OrdersService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +21,7 @@ public class AdministratorController {
     }
 
     @GetMapping("/saveAdministrator")
-    public String showCreateFormNewAdministrator(Model model,
+    public String showCreateEditFormNewAdministrator(Model model,
                                                  AdministratorDto administratorDto) {
         model.addAttribute("administratorDto", administratorDto);
         return "administratorAddEdit";

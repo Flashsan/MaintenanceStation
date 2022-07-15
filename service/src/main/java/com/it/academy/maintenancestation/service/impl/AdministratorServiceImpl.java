@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class AdministratorServiceImpl implements AdministratorService {
+public class AdministratorServiceImpl
+        implements AdministratorService {
 
     ModelMapper modelMapper = new ModelMapper();
 
@@ -52,10 +53,7 @@ public class AdministratorServiceImpl implements AdministratorService {
      */
     @Override
     public AdministratorDto findAdministratorById(Integer administratorId) {
-        return convertToAdministratorDto(
-                administratorRepository
-                        .findById(administratorId)
-                        .orElse(null));
+        return convertToAdministratorDto(administratorRepository.findById(administratorId).orElse(null));
     }
 
     /**
@@ -79,6 +77,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         administratorRepository.deleteById(administratorId);
     }
 
+    //entity to dto
     public AdministratorDto convertToAdministratorDto(Administrator administrator) {
         AdministratorDto administratorDto = modelMapper.map(administrator, AdministratorDto.class);
         administratorDto.setAdministratorDetails(convertToAdministratorDetailsDto(administrator.getAdministratorDetails()));
@@ -89,16 +88,9 @@ public class AdministratorServiceImpl implements AdministratorService {
         AdministratorDetailsDto administratorDetailsDto = modelMapper.map(administratorDetails, AdministratorDetailsDto.class);
         return administratorDetailsDto;
     }
+    //end entity to dto
 
-//    public Administrator convertDtoToEntityAdministrator(AdministratorDto administratorDto) {
-//        Administrator administrator = modelMapper.map(administratorDto, Administrator.class);
-//        AdministratorDetails administratorDetails = modelMapper.map(administratorDetailsDto, AdministratorDetails.class);
-//        administrator.setAdministratorDetails(administratorDetails);
-//        administratorDetails.setAdministrator(administrator);
-//        return administrator;
-//    }
-
-
+    //dto to entity
     public Administrator convertDtoToEntityAdministrator(AdministratorDto administratorDto) {
         Administrator administrator = modelMapper.map(administratorDto, Administrator.class);
         AdministratorDetails administratorDetails = convertDtoToEntityAdministratorDetails(administratorDto.getAdministratorDetails());
@@ -112,6 +104,6 @@ public class AdministratorServiceImpl implements AdministratorService {
         AdministratorDetails administratorDetails = modelMapper.map(administratorDetailsDto, AdministratorDetails.class);
         return administratorDetails;
     }
-
+    //end dto to entity
 
 }

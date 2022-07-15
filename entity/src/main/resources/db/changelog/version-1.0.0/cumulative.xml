@@ -19,8 +19,11 @@
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-mechanic.xml"/>
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-mechanic_details.xml"/>
     <include file="db/changelog/version-1.0.0/2022-05-28-service-station-create-table-work_list_mechanic.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-spring-security-roles.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-spring-security-users.xml"/>
+    <include file="db/changelog/version-1.0.0/2022-05-28-service-station-spring-security-user_role.xml"/>
 
-    <!--   test data -->
+    <!--test data -->
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-client.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-client_details.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-car.xml"/>
@@ -33,4 +36,7 @@
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-mechanic.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-mechanic_details.xml"/>
     <include file="db/changelog/version-1.0.0/data/test-data-for-table-work_list_mechanic.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-spring-security-for-table-roles.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-spring-security-for-table-users.xml"/>
+    <include file="db/changelog/version-1.0.0/data/test-data-spring-security-for-table-user_role.xml"/>
 </databaseChangeLog>

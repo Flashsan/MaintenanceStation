@@ -17,6 +17,6 @@ public class OrdersDto implements Serializable {
     private Integer ordersId;
     private String ordersDescription;
     private String ordersInspectionResult;
-//    private AdministratorDto administratorDto;
+    private AdministratorDto administrator;
 
 }

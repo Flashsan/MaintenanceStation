@@ -5,9 +5,9 @@ import com.it.academy.maintenancestation.entity.Orders;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderConverter
+public class OrdersConverter
         extends AbstractMapper<Orders, OrdersDto> {
-    public OrderConverter() {
+    public OrdersConverter() {
         super(Orders.class, OrdersDto.class);
     }
 }

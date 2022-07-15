@@ -1,44 +1,73 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
-<!--      xmlns:th="http://www.thymeleaf.org">-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(type='none')"/>
 
-<!--<head>-->
-<!--    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>-->
-<!--    <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>-->
-<!--    <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
-<!--    <script type="text/javascript" src="../static/main.js" th:src="@{/main.js}"></script>-->
-<!--    <meta charset="utf-8"/>-->
-<!--    <title>List Orders</title>-->
-<!--</head>-->
-<!--<body>-->
+<body>
 
-<!--<table class="table table-hover">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th scope="col">#</th>-->
-<!--        <th scope="col">Id</th>-->
-<!--        <th scope="col">Description</th>-->
-<!--        <th scope="col">Inspection Result</th>-->
-<!--        <th scope="col">Administrator</th>-->
-<!--        <th scope="col">Actions</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr th:each="orders:${orders}">-->
-<!--        <td>#</td>-->
-<!--        <td th:text="${orders.ordersId}">Order ID</td>-->
-<!--        <td th:text="${orders.orderDescription}">Order ID</td>-->
-<!--&lt;!&ndash;        <td th:text="${orders.administrator.getAdministratorName()}">Order </td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td th:text="${orders.descriptionOrder}">Description</td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td th:text="${orders.inspectionResultOrder}">Inspection Result</td>&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;        <td th:text="${ordersDto.getAdministratorDto().getNameAdministrator()}">Inspection Result</td>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        <td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <a th:href="@{'/edit/' + ${ordersDto.idOrder}}">Edit</a>&nbsp;&ndash;&gt;-->
-<!--&lt;!&ndash;            <a th:href="@{'/delete/' + ${ordersDto.idOrder}}">Delete</a>&ndash;&gt;-->
-<!--&lt;!&ndash;        </td>&ndash;&gt;-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--</table>-->
+<div th:replace="fragments::menu">Static header</div>
+<div class="container">
+    <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
+    <button type="button" class="btn btn-success" onclick='location.href="/orders/saveOrders"'>
+        Add New Order
+    </button>
 
-<!--</body>-->
-<!--</html>-->
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Description</th>
+            <th scope="col">car_id</th>
+            <th scope="col">Inspection result</th>
+            <th scope="col">List accepted orders</th>
+            <th scope="col">administrator_id</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ordersDto, countLine:${ordersDtoList}">
+            <td th:text="${countLine.index + 1}">Count Line</td>
+            <td th:text="${ordersDto.ordersDescription}">Description</td>
+            <td th:text="${ordersDto.ordersInspectionResult}">Inspection Result</td>
+            <td th:text="${ordersDto.administrator.administratorName}">Administrator Name</td>
+            <td th:text="${ordersDto.administrator.administratorLastName}">Administrator LastName</td>
+            <td>&nbsp;
+                <a th:href="@{/orders/editOrders/{id}(id=${ordersDto.ordersId})}"
+                   class="btn btn-primary eBtn">Edit</a>
+                <a th:href="@{/administrator/deleteAdministrator/{id}(id=${ordersDto.ordersId})}"
+                   class="btn btn-danger delBtn">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr/>
+
+<!--    &lt;!&ndash;         #Modal for removing Administrator &ndash;&gt;-->
+<!--    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"-->
+<!--         aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <p class="alert alert-danger">-->
+<!--                        Are You sure You want to delete this Administrator?-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <a href="" class="btn btn-danger" id="delRef">Delete</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;     #End modal form for removing WorkList &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+</div>
+<div th:replace="fragments::footer">Static footer</div>
+
+</body>
+</html>
