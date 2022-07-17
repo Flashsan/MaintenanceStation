@@ -8,7 +8,7 @@
 <div th:replace="fragments::menu">Static header</div>
 <div class="container">
     <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
-    <button type="button" class="btn btn-success" onclick='location.href="/orders/saveOrders"'>
+    <button type="button" class="btn btn-success" onclick='location.href="/orders/saveOrder"'>
         Add New Order
     </button>
 
@@ -29,9 +29,9 @@
             <td th:text="${countLine.index + 1}">Count Line</td>
             <td th:text="${ordersDto.ordersDescription}">Description</td>
             <td th:text="${ordersDto.ordersInspectionResult}">Inspection Result</td>
-            <td th:text="${ordersDto.administrator.administratorName}">Administrator Name</td>
-            <td th:text="${ordersDto.administrator.administratorLastName}">Administrator LastName</td>
-            <td>&nbsp;
+            <!--            <td th:text="${ordersDto.administrator.administratorName}">Administrator Name</td>-->
+            <!--            <td th:text="${ordersDto.administrator.administratorLastName}">Administrator LastName</td>-->
+            <td>
                 <a th:href="@{/orders/editOrders/{id}(id=${ordersDto.ordersId})}"
                    class="btn btn-primary eBtn">Edit</a>
                 <a th:href="@{/administrator/deleteAdministrator/{id}(id=${ordersDto.ordersId})}"
@@ -42,29 +42,29 @@
     </table>
     <hr/>
 
-<!--    &lt;!&ndash;         #Modal for removing Administrator &ndash;&gt;-->
-<!--    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"-->
-<!--         aria-hidden="true">-->
-<!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                        <span aria-hidden="true">&times;</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <p class="alert alert-danger">-->
-<!--                        Are You sure You want to delete this Administrator?-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <a href="" class="btn btn-danger" id="delRef">Delete</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;     #End modal form for removing WorkList &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+    <!--    &lt;!&ndash;         #Modal for removing Administrator &ndash;&gt;-->
+    <!--    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"-->
+    <!--         aria-hidden="true">-->
+    <!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
+    <!--            <div class="modal-content">-->
+    <!--                <div class="modal-header">-->
+    <!--                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>-->
+    <!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+    <!--                        <span aria-hidden="true">&times;</span>-->
+    <!--                    </button>-->
+    <!--                </div>-->
+    <!--                <div class="modal-body">-->
+    <!--                    <p class="alert alert-danger">-->
+    <!--                        Are You sure You want to delete this Administrator?-->
+    <!--                    </p>-->
+    <!--                </div>-->
+    <!--                <div class="modal-footer">-->
+    <!--                    <a href="" class="btn btn-danger" id="delRef">Delete</a>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    &lt;!&ndash;     #End modal form for removing WorkList &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
 
 </div>
 <div th:replace="fragments::footer">Static footer</div>

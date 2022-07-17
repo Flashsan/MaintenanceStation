@@ -5,10 +5,11 @@ import com.it.academy.maintenancestation.dto.OrdersDto;
 import com.it.academy.maintenancestation.service.AdministratorService;
 import com.it.academy.maintenancestation.service.OrdersService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/orders")
@@ -17,30 +18,39 @@ public class OrdersController {
 
 
     private final OrdersService ordersService;
+    private final AdministratorService administratorService;
 
     @GetMapping("/")
     public String listOrders(Model model) {
+        List<OrdersDto> ordersList = ordersService.listAllOrders();
         model.addAttribute("ordersDtoList", ordersService.listAllOrders());
         return "orders";
     }
 
-    @GetMapping("/saveOrders")
-    public String showCreateFormNewOrders(Model model,
-                                          OrdersDto ordersDto) {
+    @GetMapping("/saveOrder")
+    public String showCreateFormNewOrders(Model model, OrdersDto ordersDto, AdministratorDto administratorDto) {
+
+        model.addAttribute("administratorDtoList", administratorService.listAllAdministrators());
         model.addAttribute("ordersDto", ordersDto);
         return "ordersAddEdit";
     }
 
-    @PostMapping("/saveOrders")
+//    @ModelAttribute("administratorDto")
+//    AdministratorDto administratorDto,
+
+    @PostMapping("/saveOrder")
     public String saveOrders(@ModelAttribute("ordersDto")
-                                     OrdersDto ordersDto) {
+                                     OrdersDto ordersDto,
+                             @RequestParam("administratorId") Integer administratorId) {
+        AdministratorDto administratorDtoToOrder = administratorService.findAdministratorById(administratorId);
+        ordersDto.setAdministrator(administratorDtoToOrder);
         ordersService.addOrder(ordersDto);
         return "redirect:/orders/";
     }
 
     @GetMapping("/editOrders/{id}")
     public String showEditFormOrders(@PathVariable(name = "id") Integer orderId,
-                                            Model model) {
+                                     Model model) {
         model.addAttribute("ordersDto", ordersService.findOrderById(orderId));
         return "ordersAddEdit";
     }

@@ -8,66 +8,66 @@
 <body>
 
 <div class="container text-center">
-        <div th:if="${administratorDto.administratorId == null}">
-            <h1>Create New Administrator</h1>
-        </div>
+    <div th:if="${ordersDto.ordersId == null}">
+        <h1>Create New Order</h1>
+    </div>
 
-        <div th:unless="${administratorDto.administratorId == null}">
-            <h1>Edit Administrator</h1>
-        </div>
+    <div th:unless="${ordersDto.ordersId == null}">
+        <h1>Edit Order</h1>
+    </div>
 
-    <form action="#" th:action="@{/administrator/saveAdministrator}" method="POST">
-        <input type="hidden" th:field="*{administratorDto.administratorId}"/>
+    <form action="#" th:action="@{/orders/saveOrder}" method="POST">
+        <input type="hidden" th:field="*{ordersDto.ordersId}"/>
 
         <div class="m-3">
             <div class="form-group row">
-                <label class="col-form-label col-sm-4">Administrator Name:</label>
+                <label class="col-form-label col-sm-4">Order description:</label>
                 <div class="col-sm-8">
                     <input type="text"
-                           th:field="*{administratorDto.administratorName}"
-                           id="administratorDto.administratorName"
+                           th:field="*{ordersDto.ordersDescription}"
+                           id="ordersDto.ordersDescription"
                            class="form-control"
-                           placeholder="Например:Александр" required/>
+                           placeholder="Например:Что-то стучит в моторе..." required/>
                     <div class="alert alert-warning"
-                         th:if="${#fields.hasErrors('administratorDto.administratorName')}"
-                         th:errors="*{administratorDto.administratorName}"></div>
+                         th:if="${#fields.hasErrors('ordersDto.ordersDescription')}"
+                         th:errors="*{ordersDto.ordersDescription}"></div>
                 </div>
             </div>
 
             <div class=" form-group row">
-                <label class="col-form-label col-sm-4">Administrator LastName:</label>
+                <label class="col-form-label col-sm-4">Order inspection result:</label>
                 <div class="col-sm-8">
                     <input type="text"
-                           th:field="*{administratorDto.administratorLastName}"
+                           th:field="*{ordersDto.ordersInspectionResult}"
                            id="administratorDto.administratorLastName"
                            class="form-control"
-                           placeholder="Например:Григорович" required/>
+                           placeholder="Например:В результате осмотра было выявленно,что причиной шума являеться грымыхание моторной цепи."
+                           required/>
                     <div class="alert alert-warning"
-                         th:if="${#fields.hasErrors('administratorDto.administratorLastName')}"
-                         th:errors="*{administratorDto.administratorLastName}"></div>
+                         th:if="${#fields.hasErrors('ordersDto.ordersInspectionResult')}"
+                         th:errors="*{ordersDto.ordersInspectionResult}"></div>
                 </div>
             </div>
 
-            <div class=" form-group row">
-                <label class="col-form-label col-sm-4">Administrator Experience:</label>
-                <div class="col-sm-8">
-                    <input type="text"
-                           th:field="*{administratorDto.administratorDetails.administratorDetailsExperience}"
-                           id="administratorDto.administratorDetails.administratorDetailsExperience"
-                           class="form-control"
-                           placeholder="Например:2,5" required/>
-                    <div class="alert alert-warning"
-                         th:if="${#fields.hasErrors('administratorDto.administratorDetails.administratorDetailsExperience')}"
-                         th:errors="*{administratorDto.administratorDetails.administratorDetailsExperience}"></div>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Administrator:</label>
+                <div class="col-sm-6">
+                    <select name="administratorId" class="form-control" required>
+                        <th:block th:each="administratorDto:${administratorDtoList}">
+                            <option  th:text="${administratorDto.administratorName}"
+                                    th:value="${administratorDto.administratorId}"/>
+                        </th:block>
+                    </select>
                 </div>
             </div>
 
             <div class="text-center p-3">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="/administrator/" class="btn btn-danger">Back</a>
+                <a href="/orders/" class="btn btn-danger">Back</a>
             </div>
         </div>
     </form>
 </div>
 </body>
 </html>
+
