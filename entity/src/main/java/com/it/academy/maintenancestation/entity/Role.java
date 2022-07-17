@@ -1,19 +1,25 @@
 package com.it.academy.maintenancestation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+/**
+ * Role entity
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
+
 @Entity
 @Table(name = "roles")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

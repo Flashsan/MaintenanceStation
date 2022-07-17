@@ -8,6 +8,13 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * MechanicDetails entity.
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
+
 @Entity
 @Table(name = "mechanic_details")
 @Builder
@@ -15,21 +22,29 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MechanicDetails implements Serializable  {
-
+public class MechanicDetails implements Serializable {
+    /**
+     * id entity mechanicDetails.
+     */
     @Id
     @GenericGenerator(
-            name = "one-to-one(mechanic-mechanic_details",
+            name = "one-to-one(mechanic-mechanic_details)",
             strategy = "foreign",
             parameters = @Parameter(name = "property", value = "mechanic")
     )
-    @GeneratedValue(generator = "one-to-one(mechanic-mechanic_details")
+    @GeneratedValue(generator = "one-to-one(mechanic-mechanic_details)")
     @Column(name = "mechanic_details_id")
     private Integer mechanicId;
 
+    /**
+     * experience entity mechanicDetails.
+     */
     @Column(name = "mechanic_details_experience")
     private String mechanicExperience;
 
+    /**
+     * salary entity mechanicDetails.
+     */
     @Column(name = "mechanic_details_salary")
     private String mechanicSalary;
 

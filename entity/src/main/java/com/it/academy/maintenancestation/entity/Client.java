@@ -4,7 +4,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
+
+/**
+ * Client entity.
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
 
 @Entity
 @Table(name = "client")
@@ -13,29 +20,42 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Client implements Serializable  {
-
+public class Client implements Serializable {
+    /**
+     * id entity client.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "client_id")
     private Integer clientId;
 
+    /**
+     * name entity client.
+     */
     @Column(name = "client_name")
     private String clientName;
 
+    /**
+     * lastname entity client.
+     */
     @Column(name = "client_last_name")
     private String clientLastName;
 
-//        @OneToOne(
-//            mappedBy = "client",
-//            cascade = CascadeType.ALL
-//    )
-//    private ClientDetails clientDetails;
-//
-//    @OneToMany(
-//            mappedBy = "client",
-//            fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    private List<Car> car;
+    /**
+     * additional details for entity client.
+     */
+    @OneToOne(
+            mappedBy = "client",
+            cascade = CascadeType.ALL)
+    private ClientDetails clientDetails;
+
+    /**
+     * list cars entity client.
+     */
+    @OneToMany(
+            mappedBy = "client",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private Set<Car> car;
 
 }

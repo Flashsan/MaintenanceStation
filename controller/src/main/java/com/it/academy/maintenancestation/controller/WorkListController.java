@@ -52,10 +52,8 @@ public class WorkListController {
 
     @GetMapping("/addFormWorkList")
     public String showCreateFormNewWorkList(Model model) {
-//        List<MechanicDto> mechanicList = mechanicService.listAllMechanics();
-//        model.addAttribute("mechanicListDtosList", mechanicList);
-        List<SparePartDto> sparePartDtosList = sparePartService.listAllSparePart();
-        model.addAttribute("sparePartDtosList", sparePartDtosList);
+        List<MechanicDto> mechanicDtoList = mechanicService.listAllMechanics();
+        model.addAttribute("mechanicDtoList", mechanicDtoList);
         model.addAttribute("workListDto", new WorkList());
         return "workListAddEdit";
     }

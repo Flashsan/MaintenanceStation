@@ -15,6 +15,7 @@ public class WorkListDto implements Serializable {
     private Integer workListId;
     private String workListName;
     private String workListCoast;
-    private Set<SparePartDto> sparePart;
+    private Set<MechanicDto> mechanic;
+//    private Set<SparePartDto> sparePart;
 
 }

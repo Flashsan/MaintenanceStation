@@ -7,6 +7,13 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * ClientDetails entity.
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
+
 @Entity
 @Table(name = "client_details")
 @Builder
@@ -14,7 +21,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ClientDetails implements Serializable   {
+public class ClientDetails implements Serializable {
+    /**
+     * id entity clientDetails.
+     */
     @Id
     @GenericGenerator(
             name = "one-to-one(client-client_details)",
@@ -25,6 +35,13 @@ public class ClientDetails implements Serializable   {
     @Column(name = "client_details_id")
     private Integer clientDetailsId;
 
+    /**
+     * serial number passport entity clientDetails.
+     */
     @Column(name = "client_details_num_passport")
     private String clientDetailsNumberPassport;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn
+    private Client client;
 }

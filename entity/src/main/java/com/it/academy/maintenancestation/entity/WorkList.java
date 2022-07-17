@@ -7,6 +7,12 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * WorkList entity
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
 
 @Entity
 @Table(name = "work_list")
@@ -28,22 +34,20 @@ public class WorkList implements Serializable {
     @Column(name = "work_list_coast")
     private String workListCoast;
 
-    ////    We are not using cascade type ALL, as this may propagate the delete operation to the courses as well and deletes all the associated courses if a student object is deleted.
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "work_list_mechanic",
             joinColumns = {@JoinColumn(name = "work_list_id")},
-            inverseJoinColumns = {@JoinColumn(name = "mechanic_id")}
-    )
+            inverseJoinColumns = {@JoinColumn(name = "mechanic_id")})
     private Set<Mechanic> mechanic = new HashSet<>();
 
     @OneToMany(mappedBy = "workList")
     private Set<SparePart> sparePart;
 
-//    @ManyToOne
-//    @JoinColumn(name = "orders_id")
-//    private Orders orders;
+    @ManyToOne
+    @JoinColumn(name = "orders_id")
+    private Orders orders;
 
 
 }

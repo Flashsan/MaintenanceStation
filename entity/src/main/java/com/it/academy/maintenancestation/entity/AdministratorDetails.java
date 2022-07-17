@@ -1,9 +1,6 @@
 package com.it.academy.maintenancestation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -11,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * AdministratorDetails entity
+ * AdministratorDetails entity.
  *
  * @author Alexander Grigorovich
  * @version 12.07.2022
@@ -22,7 +19,8 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class AdministratorDetails implements Serializable {
     /**
      * id entity administratorDetails.
@@ -31,9 +29,9 @@ public class AdministratorDetails implements Serializable {
     @GenericGenerator(
             name = "one-to-one(administrator-administrator_details)",
             strategy = "foreign",
-            parameters = @Parameter(name = "property", value = "administrator")
-    )
-    @GeneratedValue(generator = "one-to-one(administrator-administrator_details)")
+            parameters = @Parameter(name = "property", value = "administrator"))
+    @GeneratedValue(
+            generator = "one-to-one(administrator-administrator_details)")
     @Column(name = "administrator_details_id")
     private Integer administratorDetailsId;
 
@@ -43,9 +41,6 @@ public class AdministratorDetails implements Serializable {
     @Column(name = "administrator_details_experience")
     private String administratorDetailsExperience;
 
-    /**
-     *
-     */
     @OneToOne(fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private Administrator administrator;
