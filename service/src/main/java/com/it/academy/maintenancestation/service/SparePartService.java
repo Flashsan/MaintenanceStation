@@ -10,6 +10,7 @@ import java.util.List;
  * @author Alexander Grigorovich
  * @version 12.07.2022
  */
+
 public interface SparePartService {
     List<SparePartDto> listAllSparePart();
 

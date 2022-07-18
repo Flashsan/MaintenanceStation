@@ -13,10 +13,16 @@ import java.util.List;
 @Getter
 @Setter
 public class CarDto implements Serializable  {
+
     private Integer carId;
+
     private String carModel;
+
     private String carColor;
+
     private String carNumber;
+
     private CarDetailsDto carDetails;
+
     private List<OrdersDto> orders;
 }

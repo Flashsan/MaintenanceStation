@@ -1,60 +1,105 @@
 package com.it.academy.maintenancestation.service.impl;
 
 
-import com.it.academy.maintenancestation.converter.impl.MechanicConverter;
+import com.it.academy.maintenancestation.converter.MapperConfiguration;
+import com.it.academy.maintenancestation.dto.ClientDetailsDto;
+import com.it.academy.maintenancestation.dto.ClientDto;
+import com.it.academy.maintenancestation.dto.MechanicDetailsDto;
 import com.it.academy.maintenancestation.dto.MechanicDto;
+import com.it.academy.maintenancestation.entity.Client;
+import com.it.academy.maintenancestation.entity.ClientDetails;
 import com.it.academy.maintenancestation.entity.Mechanic;
+import com.it.academy.maintenancestation.entity.MechanicDetails;
+import com.it.academy.maintenancestation.repository.ClientRepository;
 import com.it.academy.maintenancestation.repository.MechanicRepository;
 import com.it.academy.maintenancestation.service.MechanicService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class MechanicServiceImpl
         implements MechanicService {
 
+    ModelMapper modelMapper = new ModelMapper();
 
-    @Autowired
-    private MechanicRepository mechanicRepository;
+    /**
+     * Mechanic repository.
+     */
+    private final MechanicRepository mechanicRepository;
 
-    //    @Resource
-    @Autowired
-    private MechanicConverter mechanicConverter;
-
+    /**
+     * service - show all mechanicDto
+     *
+     * @return all mechanicDto
+     */
     @Override
     public List<MechanicDto> listAllMechanics() {
-        List<Mechanic> exportFromDBMechanic =
-                mechanicRepository.findAll();
-        List<MechanicDto> mechanicDtos = new ArrayList<>();
-        exportFromDBMechanic.stream()
-                .forEach(mechanic -> {
-                    MechanicDto mechanicDto = mechanicConverter.toDto(mechanic);
-                });
-        return mechanicDtos;
+        List<Mechanic> mechanicList = mechanicRepository.findAll();
+        return MapperConfiguration.convertList(mechanicList, this::convertToMechanicDto);
     }
 
+    /**
+     * method -  find mechanic by id from db
+     *
+     * @param mechanicId
+     * @return mechanicDto by id
+     */
     @Override
-    public MechanicDto findById(Integer mechanicId) {
-        return mechanicConverter.toDto(
-                mechanicRepository
-                        .findById(mechanicId)
-                        .get()
-        );
-
+    public MechanicDto findMechanicById(Integer mechanicId) {
+        return convertToMechanicDto(mechanicRepository.findById(mechanicId).orElse(null));
     }
 
+    /**
+     * method - add mechanic in db
+     *
+     * @param mechanicDto
+     */
     @Override
     public void addMechanic(MechanicDto mechanicDto) {
-
+        mechanicRepository.save(convertDtoToEntityMechanic(mechanicDto));
     }
 
+    /**
+     * method - delete mechanic from db by id
+     *
+     * @param mechanicId
+     */
     @Override
     public void deleteMechanicById(Integer mechanicId) {
-
+        mechanicRepository.deleteById(mechanicId);
     }
+
+    //entity to dto
+    public MechanicDto convertToMechanicDto(Mechanic mechanic) {
+        MechanicDto mechanicDto = modelMapper.map(mechanic, MechanicDto.class);
+        mechanicDto.setMechanicDetails(convertToMechanicDetailsDto(mechanic.getMechanicDetails()));
+        return mechanicDto;
+    }
+
+    public MechanicDetailsDto convertToMechanicDetailsDto(MechanicDetails mechanicDetails) {
+        MechanicDetailsDto mechanicDetailsDto = modelMapper.map(mechanicDetails, MechanicDetailsDto.class);
+        return mechanicDetailsDto;
+    }
+    //end entity to dto
+
+    //dto to entity
+    public Mechanic convertDtoToEntityMechanic(MechanicDto mechanicDto) {
+        Mechanic mechanic = modelMapper.map(mechanicDto, Mechanic.class);
+        MechanicDetails mechanicDetails = convertDtoToEntityMechanicDetails(mechanicDto.getMechanicDetails());
+        mechanic.setMechanicDetails(mechanicDetails);
+        mechanicDetails.setMechanic(mechanic);
+        mechanicDetails.setMechanicDetailsId(mechanic.getMechanicId());
+        return mechanic;
+    }
+
+    public MechanicDetails convertDtoToEntityMechanicDetails(MechanicDetailsDto mechanicDetailsDto) {
+        MechanicDetails mechanicDetails = modelMapper.map(mechanicDetailsDto, MechanicDetails.class);
+        return mechanicDetails;
+    }
+    //end dto to entity
+
 }

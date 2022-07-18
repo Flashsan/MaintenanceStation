@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class ClientDetailsDto implements Serializable   {
+
     private Integer clientDetailsId;
+
     private String clientDetailsNumberPassport;
 }

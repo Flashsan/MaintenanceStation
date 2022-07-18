@@ -15,8 +15,11 @@ import java.util.Set;
 public class OrdersDto implements Serializable {
 
     private Integer ordersId;
+
     private String ordersDescription;
+
     private String ordersInspectionResult;
+
     private AdministratorDto administrator;
 
 }

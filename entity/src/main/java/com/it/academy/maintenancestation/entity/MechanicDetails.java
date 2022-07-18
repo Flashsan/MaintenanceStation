@@ -34,19 +34,19 @@ public class MechanicDetails implements Serializable {
     )
     @GeneratedValue(generator = "one-to-one(mechanic-mechanic_details)")
     @Column(name = "mechanic_details_id")
-    private Integer mechanicId;
+    private Integer mechanicDetailsId;
 
     /**
      * experience entity mechanicDetails.
      */
     @Column(name = "mechanic_details_experience")
-    private String mechanicExperience;
+    private String mechanicDetailsExperience;
 
     /**
      * salary entity mechanicDetails.
      */
     @Column(name = "mechanic_details_salary")
-    private String mechanicSalary;
+    private String mechanicDetailsSalary;
 
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn

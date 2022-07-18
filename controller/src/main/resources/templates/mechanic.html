@@ -7,9 +7,10 @@
 <div th:replace="fragments::menu">Static header</div>
 <div class="container">
     <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
-    <button type="button" class="btn btn-success" onclick='location.href="/workList/addFormMechanic"'>
+    <button type="button" class="btn btn-success" onclick='location.href="/mechanic/saveMechanic"'>
         Add New Mechanic
     </button>
+
     <table class="table table-hover">
         <thead>
         <tr>
@@ -18,27 +19,22 @@
             <th scope="col">LastName</th>
             <th scope="col">Experience</th>
             <th scope="col">Salary</th>
+            <th scope="col">Work list</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="mechanicDto, countLine:${MechanicDtoList}">
+        <tr th:each="mechanicDto, countLine:${mechanicDtoList}">
             <td th:text="${countLine.index + 1}">Count Line</td>
             <td th:text="${mechanicDto.mechanicName}">Name</td>
-            <td th:text="${mechanicDto.mechanicLastName}">Name</td>
-            <!--            <td th:text="${mechanicDto.mechanicExperience}">Experience</td>-->
-            <!--            <td th:text="${mechanicDto.mechanicSalary}">Salary</td>-->
-            <!--&lt;!&ndash;            <td>&ndash;&gt;-->
-            <!--        <span th:each="mechanic,irerStat:${workListDto.mechanic}">-->
-            <!--        <span th:text="${mechanic.mechanicName}"/>-->
-            <!--        <span th:text="${mechanic.mechanicLastName}"/>-->
-            <!--        <th:block th:if="${!irerStat.last}">,</th:block>-->
-            <!--        </span>-->
-            <!--            </td>-->
+            <td th:text="${mechanicDto.mechanicLastName}">LastName</td>
+            <td th:text="${mechanicDto.mechanicDetails.mechanicDetailsExperience}">Experience</td>
+            <td th:text="${mechanicDto.mechanicDetails.mechanicDetailsSalary}">Salary</td>
+            <td></td>
             <td>&nbsp;
                 <a th:href="@{/mechanic/editMechanic/{id}(id=${mechanicDto.mechanicId})}"
                    class="btn btn-primary eBtn">Edit</a>
-                <a th:href="@{/workList/deleteMechanic/{id}(id=${mechanicDto.mechanicId})}"
+                <a th:href="@{/mechanic/deleteMechanic/{id}(id=${mechanicDto.mechanicId})}"
                    class="btn btn-danger delBtn">Delete</a>
             </td>
         </tr>
@@ -46,32 +42,7 @@
     </table>
     <hr/>
 
-<!--    &lt;!&ndash; #Pagination &ndash;&gt;-->
-<!--    <nav aria-label="Page navigation" class="paging">-->
-<!--        <ul class="pagination" th:if="${workListDtosList.page.totalPages > 1}">-->
-<!--            <li class="page-item" th:classappend="${!workListDtosList.paging.isPrevEnabled()? 'disabled' : ''}">-->
-<!--                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber - 1}}"-->
-<!--                   tabindex="-1">Previous</a>-->
-<!--            </li>-->
-<!--            <th:block th:each="item : ${workListDtosList.paging.getItems()}">-->
-<!--                <li class="page-item"-->
-<!--                    th:classappend="${item.index == workListDtosList.paging.pageNumber? 'active' : ''}"-->
-<!--                    th:if="${item.pageItemType.name() == 'PAGE'}">-->
-<!--                    <a class="page-link" th:href="@{'/?pageNumber=' + ${item.index}}"-->
-<!--                       th:text="${item.index}"></a>-->
-<!--                </li>-->
-<!--                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">-->
-<!--                    <a class="page-link" href="#">...</a>-->
-<!--                </li>-->
-<!--            </th:block>-->
-<!--            <li class="page-item" th:classappend="${!workListDtosList.paging.isNextEnabled()? 'disabled' : ''}">-->
-<!--                <a class="page-link" th:href="@{'/?pageNumber=' + ${workListDtosList.paging.pageNumber + 1}}">Next</a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
-<!--    &lt;!&ndash; #End pagination &ndash;&gt;-->
-
-    <!-- #Modal for removing WorkList -->
+    <!--         #Modal for removing Mechanic -->
     <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -88,13 +59,12 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a href="" class="btn btn-danger" id="delRef">Delete</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- #End modal form for removing WorkList -->
+    <!--     #End modal form for removing Mechanic-->
 </div>
 <div th:replace="fragments::footer">Static footer</div>
 </body>

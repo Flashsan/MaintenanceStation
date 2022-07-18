@@ -8,12 +8,19 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class CarDetailsDto implements Serializable {
+
     private Integer carDetailsId;
+
     private String carDetailsTypeEngine;
+
     private String carDetailsValueEngine;
+
     private String carDetailsTypeTransmission;
+
     private String carDetailsTypeBody;
+
     private String carDetailsYearOfIssue;
+
     private CarDetailsDto carDetails;
 
 

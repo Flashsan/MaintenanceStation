@@ -9,10 +9,15 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Data
 public class SparePartDto implements Serializable {
+
     private Integer sparePartId;
+
     private String sparePartNamePart;
+
     private String sparePartBrand;
+
     private String sparePartCoast;
+
     private Integer workListId;
 
 

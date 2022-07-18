@@ -5,40 +5,39 @@ import com.it.academy.maintenancestation.dto.ClientDto;
 import java.util.List;
 
 /**
- * ClientService
+ * interface ClientService
  *
  * @author Alexander Grigorovich
  * @version 12.07.2022
  */
-public interface ClientService {
-//    /**
-//     * service - show all administrators
-//     *
-//     * @return all administrators
-//     */
-//    List<ClientDto> listAllClients();
-//
-//    /**
-//     * service - find administrator by id
-//     *
-//     * @param administratorId
-//     * @return administrator by id
-//     */
-//    AdministratorDto findAdministratorById(Integer administratorId);
-//
-//    /**
-//     * service - create administrator
-//     *
-//     * @param administratorDto
-//     */
-//    void addAdministrator(AdministratorDto administratorDto);
-//
-//    /**
-//     * service - delete administrator by id
-//     *
-//     * @param administratorId
-//     */
-//    void deleteAdministratorById(Integer administratorId);
-//
 
+public interface ClientService {
+    /**
+     * service - show all clients
+     *
+     * @return all clients
+     */
+    List<ClientDto> listAllClients();
+
+    /**
+     * service - find client by id
+     *
+     * @param clientId
+     * @return client by id
+     */
+    ClientDto findClientById(Integer clientId);
+
+    /**
+     * service - create client
+     *
+     * @param clientDto
+     */
+    void addClient(ClientDto clientDto);
+
+    /**
+     * service - delete client by id
+     *
+     * @param clientId
+     */
+    void deleteClientById(Integer clientId);
 }
