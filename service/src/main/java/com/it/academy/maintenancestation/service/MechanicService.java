@@ -11,7 +11,7 @@ import java.util.Optional;
  * MechanicService
  *
  * @author Alexander Grigorovich
- * @version 22.05.2022
+ * @version 12.07.2022
  */
 public interface MechanicService {
 

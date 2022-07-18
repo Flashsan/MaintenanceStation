@@ -1,7 +1,6 @@
 package com.it.academy.maintenancestation.service.impl;
 
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
-import com.it.academy.maintenancestation.converter.impl.AdministratorMapper;
 import com.it.academy.maintenancestation.dto.AdministratorDetailsDto;
 import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.entity.Administrator;
@@ -12,16 +11,15 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * AdministratorService
+ * implementation AdministratorService
  *
  * @author Alexander Grigorovich
  * @version 12.07.2022
  */
+
 @Service
 @RequiredArgsConstructor
 public class AdministratorServiceImpl
@@ -64,7 +62,6 @@ public class AdministratorServiceImpl
     @Override
     public void addAdministrator(AdministratorDto administratorDto) {
         administratorRepository.save(convertDtoToEntityAdministrator(administratorDto));
-        administratorRepository.flush();
     }
 
     /**

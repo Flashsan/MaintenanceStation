@@ -14,17 +14,7 @@
 </div>
 
 <header>
-<!--    &lt;!&ndash; This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS &ndash;&gt;-->
-<!--    <div class="overlay"></div>-->
 
-<!--    &lt;!&ndash; The HTML5 video element that will create the background video on the header &ndash;&gt;-->
-<!--    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">-->
-<!--        <source src="gvidoWorkShop.mp4" type="video/mp4">-->
-<!--    </video>-->
-
-<!--    <video autoplay muted loop id="myVideo">-->
-<!--        <source src="gvidoWorkShop.mp4" type="video/mp4">-->
-<!--    </video>-->
 
     <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
     <form th:action="@{/logout}" method="post">
@@ -53,7 +43,6 @@
 <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
 
 <div class="container">
-<!-- Page section example for content below the video header -->
 <section class="my-5">
     <div class="container">
         <div class="row">

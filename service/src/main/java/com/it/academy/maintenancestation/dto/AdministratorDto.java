@@ -9,7 +9,8 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class AdministratorDto implements Serializable {
 
     private Integer administratorId;
@@ -25,6 +26,7 @@ public class AdministratorDto implements Serializable {
     private String administratorLastName;
 
     private AdministratorDetailsDto administratorDetails;
+
     private List<OrdersDto> orders;
 
 

@@ -29,11 +29,7 @@
             <td th:text="${administratorDto.administratorName}">Name</td>
             <td th:text="${administratorDto.administratorLastName}">LastName</td>
             <td th:text="${administratorDto.administratorDetails.administratorDetailsExperience}">LastName</td>
-            <td>
-                <span th:each="odersDto,irerStat:${administratorDto.orders}">
-                    <span th:text="${odersDto.ordersDescription}"/>
-                        <th:block th:if="${!irerStat.last}">,</th:block><br></span>
-            </td>
+            <td></td>
             <td>&nbsp;
                 <a th:href="@{/administrator/editAdministrator/{id}(id=${administratorDto.administratorId})}"
                    class="btn btn-primary eBtn">Edit</a>

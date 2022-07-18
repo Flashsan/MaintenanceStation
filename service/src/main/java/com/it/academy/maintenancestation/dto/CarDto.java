@@ -1,9 +1,11 @@
 package com.it.academy.maintenancestation.dto;
 
+import com.it.academy.maintenancestation.entity.CarDetails;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -15,5 +17,6 @@ public class CarDto implements Serializable  {
     private String carModel;
     private String carColor;
     private String carNumber;
-
+    private CarDetailsDto carDetails;
+    private List<OrdersDto> orders;
 }

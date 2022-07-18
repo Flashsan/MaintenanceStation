@@ -1,13 +1,8 @@
 package com.it.academy.maintenancestation.dto;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -19,6 +14,7 @@ public class CarDetailsDto implements Serializable {
     private String carDetailsTypeTransmission;
     private String carDetailsTypeBody;
     private String carDetailsYearOfIssue;
+    private CarDetailsDto carDetails;
 
 
 }
