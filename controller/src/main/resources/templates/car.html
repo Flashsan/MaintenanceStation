@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: html_head(type='none')"/>
+
+<body>
+
+<div th:replace="fragments::menu">Static header</div>
+<div class="container">
+    <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
+    <button type="button" class="btn btn-success" onclick='location.href="/car/saveCar"'>
+        Add New Car
+    </button>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Model</th>
+            <th scope="col">Color</th>
+            <th scope="col">Number</th>
+            <th scope="col">Type engine</th>
+            <th scope="col">Value engine</th>
+            <th scope="col">Type transmission</th>
+            <th scope="col">Type body</th>
+            <th scope="col">Year of issue</th>
+            <th scope="col">Order list for car</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="carDto, countLine:${carDtoList}">
+            <td th:text="${countLine.index + 1}">Count Line</td>
+            <td th:text="${carDto.carModel}">Model</td>
+            <td th:text="${carDto.carColor}">Color</td>
+            <td th:text="${carDto.carNumber}">Number</td>
+            <td th:text="${carDto.carDetails.carDetailsTypeEngine}">Type engine</td>
+            <td th:text="${carDto.carDetails.carDetailsValueEngine}">Value engine</td>
+            <td th:text="${carDto.carDetails.carDetailsTypeTransmission}">Type transmission</td>
+            <td th:text="${carDto.carDetails.carDetailsTypeBody}">Type body</td>
+            <td th:text="${carDto.carDetails.carDetailsYearOfIssue}">Year of issue</td>
+            <td></td>
+            <td>
+                <a th:href="@{/car/editCar/{id}(id=${carDto.carId})}"
+                   class="btn btn-primary eBtn">Edit</a>
+                <a th:href="@{/car/deleteCar/{id}(id=${carDto.carId})}"
+                   class="btn btn-danger delBtn">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr/>
+
+    <!--         #Modal for removing Car -->
+    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger">
+                        Are You sure You want to delete this Car?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-danger" id="delRef">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     #End modal form for removing WorkList &ndash;&gt;&ndash;&gt;-->
+
+</div>
+<div th:replace="fragments::footer">Static footer</div>
+
+</body>
+</html>

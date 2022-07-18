@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:actionth="http://www.w3.org/1999/xhtml">
+<link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+
+<head th:replace="fragments ::html_head(type='none')"/>
+
+<body>
+
+<div class="container text-center">
+    <div th:if="${carDto.carId == null}">
+        <h1>Create New Car</h1>
+    </div>
+
+    <div th:unless="${carDto.carId == null}">
+        <h1>Edit Car</h1>
+    </div>
+
+    <form action="#" th:action="@{/car/saveCar}" method="POST">
+        <input type="hidden" th:field="*{carDto.carId}"/>
+
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Car model:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carModel}"
+                           id="carDto.carModel"
+                           class="form-control"
+                           placeholder="Например:Audi" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carModel')}"
+                         th:errors="*{carDto.carModel}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Car color:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carColor}"
+                           id="carDto.carColor"
+                           class="form-control"
+                           placeholder="Например:Black" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carColor')}"
+                         th:errors="*{carDto.carColor}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Car number:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carNumber}"
+                           id="carDto.carNumber"
+                           class="form-control"
+                           placeholder="Например:8822 BI-2" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carNumber')}"
+                         th:errors="*{carDto.carNumber}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Car type engine:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carDetails.carDetailsTypeEngine}"
+                           id="carDto.carDetails.carDetailsTypeEngine"
+                           class="form-control"
+                           placeholder="Например:Diesel" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carDetails.carDetailsTypeEngine')}"
+                         th:errors="*{carDto.carDetails.carDetailsTypeEngine}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Car value engine:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carDetails.carDetailsValueEngine}"
+                           id="carDto.carDetails.carDetailsValueEngine"
+                           class="form-control"
+                           placeholder="Например:2.0" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carDetails.carDetailsValueEngine')}"
+                         th:errors="*{carDto.carDetails.carDetailsValueEngine}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Car type transmission:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carDetails.carDetailsTypeTransmission}"
+                           id="carDto.carDetails.carDetailsTypeTransmission"
+                           class="form-control"
+                           placeholder="Например:МКПП" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carDetails.carDetailsTypeTransmission')}"
+                         th:errors="*{carDto.carDetails.carDetailsTypeTransmission}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Car type body:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carDetails.carDetailsTypeBody}"
+                           id="carDto.carDetails.carDetailsTypeBody"
+                           class="form-control"
+                           placeholder="Например:Универсал" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carDetails.carDetailsTypeBody')}"
+                         th:errors="*{carDto.carDetails.carDetailsTypeBody}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Car year of issue:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{carDto.carDetails.carDetailsYearOfIssue}"
+                           id="carDto.carDetails.carDetailsYearOfIssue"
+                           class="form-control"
+                           placeholder="Например:2008" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('carDto.carDetails.carDetailsYearOfIssue')}"
+                         th:errors="*{carDto.carDetails.carDetailsYearOfIssue}"></div>
+                </div>
+            </div>
+
+            <div class="text-center p-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/administrator/" class="btn btn-danger">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
