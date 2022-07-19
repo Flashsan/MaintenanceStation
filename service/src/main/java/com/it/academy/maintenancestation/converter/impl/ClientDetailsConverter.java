@@ -5,9 +5,5 @@ import com.it.academy.maintenancestation.entity.ClientDetails;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClientDetailsConverter
-        extends AbstractMapper<ClientDetails, ClientDetailsDto> {
-    public ClientDetailsConverter() {
-        super(ClientDetails.class, ClientDetailsDto.class);
-    }
+public class ClientDetailsConverter{
 }

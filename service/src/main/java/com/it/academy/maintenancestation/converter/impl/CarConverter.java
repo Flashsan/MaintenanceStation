@@ -6,8 +6,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CarConverter
-        extends AbstractMapper<Car, CarDto> {
-    public CarConverter() {
-        super(Car.class, CarDto.class);
-    }
+        {
+//    public CarConverter() {
+//        super(Car.class, CarDto.class);
+//    }
+//
+//    @Override
+//    public Car dtoToEntity(CarDto dto) {
+//        return null;
+//    }
+//
+//    @Override
+//    public CarDto entityToDto(Car entity) {
+//        return null;
+//    }
 }

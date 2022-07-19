@@ -10,6 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/**
+ * userDetailsService
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
+
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 

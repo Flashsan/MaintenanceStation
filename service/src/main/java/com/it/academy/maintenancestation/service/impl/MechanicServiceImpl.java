@@ -2,14 +2,8 @@ package com.it.academy.maintenancestation.service.impl;
 
 
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
-import com.it.academy.maintenancestation.dto.ClientDetailsDto;
-import com.it.academy.maintenancestation.dto.ClientDto;
-import com.it.academy.maintenancestation.dto.MechanicDetailsDto;
-import com.it.academy.maintenancestation.dto.MechanicDto;
-import com.it.academy.maintenancestation.entity.Client;
-import com.it.academy.maintenancestation.entity.ClientDetails;
-import com.it.academy.maintenancestation.entity.Mechanic;
-import com.it.academy.maintenancestation.entity.MechanicDetails;
+import com.it.academy.maintenancestation.dto.*;
+import com.it.academy.maintenancestation.entity.*;
 import com.it.academy.maintenancestation.repository.ClientRepository;
 import com.it.academy.maintenancestation.repository.MechanicRepository;
 import com.it.academy.maintenancestation.service.MechanicService;
@@ -18,6 +12,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+/**
+ * MechanicService
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +74,24 @@ public class MechanicServiceImpl
         mechanicRepository.deleteById(mechanicId);
     }
 
+    @Override
+    public List<WorkListDto> listPinnedWorkList(Integer byMechanicId) {
+        return null;
+    }
+
+
+//    /**
+//     * method - show list pinned workList
+//     * @param byMechanicId
+//     * @return list
+//     */
+//    @Override
+//    public List<WorkListDto> listPinnedWorkList(Integer byMechanicId) {
+//        List<WorkList> workListList = mechanicRepository.getMechanicTask(byMechanicId);
+//        return MapperConfiguration.convertList(workListList, this::convertToDto);
+//
+//    }
+
     //entity to dto
     public MechanicDto convertToMechanicDto(Mechanic mechanic) {
         MechanicDto mechanicDto = modelMapper.map(mechanic, MechanicDto.class);
@@ -101,5 +120,9 @@ public class MechanicServiceImpl
         return mechanicDetails;
     }
     //end dto to entity
+
+
+
+
 
 }

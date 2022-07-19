@@ -1,13 +1,9 @@
 package com.it.academy.maintenancestation.dto;
 
-import com.it.academy.maintenancestation.entity.Administrator;
 import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

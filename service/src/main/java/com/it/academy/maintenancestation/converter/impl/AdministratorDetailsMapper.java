@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AdministratorDetailsMapper
-        extends AbstractMapper<AdministratorDetails, AdministratorDetailsDto> {
+       {
 
-    public AdministratorDetailsMapper() {
-        super(AdministratorDetails.class, AdministratorDetailsDto.class);
-    }
 }

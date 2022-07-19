@@ -1,22 +1,45 @@
 package com.it.academy.maintenancestation.service;
 
 import com.it.academy.maintenancestation.dto.WorkListDto;
-import com.it.academy.maintenancestation.entity.WorkList;
 
-import javax.validation.Valid;
 import java.util.List;
+
+/**
+ * interface WorkListService
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
 
 public interface WorkListService {
 
-//    public Paged<WorkList> getPage(int pageNumber, int size);
+    /**
+     * service - show all WorkList
+     *
+     * @return all administrators
+     */
 
     List<WorkListDto> listAllWorkList();
 
-//    WorkListDto findById(Integer workListId);
-//
-    void addWorkList(@Valid WorkList workListDto);
+    /**
+     * service - find workList by id
+     *
+     * @param workListId
+     * @return workList by id
+     */
+    WorkListDto findWorkListById(Integer workListId);
 
-//
-//    void deleteWorkListById(Integer workListId);
+    /**
+     * service - create workList
+     *
+     * @param workListDto
+     */
+    void addWorkList(WorkListDto workListDto);
 
+    /**
+     * service - delete workList by id
+     *
+     * @param workListId
+     */
+    void deleteWorkListById(Integer workListId);
 }

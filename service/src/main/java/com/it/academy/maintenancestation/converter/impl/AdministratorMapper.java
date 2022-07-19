@@ -8,20 +8,20 @@ import java.util.Objects;
 
 @Component
 public class AdministratorMapper
-        extends AbstractMapper<Administrator, AdministratorDto> {
+      {
 
-    public AdministratorMapper() {
-        super(Administrator.class, AdministratorDto.class);
-    }
 
-//    @Override
-//    public E toEntity(D dto) {
-//        return Objects.isNull(dto) ? null : modelMapper.map(dto, entityClass);
+//    public AdministratorMapper(Class<Administrator> entityClass, Class<AdministratorDto> dtoClass) {
+//        super(entityClass, dtoClass);
 //    }
 //
 //    @Override
-//    public D toDto(E entity) {
-//        return Objects.isNull(entity) ? null : modelMapper.map(entity, dtoClass);
+//    public Administrator dtoToEntity(AdministratorDto dto) {
+//        return null;
 //    }
-
+//
+//    @Override
+//    public AdministratorDto entityToDto(Administrator entity) {
+//        return null;
+//    }
 }

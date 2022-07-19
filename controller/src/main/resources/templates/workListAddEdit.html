@@ -16,50 +16,56 @@
         <h1>Edit WorkList</h1>
     </div>
 
-    <form action="#" th:action="@{/workList/addWorkList}" th:object="${workListDto}"
+    <form action="#" th:action="@{/workList/saveWorkList}"
           method="post">
-<!--        <input type="hidden" th:field="*{workListDto.workListId}"/>-->
+        <input type="hidden" th:field="*{workListDto.workListId}"/>
 
         <div class="m-3">
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">WorkList Name:</label>
                 <div class="col-sm-8">
-                    <input type="text" th:field="*{workListName}" class="form-control" required/>
+                    <input type="text"
+                           th:field="*{workListDto.workListName}"
+                           class="form-control"
+                           required/>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">WorkList Coast:</label>
                 <div class="col-sm-8">
-                    <input type="text" th:field="*{workListCoast}" class="form-control" required/>
+                    <input type="text"
+                           th:field="*{workListDto.workListCoast}"
+                           class="form-control" required/>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-4">Spare parts:</label>
+                <label class="col-form-label col-sm-4">Mechanics:</label>
                 <div class="col-sm-6 text-left">
-                    <th:block th:each="sparePartDto:${sparePartDtosList}">
+                    <th:block th:each="mechanicDto:${mechanicListDtosList}">
                         <div>
-                            <input type="checkbox" th:field="*{sparePart}"
-                                   th:value="${sparePartDto.sparePartId}" class="m-2"/>
-                            <td th:text="${sparePartDto.sparePartNamePart}">Spare part</td>
+                            <input type="checkbox" th:field="*{mechanic}" th:text="${mechanicDto.mechanicName}"
+                                   th:value="${mechanicDto.mechanicId}" class="m-2"/>
+                            <td th:text="${mechanicDto.mechanicLastName}"></td>
 
                         </div>
                     </th:block>
                 </div>
 
                 <!--            <div class="form-group row">-->
-                <!--                <label class="col-form-label col-sm-4">Mechanics:</label>-->
+                <!--                <label class="col-form-label col-sm-4">Spare parts:</label>-->
                 <!--                <div class="col-sm-6 text-left">-->
-                <!--                    <th:block th:each="mechanicDto:${mechanicListDtosList}">-->
+                <!--                    <th:block th:each="sparePartDto:${sparePartDtosList}">-->
                 <!--                        <div>-->
-                <!--                            <input type="checkbox" th:field="*{mechanic}" th:text="${mechanicDto.mechanicName}"-->
-                <!--                                   th:value="${mechanicDto.mechanicId}" class="m-2"/>-->
-                <!--                            <td th:text="${mechanicDto.mechanicLastName}"></td>-->
+                <!--                            <input type="checkbox" th:field="*{sparePart}"-->
+                <!--                                   th:value="${sparePartDto.sparePartId}" class="m-2"/>-->
+                <!--                            <td th:text="${sparePartDto.sparePartNamePart}">Spare part</td>-->
 
                 <!--                        </div>-->
                 <!--                    </th:block>-->
                 <!--                </div>-->
+
             </div>
 
             <div class="text-center p-3">

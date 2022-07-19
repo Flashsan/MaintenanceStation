@@ -11,20 +11,25 @@ import javax.annotation.PostConstruct;
 import java.util.Objects;
 
 @Component
-public class SparePartMapper
-        extends AbstractMapper<SparePart, SparePartDto> {
-
-    private final ModelMapper mapper;
-    private final WorkListRepository workListRepository;
-
-    @Autowired
-    public SparePartMapper(ModelMapper mapper, WorkListRepository workListRepository) {
-        super(SparePart.class, SparePartDto.class);
-        this.mapper = mapper;
-        this.workListRepository = workListRepository;
-    }
-
+public class SparePartMapper{
+//        extends AbstractMapper<SparePart, SparePartDto> {
 //
+//    @Autowired
+//    public SparePartMapper(ModelMapper mapper, WorkListRepository workListRepository) {
+//        super(SparePart.class, SparePartDto.class);
+//    }
+//
+//    @Override
+//    public SparePart dtoToEntity(SparePartDto dto) {
+//        return null;
+//    }
+//
+//    @Override
+//    public SparePartDto entityToDto(SparePart entity) {
+//        return null;
+//    }
+//
+////
 
 
 }

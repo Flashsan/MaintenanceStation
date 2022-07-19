@@ -23,15 +23,4 @@ public abstract class AbstractMapper<E, D> implements Mapper<E, D> {
         this.dtoClass = dtoClass;
     }
 
-    @Override
-    public E toEntity(D dto) {
-        return Objects.isNull(dto) ? null : modelMapper.map(dto, entityClass);
-    }
-
-    @Override
-    public D toDto(E entity) {
-        return Objects.isNull(entity) ? null : modelMapper.map(entity, dtoClass);
-    }
-
-
 }

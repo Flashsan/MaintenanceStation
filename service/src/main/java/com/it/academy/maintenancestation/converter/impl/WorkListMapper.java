@@ -13,13 +13,21 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @Component
-public class WorkListMapper
-        extends AbstractMapper<WorkList, WorkListDto> {
-
-    public WorkListMapper(SparePartRepository sparePartRepository) {
-        super(WorkList.class, WorkListDto.class);
-//        this.sparePartRepository = sparePartRepository;
-    }
-
-
+public class WorkListMapper{
+//        extends AbstractMapper<WorkList, WorkListDto> {
+//
+//    public WorkListMapper(SparePartRepository sparePartRepository) {
+//        super(WorkList.class, WorkListDto.class);
+//    }
+//
+//
+//    @Override
+//    public WorkList dtoToEntity(WorkListDto dto) {
+//        return null;
+//    }
+//
+//    @Override
+//    public WorkListDto entityToDto(WorkList entity) {
+//        return null;
+//    }
 }

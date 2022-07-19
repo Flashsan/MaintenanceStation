@@ -1,6 +1,8 @@
 package com.it.academy.maintenancestation.service;
 
 import com.it.academy.maintenancestation.dto.MechanicDto;
+import com.it.academy.maintenancestation.dto.OrdersDto;
+import com.it.academy.maintenancestation.dto.WorkListDto;
 
 import java.util.List;
 
@@ -42,4 +44,10 @@ public interface MechanicService {
      */
     void deleteMechanicById(Integer mechanicId);
 
+    /**
+     * service - show pinned workList
+     *
+     * @return list workList which pinned to the mechanic.
+     */
+    List<WorkListDto> listPinnedWorkList(Integer byMechanicId);
 }

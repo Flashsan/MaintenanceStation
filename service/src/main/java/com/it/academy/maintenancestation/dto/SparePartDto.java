@@ -1,6 +1,5 @@
 package com.it.academy.maintenancestation.dto;
 
-import com.it.academy.maintenancestation.entity.WorkList;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,7 +17,7 @@ public class SparePartDto implements Serializable {
 
     private String sparePartCoast;
 
-    private Integer workListId;
+
 
 
 }

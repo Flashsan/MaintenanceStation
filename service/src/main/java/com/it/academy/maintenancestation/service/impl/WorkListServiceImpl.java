@@ -1,72 +1,89 @@
 package com.it.academy.maintenancestation.service.impl;
 
-
-import com.it.academy.maintenancestation.converter.impl.WorkListMapper;
+import com.it.academy.maintenancestation.converter.MapperConfiguration;
 import com.it.academy.maintenancestation.dto.WorkListDto;
 import com.it.academy.maintenancestation.entity.WorkList;
 import com.it.academy.maintenancestation.repository.WorkListRepository;
 import com.it.academy.maintenancestation.service.WorkListService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.util.*;
 
+/**
+ * WorkListService
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
+
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class WorkListServiceImpl
         implements WorkListService {
 
-    @Autowired
-    private WorkListRepository workListRepository;
+    /**
+     * WorkList repository.
+     */
+    private final WorkListRepository workListRepository;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private WorkListMapper workListConverter;
-
-//    @Override
-//    public Paged<WorkList> getPage(int pageNumber, int size) {
-//        PageRequest request = PageRequest.of(pageNumber - 1, size,Sort.unsorted());
-//        Page<WorkList> workListPage = workListRepository.findAll(request);
-//        Page<WorkListDto> workListDtoPage = (Page<WorkListDto>) workListPage.stream()
-//                .map(workListConverter::toDto)
-//                .collect(Collectors.toList());
-//        return new Paged<>(workListPage, Paging.of(workListPage.getTotalPages(), pageNumber, size));
-//    }
-
+    /**
+     * service - show all workListDto
+     *
+     * @return all workListDto
+     */
     @Override
     public List<WorkListDto> listAllWorkList() {
-        List<WorkList> exportFromDBWorkList =
-                workListRepository.findAll();
-        List<WorkListDto> workListDtos = new ArrayList<>();
-        exportFromDBWorkList.stream()
-                .forEach(workList -> {
-                    WorkListDto workListDto = workListConverter.toDto(workList);
-                    workListDtos.add(workListDto);
-                });
-        return workListDtos;
+        List<WorkList> workList = workListRepository.findAll();
+        return MapperConfiguration.convertList(workList, this::convertToWorkListDto);
     }
 
-
+    /**
+     * method -  find workList by id from db
+     *
+     * @param workListId
+     * @return workListDto by id
+     */
     @Override
-    public void addWorkList(@Valid WorkList workListDto) {
-        workListRepository.save(workListDto);
-
+    public WorkListDto findWorkListById(Integer workListId) {
+        return convertToWorkListDto(workListRepository.findById(workListId).orElse(null));
     }
 
-//
-//    @Override
-//    public WorkListDto findById(Integer workListId) {
-//        return workListConverter.toDto(
-//                workListRepository.findById(workListId).orElse(null));
-//    }
-//
+    /**
+     * method - add workList in db
+     *
+     * @param workListDto
+     */
+    @Override
+    public void addWorkList(WorkListDto workListDto) {
+        workListRepository.save(convertDtoToEntityWorkList(workListDto));
+    }
 
-//
-//    @Override
-//    public void deleteWorkListById(Integer workListId) {
-//        workListRepository.deleteById(workListId);
-//    }
+    /**
+     * method - delete workList from db by id
+     *
+     * @param workListId
+     */
+    @Override
+    public void deleteWorkListById(Integer workListId) {
+        workListRepository.deleteById(workListId);
+    }
+
+    //entity to dto
+    public WorkListDto convertToWorkListDto(WorkList workList) {
+        WorkListDto workListDto = modelMapper.map(workList, WorkListDto.class);
+        return workListDto;
+    }
+    //end entity to dto
+
+    //dto to entity
+    public WorkList convertDtoToEntityWorkList(WorkListDto workListDto) {
+        WorkList workList = modelMapper.map(workListDto, WorkList.class);
+        return workList;
+    }
+//end dto to entity
 
 }
 

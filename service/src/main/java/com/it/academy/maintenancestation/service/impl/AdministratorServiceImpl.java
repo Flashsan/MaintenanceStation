@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * implementation AdministratorService
+ * AdministratorService
  *
  * @author Alexander Grigorovich
  * @version 12.07.2022

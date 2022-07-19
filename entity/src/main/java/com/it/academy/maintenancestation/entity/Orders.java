@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Order entity
@@ -54,8 +55,8 @@ public class Orders implements Serializable {
     @JoinColumn(name = "car_id")
     private Car car;
 
-////    @OneToMany(mappedBy = "orders")
-////    private Set<WorkList> workList;
+    @OneToMany(mappedBy = "orders")
+    private Set<WorkList> workList;
 
 
 }

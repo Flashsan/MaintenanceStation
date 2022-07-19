@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * implementation ClientService
+ * ClientService
  *
  * @author Alexander Grigorovich
  * @version 12.07.2022

@@ -3,7 +3,8 @@ package com.it.academy.maintenancestation.dto;
 
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class MechanicDto {
 
     private MechanicDetailsDto mechanicDetails;
 
-    private Set<WorkListDto> workList;
+    private List<WorkListDto> workList;
 
 
 }

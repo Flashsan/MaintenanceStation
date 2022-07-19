@@ -22,8 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * OrdersService
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
+
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class OrdersServiceImpl
         implements OrdersService {
@@ -48,18 +54,12 @@ public class OrdersServiceImpl
 
     @Override
     public OrdersDto findOrderById(Integer orderId) {
-        return ordersConverter.toDto(
-                ordersRepository
-                        .findById(orderId)
-                        .orElse(null));
+        return null;
     }
 
     @Override
     public void addOrder(OrdersDto ordersDto) {
-
         ordersRepository.save(convertDtoToEntityOrders(ordersDto));
-//
-
     }
 
     @Override

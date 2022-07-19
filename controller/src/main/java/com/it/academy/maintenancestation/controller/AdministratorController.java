@@ -38,7 +38,6 @@ public class AdministratorController {
     public String showEditFormAdministrator(@PathVariable(name = "id") Integer administratorId,
                                             Model model) {
         AdministratorDto administrator = administratorService.findAdministratorById(administratorId);
-        administrator.toString();
         model.addAttribute("administratorDto", administratorService.findAdministratorById(administratorId));
         return "administratorAddEdit";
     }
@@ -53,7 +52,7 @@ public class AdministratorController {
     public String listAcceptedOrders(@PathVariable(name = "id") Integer byAdministratorId,
                                      Model model) {
         model.addAttribute("acceptedOrdersDtoByAdministratorList", administratorService.listAcceptedOrdersByAdministrator(byAdministratorId));
-        return "acceptedOrdersByAdministrator";
+        return "administratorAcceptedListOrders";
     }
 }
 

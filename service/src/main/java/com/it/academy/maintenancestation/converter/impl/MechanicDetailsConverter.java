@@ -5,9 +5,19 @@ import com.it.academy.maintenancestation.entity.ClientDetails;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MechanicDetailsConverter
-        extends AbstractMapper<ClientDetails, ClientDetailsDto> {
-    public MechanicDetailsConverter() {
-        super(ClientDetails.class, ClientDetailsDto.class);
-    }
+public class MechanicDetailsConverter{
+//        extends AbstractMapper<ClientDetails, ClientDetailsDto> {
+//    public MechanicDetailsConverter() {
+//        super(ClientDetails.class, ClientDetailsDto.class);
+//    }
+//
+//    @Override
+//    public ClientDetails dtoToEntity(ClientDetailsDto dto) {
+//        return null;
+//    }
+//
+//    @Override
+//    public ClientDetailsDto entityToDto(ClientDetails entity) {
+//        return null;
+//    }
 }

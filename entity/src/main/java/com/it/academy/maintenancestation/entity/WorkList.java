@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -40,14 +39,13 @@ public class WorkList implements Serializable {
             name = "work_list_mechanic",
             joinColumns = {@JoinColumn(name = "work_list_id")},
             inverseJoinColumns = {@JoinColumn(name = "mechanic_id")})
-    private Set<Mechanic> mechanic = new HashSet<>();
-
-    @OneToMany(mappedBy = "workList")
-    private Set<SparePart> sparePart;
+    private Set<Mechanic> mechanic;
 
     @ManyToOne
     @JoinColumn(name = "orders_id")
     private Orders orders;
 
+    @OneToMany(mappedBy = "workList")
+    private Set<SparePart> sparePart;
 
 }
