@@ -7,8 +7,8 @@
 <div th:replace="fragments::menu">Static header</div>
 <div class="container">
     <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
-    <button type="button" class="btn btn-success" onclick='location.href="/administrator/saveAdministrator"'>
-        Add New Administrator
+    <button type="button" class="btn btn-success" onclick='location.href="/client/saveClient"'>
+        Add New Client
     </button>
 
     <table class="table table-hover">
@@ -17,22 +17,22 @@
             <th scope="col">№</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">Work experience</th>
-            <th scope="col">List accepted orders</th>
+            <th scope="col">Number passport</th>
+            <th scope="col">List own cars </th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="administratorDto, countLine:${administratorDtoList}">
+        <tr th:each="clientDto, countLine:${clientDtoList}">
             <td th:text="${countLine.index + 1}">Count Line</td>
-            <td th:text="${administratorDto.administratorName}">Name</td>
-            <td th:text="${administratorDto.administratorLastName}">LastName</td>
-            <td th:text="${administratorDto.administratorDetails.administratorDetailsExperience}">LastName</td>
+            <td th:text="${clientDto.clientName}">Name</td>
+            <td th:text="${clientDto.clientLastName}">LastName</td>
+            <td th:text="${clientDto.clientDetails.clientDetailsNumberPassport}">Number Passport</td>
             <td></td>
             <td>&nbsp;
-                <a th:href="@{/administrator/editAdministrator/{id}(id=${administratorDto.administratorId})}"
+                <a th:href="@{/client/editClient/{id}(id=${clientDto.clientId})}"
                    class="btn btn-primary eBtn">Edit</a>
-                <a th:href="@{/administrator/deleteAdministrator/{id}(id=${administratorDto.administratorId})}"
+                <a th:href="@{/client/deleteClient/{id}(id=${clientDto.clientId})}"
                    class="btn btn-danger delBtn">Delete</a>
             </td>
         </tr>
@@ -40,7 +40,7 @@
     </table>
     <hr/>
 
-    <!--         #Modal for removing Administrator -->
+    <!--         #Modal for removing Client -->
     <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-danger">
-                        Are You sure You want to delete this Administrator?
+                        Are You sure You want to delete this Client?
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <!--     #End modal form for removing Administrator-->
+    <!--     #End modal form for removing Client-->
 
 </div>
 <div th:replace="fragments::footer">Static footer</div>

@@ -22,7 +22,7 @@ public class AdministratorController {
 
     @GetMapping("/saveAdministrator")
     public String showCreateEditFormNewAdministrator(Model model,
-                                                 AdministratorDto administratorDto) {
+                                                     AdministratorDto administratorDto) {
         model.addAttribute("administratorDto", administratorDto);
         return "administratorAddEdit";
     }
@@ -47,6 +47,13 @@ public class AdministratorController {
     public String deleteAdministrator(@PathVariable(name = "id") Integer administratorId) {
         administratorService.deleteAdministratorById(administratorId);
         return "redirect:/administrator/";
+    }
+
+    @GetMapping("/acceptedOrders/{id}")
+    public String listAcceptedOrders(@PathVariable(name = "id") Integer byAdministratorId,
+                                     Model model) {
+        model.addAttribute("acceptedOrdersDtoByAdministratorList", administratorService.listAcceptedOrdersByAdministrator(byAdministratorId));
+        return "acceptedOrdersByAdministrator";
     }
 }
 

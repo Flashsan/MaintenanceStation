@@ -28,7 +28,8 @@
             <td th:text="${administratorDto.administratorName}">Name</td>
             <td th:text="${administratorDto.administratorLastName}">LastName</td>
             <td th:text="${administratorDto.administratorDetails.administratorDetailsExperience}">LastName</td>
-            <td></td>
+            <td><a th:href="@{/administrator/acceptedOrders/{id}(id=${administratorDto.administratorId})}">
+                Accepted orders</a></td>
             <td>&nbsp;
                 <a th:href="@{/administrator/editAdministrator/{id}(id=${administratorDto.administratorId})}"
                    class="btn btn-primary eBtn">Edit</a>

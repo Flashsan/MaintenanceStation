@@ -3,8 +3,10 @@ package com.it.academy.maintenancestation.service.impl;
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
 import com.it.academy.maintenancestation.dto.AdministratorDetailsDto;
 import com.it.academy.maintenancestation.dto.AdministratorDto;
+import com.it.academy.maintenancestation.dto.OrdersDto;
 import com.it.academy.maintenancestation.entity.Administrator;
 import com.it.academy.maintenancestation.entity.AdministratorDetails;
+import com.it.academy.maintenancestation.entity.Orders;
 import com.it.academy.maintenancestation.repository.AdministratorRepository;
 import com.it.academy.maintenancestation.service.AdministratorService;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +76,17 @@ public class AdministratorServiceImpl
         administratorRepository.deleteById(administratorId);
     }
 
+    /**
+     * method - show list accepted orders byAdministrator
+     * @param byAdministratorId
+     * @return
+     */
+    @Override
+    public List<OrdersDto> listAcceptedOrdersByAdministrator(Integer byAdministratorId) {
+        List<Orders> ordersList = administratorRepository.getAdministratorsOrders(byAdministratorId);
+        return MapperConfiguration.convertList(ordersList, this::convertToOrdersDto);
+    }
+
     //entity to dto
     public AdministratorDto convertToAdministratorDto(Administrator administrator) {
         AdministratorDto administratorDto = modelMapper.map(administrator, AdministratorDto.class);
@@ -102,5 +115,21 @@ public class AdministratorServiceImpl
         return administratorDetails;
     }
     //end dto to entity
+
+    //entity to dto
+    public OrdersDto convertToOrdersDto(Orders orders) {
+        OrdersDto ordersDto = modelMapper.map(orders, OrdersDto.class);
+        ordersDto.setAdministrator(convertToAdministratorDto(orders.getAdministrator()));
+        return ordersDto;
+    }
+    //end entity to dto
+
+    //dto to entity
+    public Orders convertDtoToEntityOrders(OrdersDto ordersDto) {
+        Orders orders = modelMapper.map(ordersDto, Orders.class);
+        orders.setAdministrator(convertDtoToEntityAdministrator(ordersDto.getAdministrator()));
+        return orders;
+    }
+//end dto to entity
 
 }

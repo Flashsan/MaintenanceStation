@@ -1,6 +1,7 @@
 package com.it.academy.maintenancestation.service;
 
 import com.it.academy.maintenancestation.dto.AdministratorDto;
+import com.it.academy.maintenancestation.dto.OrdersDto;
 
 import java.util.List;
 
@@ -41,4 +42,11 @@ public interface AdministratorService {
      * @param administratorId
      */
     void deleteAdministratorById(Integer administratorId);
+
+    /**
+     * service - show accepted orders
+     *
+     * @return orders which administrator accepted.
+     */
+    List<OrdersDto> listAcceptedOrdersByAdministrator(Integer byAdministratorId);
 }
