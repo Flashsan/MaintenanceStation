@@ -18,12 +18,9 @@ public class WorkListDto implements Serializable {
 
     private String workListCoast;
 
-    private Set<MechanicDto> mechanic;
+    private List<MechanicDto> mechanic;
 
-    private Set<SparePartDto> sparePart;
+//    private List<SparePartDto> sparePart;
 
-    public void addMechanic(MechanicDto mechanicDto) {
-        this.mechanic.add(mechanicDto);
-    }
 
 }

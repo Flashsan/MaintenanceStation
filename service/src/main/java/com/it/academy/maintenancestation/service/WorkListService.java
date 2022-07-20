@@ -1,6 +1,8 @@
 package com.it.academy.maintenancestation.service;
 
 import com.it.academy.maintenancestation.dto.WorkListDto;
+import com.it.academy.maintenancestation.entity.WorkList;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface WorkListService {
      * @return all administrators
      */
 
-    List<WorkListDto> listAllWorkList();
+    List<WorkListDto> listAllWorkList(int pageNo, int pageSize, String sortField, String sortDir);
 
     /**
      * service - find workList by id
@@ -42,4 +44,5 @@ public interface WorkListService {
      * @param workListId
      */
     void deleteWorkListById(Integer workListId);
+
 }

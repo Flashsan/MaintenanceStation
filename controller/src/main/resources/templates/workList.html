@@ -15,8 +15,14 @@
         <thead>
         <tr>
             <th scope="col">№</th>
-            <th scope="col">Name</th>
-            <th scope="col">Coast</th>
+            <!--            <th scope="col">Name</th>-->
+            <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=workListName&sortDir=' + ${reverseSortDir}}">
+                WorkList Name</a></th>
+
+            <!--            <th scope="col">Coast</th>-->
+            <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=workListCoast&sortDir=' + ${reverseSortDir}}">
+                    WorkList Coast</a></th>
             <th scope="col">List spare part</th>
             <th scope="col">Mechanics</th>
             <th scope="col">Actions</th>
@@ -28,10 +34,10 @@
             <td th:text="${workListDto.workListName}">Name</td>
             <td th:text="${workListDto.workListCoast}">Coast</td>
             <td>
-                            <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">
-                                <span th:text="${sparePartDto.sparePartNamePart}"/>
-                                    <th:block th:if="${!irerStat.last}">,</th:block><br></span>
-            </td>
+                <!--                            <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">-->
+                <!--                                <span th:text="${sparePartDto.sparePartNamePart}"/>-->
+                <!--                                    <th:block th:if="${!irerStat.last}">,</th:block><br></span>-->
+                <!--            </td>-->
             <td>
                 <span th:each="mechanic,irerStat:${workListDto.mechanic}">
                 <span th:text="${mechanic.mechanicName}"/>
@@ -50,6 +56,33 @@
         </tbody>
     </table>
     <hr/>
+
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+            <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col-sm-1">
+     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}"
+         th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+     </span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+
 
     <!--         #Modal for removing WorkList -->
     <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"

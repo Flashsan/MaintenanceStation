@@ -8,8 +8,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class MechanicDto {
 
     private Integer mechanicId;
@@ -21,6 +20,7 @@ public class MechanicDto {
     private MechanicDetailsDto mechanicDetails;
 
     private List<WorkListDto> workList;
+
 
 
 }

@@ -17,7 +17,13 @@ public class SparePartDto implements Serializable {
 
     private String sparePartCoast;
 
-
-
-
+    @Override
+    public String toString() {
+        return "SparePartDto{" +
+                "sparePartId=" + sparePartId +
+                ", sparePartNamePart='" + sparePartNamePart + '\'' +
+                ", sparePartBrand='" + sparePartBrand + '\'' +
+                ", sparePartCoast='" + sparePartCoast + '\'' +
+                '}';
+    }
 }

@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * WorkList entity
@@ -34,18 +34,17 @@ public class WorkList implements Serializable {
     private String workListCoast;
 
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+            cascade = CascadeType.MERGE)
     @JoinTable(
             name = "work_list_mechanic",
             joinColumns = {@JoinColumn(name = "work_list_id")},
             inverseJoinColumns = {@JoinColumn(name = "mechanic_id")})
-    private Set<Mechanic> mechanic;
+    private List<Mechanic> mechanic;
+
+    @OneToMany(mappedBy = "workList")
+    private List<SparePart> sparePart;
 
     @ManyToOne
     @JoinColumn(name = "orders_id")
     private Orders orders;
-
-    @OneToMany(mappedBy = "workList")
-    private Set<SparePart> sparePart;
-
 }
