@@ -28,19 +28,17 @@
             <td th:text="${workListDto.workListName}">Name</td>
             <td th:text="${workListDto.workListCoast}">Coast</td>
             <td>
+                            <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">
+                                <span th:text="${sparePartDto.sparePartNamePart}"/>
+                                    <th:block th:if="${!irerStat.last}">,</th:block><br></span>
+            </td>
+            <td>
                 <span th:each="mechanic,irerStat:${workListDto.mechanic}">
                 <span th:text="${mechanic.mechanicName}"/>
                 <span th:text="${mechanic.mechanicLastName}"/>
                 <th:block th:if="${!irerStat.last}">,</th:block>
                 </span>
             </td>
-
-            <!--            <td>-->
-            <!--                <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">-->
-            <!--                    <span th:text="${sparePartDto.sparePartNamePart}"/>-->
-            <!--                        <th:block th:if="${!irerStat.last}">,</th:block><br></span>-->
-            <!--            </td>-->
-
 
             <td>
                 <a th:href="@{/workList/editWorkList/{id}(id=${workListDto.workListId})}"

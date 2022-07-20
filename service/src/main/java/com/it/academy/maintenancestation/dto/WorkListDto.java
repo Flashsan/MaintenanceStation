@@ -20,10 +20,10 @@ public class WorkListDto implements Serializable {
 
     private Set<MechanicDto> mechanic;
 
+    private Set<SparePartDto> sparePart;
+
     public void addMechanic(MechanicDto mechanicDto) {
         this.mechanic.add(mechanicDto);
     }
-
-//    private Set<SparePartDto> sparePart;
 
 }

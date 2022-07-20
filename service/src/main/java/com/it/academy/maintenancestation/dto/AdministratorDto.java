@@ -1,5 +1,8 @@
 package com.it.academy.maintenancestation.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -24,9 +27,11 @@ public class AdministratorDto implements Serializable {
     @Size(min = 2, max = 50, message = "LastName should be between 2 and 50 characters!")
 //    @Pattern(regexp = "[a-zA-Z]*", message = "Только латинские буквы")
     private String administratorLastName;
-
+//    @JsonIgnore
+//@JsonBackReference
     private AdministratorDetailsDto administratorDetails;
-
+//    @JsonIgnore
+//@JsonBackReference
     private List<OrdersDto> orders;
 
 

@@ -1,73 +1,122 @@
 package com.it.academy.maintenancestation.controller;
 
-import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.dto.MechanicDto;
 import com.it.academy.maintenancestation.dto.SparePartDto;
 import com.it.academy.maintenancestation.dto.WorkListDto;
-import com.it.academy.maintenancestation.entity.WorkList;
 import com.it.academy.maintenancestation.service.MechanicService;
 import com.it.academy.maintenancestation.service.SparePartService;
 import com.it.academy.maintenancestation.service.WorkListService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
+/**
+ * WorkListController
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
 
 @Controller
 @RequestMapping("/workList")
 @RequiredArgsConstructor
 public class WorkListController {
+    /**
+     * Constant(WorkListController)
+     */
+    public static final String REDIRECT_WORK_LIST = "redirect:/workList/";
+    public static final String ID = "id";
+    public static final String WORK_LIST_ADD_EDIT = "workListAddEdit";
+    public static final String WORK_LIST_DTO = "workListDto";
+    public static final String MECHANIC_DTO_LIST = "mechanicDtoList";
+    public static final String WORK_LIST = "workList";
+    public static final String WORK_LIST_DTOS_LIST = "workListDtosList";
+    public static final String SPARE_PART_DTO_LIST = "sparePartDtoList";
 
-//    @GetMapping("/")
-//    public String workList(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
-//                           @RequestParam(value = "size", required = false, defaultValue = "5") int size, Model model) {
-//        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.getPage(pageNumber, size));
-//        return WORK_LIST;
-//    }
-
+    /**
+     *
+     */
     private final WorkListService workListService;
+
+    /**
+     *
+     */
     private final MechanicService mechanicService;
 
+    /**
+     *
+     */
+    private final SparePartService sparePartService;
+
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String listWorkList(Model model) {
-        model.addAttribute("workListDtosList", workListService.listAllWorkList());
-        return "workList";
+        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.listAllWorkList());
+        return WORK_LIST;
     }
 
+    /**
+     *
+     * @param model
+     * @param workListDto
+     * @return
+     */
     @GetMapping("/saveWorkList")
     public String showCreateFormNewWorkList(Model model,
-                                                WorkListDto workListDto) {
+                                            WorkListDto workListDto) {
         List<MechanicDto> mechanicDtoList = mechanicService.listAllMechanics();
-        model.addAttribute("mechanicDtoList", mechanicDtoList);
-        model.addAttribute("workListDto", new WorkList());
-        return "workListAddEdit";
+        List<SparePartDto> sparePartDtoList = sparePartService.listAllSparePart();
+        model.addAttribute(MECHANIC_DTO_LIST, mechanicDtoList);
+        model.addAttribute(SPARE_PART_DTO_LIST, sparePartDtoList);
+        model.addAttribute(WORK_LIST_DTO, workListDto);
+        return WORK_LIST_ADD_EDIT;
     }
 
+    /**
+     *
+     * @param workListDto
+     * @param mechanicQuantity
+     * @param sparePartQuantity
+     * @return
+     */
+//    @RequestParam(sparePartQuantity)
     @PostMapping(value = "/saveWorkList")
-    public String saveWorkList(@ModelAttribute("workListDto") WorkListDto workListDto) {
+    public String saveWorkList(@ModelAttribute(WORK_LIST_DTO) WorkListDto workListDto,
+                               List<String> mechanicQuantity,
+                               List<String> sparePartQuantity) {
         workListService.addWorkList(workListDto);
-        return "redirect:/workList/";
+        return REDIRECT_WORK_LIST;
     }
 
+    /**
+     *
+     * @param workListId
+     * @param model
+     * @return
+     */
     @GetMapping("/editWorkList/{id}")
-    public String showEditFormWorkList(@PathVariable(name = "id") Integer workListId,
-                                            Model model) {
-        WorkListDto workList = workListService.findWorkListById(workListId);
-        model.addAttribute("workListDto", workListService.findWorkListById(workListId));
-        return "workListAddEdit";
+    public String showEditFormWorkList(@PathVariable(name = ID) Integer workListId,
+                                       Model model) {
+        model.addAttribute(WORK_LIST_DTO, workListService.findWorkListById(workListId));
+        return WORK_LIST_ADD_EDIT;
     }
 
+    /**
+     *
+     * @param workListId
+     * @return
+     */
     @GetMapping(value = "/deleteWorkList/{id}")
-    public String deleteWorkList(@PathVariable("id") Integer workListId) {
+    public String deleteWorkList(@PathVariable(ID) Integer workListId) {
         workListService.deleteWorkListById(workListId);
-        return "redirect:/workList/";
+        return REDIRECT_WORK_LIST;
     }
 
 }

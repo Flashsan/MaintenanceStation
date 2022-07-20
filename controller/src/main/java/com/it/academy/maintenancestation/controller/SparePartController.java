@@ -17,47 +17,90 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * SparePartController
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
 
 @Controller
 @RequestMapping("/sparePart")
 @RequiredArgsConstructor
 public class SparePartController {
 
-
+    /**
+     * Constant(SparePartController)
+     */
+    public static final String SPARE_PART_DTO_LIST = "sparePartDtoList";
+    public static final String SPARE_PART = "sparePart";
+    public static final String SPARE_PART_DTO = "sparePartDto";
+    public static final String SPARE_PART_ADD_EDIT = "sparePartAddEdit";
+    public static final String REDIRECT_SPARE_PART = "redirect:/sparePart/";
+    public static final String ID = "id";
+    /**
+     *
+     */
     private final SparePartService sparePartService;
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String listSparePart(Model model) {
-        model.addAttribute("sparePartDtoList", sparePartService.listAllSparePart());
-        return "sparePart";
+        model.addAttribute(SPARE_PART_DTO_LIST, sparePartService.listAllSparePart());
+        return SPARE_PART;
     }
 
+    /**
+     *
+     * @param model
+     * @param sparePartDto
+     * @return
+     */
     @GetMapping("/saveSparePart")
     public String showCreateEditFormNewSparePart(Model model,
                                                  SparePartDto sparePartDto) {
-        model.addAttribute("sparePartDto", sparePartDto);
-        return "sparePartAddEdit";
+        model.addAttribute(SPARE_PART_DTO, sparePartDto);
+        return SPARE_PART_ADD_EDIT;
     }
 
+    /**
+     *
+     * @param sparePartDto
+     * @return
+     */
     @PostMapping("/saveSparePart")
-    public String saveSparePart(@ModelAttribute("sparePartDto")
+    public String saveSparePart(@ModelAttribute(SPARE_PART_DTO)
                                         SparePartDto sparePartDto) {
         sparePartService.addSparePart(sparePartDto);
-        return "redirect:/sparePart/";
+        return REDIRECT_SPARE_PART;
     }
 
+    /**
+     *
+     * @param sparePartId
+     * @param model
+     * @return
+     */
     @GetMapping("/editSparePart/{id}")
-    public String showEditFormSparePart(@PathVariable(name = "id") Integer sparePartId,
+    public String showEditFormSparePart(@PathVariable(name = ID) Integer sparePartId,
                                             Model model) {
-        SparePartDto sparePartDto = sparePartService.findSparePartById(sparePartId);
-        model.addAttribute("sparePartDto", sparePartService.findSparePartById(sparePartId));
-        return "sparePartAddEdit";
+        model.addAttribute(SPARE_PART_DTO, sparePartService.findSparePartById(sparePartId));
+        return SPARE_PART_ADD_EDIT;
     }
 
+    /**
+     *
+     * @param sparePartId
+     * @return
+     */
     @GetMapping("/deleteSparePart/{id}")
-    public String deleteSparePart(@PathVariable(name = "id") Integer sparePartId) {
+    public String deleteSparePart(@PathVariable(name = ID) Integer sparePartId) {
         sparePartService.deleteSparePartById(sparePartId);
-        return "redirect:/sparePart/";
+        return REDIRECT_SPARE_PART;
     }
 }
 

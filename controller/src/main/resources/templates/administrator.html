@@ -7,7 +7,8 @@
 <div th:replace="fragments::menu">Static header</div>
 <div class="container">
     <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
-    <button type="button" class="btn btn-success" onclick='location.href="/administrator/saveAdministrator"'>
+    <button type="button" class="btn btn-success"
+            onclick='location.href="/administrator/saveAdministrator"'>
         Add New Administrator
     </button>
 
@@ -42,8 +43,12 @@
     <hr/>
 
     <!--         #Modal for removing Administrator -->
-    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
+    <div class="modal fade"
+         id="removeModalCenter"
+         tabindex="-1" role="dialog"
+         aria-labelledby="removeModalCenterTitle"
          aria-hidden="true">
+
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -52,11 +57,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <p class="alert alert-danger">
                         Are You sure You want to delete this Administrator?
                     </p>
                 </div>
+
                 <div class="modal-footer">
                     <a href="" class="btn btn-danger" id="delRef">Delete</a>
                 </div>

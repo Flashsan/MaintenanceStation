@@ -1,13 +1,9 @@
 package com.it.academy.maintenancestation.converter.impl;
 
-import com.it.academy.maintenancestation.dto.AdministratorDto;
-import com.it.academy.maintenancestation.entity.Administrator;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
 @Component
-public class AdministratorMapper
+public class AdministratorConverter
       {
 
 

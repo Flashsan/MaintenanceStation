@@ -1,17 +1,9 @@
 package com.it.academy.maintenancestation.converter.impl;
 
-import com.it.academy.maintenancestation.dto.SparePartDto;
-import com.it.academy.maintenancestation.entity.SparePart;
-import com.it.academy.maintenancestation.repository.WorkListRepository;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.Objects;
-
 @Component
-public class SparePartMapper{
+public class SparePartConverter {
 //        extends AbstractMapper<SparePart, SparePartDto> {
 //
 //    @Autowired

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:actionth="http://www.w3.org/1999/xhtml">
+<link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
+<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+
+<head th:replace="fragments ::html_head(type='none')"/>
+
+<body>
+
+<div class="container text-center">
+        <div th:if="${administratorDto.administratorId == null}">
+            <h1>Create New Administrator</h1>
+        </div>
+
+        <div th:unless="${administratorDto.administratorId == null}">
+            <h1>Edit Administrator</h1>
+        </div>
+
+    <form action="#" th:action="@{/administrator/saveAdministrator}" method="POST">
+        <input type="hidden" th:field="*{administratorDto.administratorId}"/>
+
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Administrator Name:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{administratorDto.administratorName}"
+                           id="administratorDto.administratorName"
+                           class="form-control"
+                           placeholder="Например:Александр" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('administratorDto.administratorName')}"
+                         th:errors="*{administratorDto.administratorName}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Administrator LastName:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{administratorDto.administratorLastName}"
+                           id="administratorDto.administratorLastName"
+                           class="form-control"
+                           placeholder="Например:Григорович" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('administratorDto.administratorLastName')}"
+                         th:errors="*{administratorDto.administratorLastName}"></div>
+                </div>
+            </div>
+
+            <div class=" form-group row">
+                <label class="col-form-label col-sm-4">Administrator Experience:</label>
+                <div class="col-sm-8">
+                    <input type="text"
+                           th:field="*{administratorDto.administratorDetails.administratorDetailsExperience}"
+                           id="administratorDto.administratorDetails.administratorDetailsExperience"
+                           class="form-control"
+                           placeholder="Например:2,5" required/>
+                    <div class="alert alert-warning"
+                         th:if="${#fields.hasErrors('administratorDto.administratorDetails.administratorDetailsExperience')}"
+                         th:errors="*{administratorDto.administratorDetails.administratorDetailsExperience}"></div>
+                </div>
+            </div>
+
+            <div class="text-center p-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/administrator/" class="btn btn-danger">Back</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

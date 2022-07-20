@@ -1,6 +1,8 @@
 package com.it.academy.maintenancestation.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -45,6 +47,7 @@ public class Administrator implements Serializable {
     /**
      * additional details for entity administrator.
      */
+    @JsonManagedReference
     @OneToOne(
             mappedBy = "administrator",
             cascade = CascadeType.ALL,
@@ -54,6 +57,7 @@ public class Administrator implements Serializable {
     /**
      * List accepted orders.
      */
+    @JsonManagedReference
     @OneToMany(
             mappedBy = "administrator",
             cascade = {

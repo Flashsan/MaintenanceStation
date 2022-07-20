@@ -9,56 +9,102 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+/**
+ * OrdersController
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
 
 @Controller
 @RequestMapping("/orders")
 @RequiredArgsConstructor
 public class OrdersController {
 
+    /**
+     * Constant(OrdersController)
+     */
+    public static final String ORDERS_DTO_LIST = "ordersDtoList";
+    public static final String ORDERS = "orders";
+    public static final String ADMINISTRATOR_DTO_LIST = "administratorDtoList";
+    public static final String ORDERS_DTO = "ordersDto";
+    public static final String ORDERS_ADD_EDIT = "ordersAddEdit";
+    public static final String ADMINISTRATOR_ID = "administratorId";
+    public static final String REDIRECT_ORDERS = "redirect:/orders/";
+    public static final String ID = "id";
 
+    /**
+     *
+     */
     private final OrdersService ordersService;
+
+    /**
+     *
+     */
     private final AdministratorService administratorService;
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String listOrders(Model model) {
-        List<OrdersDto> ordersList = ordersService.listAllOrders();
-        model.addAttribute("ordersDtoList", ordersService.listAllOrders());
-        return "orders";
+        model.addAttribute(ORDERS_DTO_LIST, ordersService.listAllOrders());
+        return ORDERS;
     }
 
+    /**
+     *
+     * @param model
+     * @param ordersDto
+     * @return
+     */
     @GetMapping("/saveOrder")
-    public String showCreateFormNewOrders(Model model, OrdersDto ordersDto, AdministratorDto administratorDto) {
-
-        model.addAttribute("administratorDtoList", administratorService.listAllAdministrators());
-        model.addAttribute("ordersDto", ordersDto);
-        return "ordersAddEdit";
+    public String showCreateFormNewOrders(Model model, OrdersDto ordersDto) {
+        model.addAttribute(ADMINISTRATOR_DTO_LIST, administratorService.listAllAdministrators());
+        model.addAttribute(ORDERS_DTO, ordersDto);
+        return ORDERS_ADD_EDIT;
     }
 
-//    @ModelAttribute("administratorDto")
-//    AdministratorDto administratorDto,
-
+    /**
+     *
+     * @param ordersDto
+     * @param administratorId
+     * @return
+     */
     @PostMapping("/saveOrder")
-    public String saveOrders(@ModelAttribute("ordersDto")
+    public String saveOrders(@ModelAttribute(ORDERS_DTO)
                                      OrdersDto ordersDto,
-                             @RequestParam("administratorId") Integer administratorId) {
+                             @RequestParam(ADMINISTRATOR_ID) Integer administratorId) {
         AdministratorDto administratorDtoToOrder = administratorService.findAdministratorById(administratorId);
         ordersDto.setAdministrator(administratorDtoToOrder);
         ordersService.addOrder(ordersDto);
-        return "redirect:/orders/";
+        return REDIRECT_ORDERS;
     }
 
+    /**
+     *
+     * @param orderId
+     * @param model
+     * @return
+     */
     @GetMapping("/editOrders/{id}")
-    public String showEditFormOrders(@PathVariable(name = "id") Integer orderId,
+    public String showEditFormOrders(@PathVariable(name = ID) Integer orderId,
                                      Model model) {
-        model.addAttribute("ordersDto", ordersService.findOrderById(orderId));
-        return "ordersAddEdit";
+        model.addAttribute(ORDERS_DTO, ordersService.findOrderById(orderId));
+        return ORDERS_ADD_EDIT;
     }
 
+    /**
+     *
+     * @param orderId
+     * @return
+     */
     @GetMapping("/deleteOrders/{id}")
-    public String deleteOrders(@PathVariable(name = "id") Integer orderId) {
+    public String deleteOrders(@PathVariable(name = ID) Integer orderId) {
         ordersService.deleteOrdersById(orderId);
-        return "redirect:/orders/";
+        return REDIRECT_ORDERS;
     }
 
 }
