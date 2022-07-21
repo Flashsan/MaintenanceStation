@@ -41,7 +41,12 @@ public class WorkList implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "mechanic_id")})
     private List<Mechanic> mechanic;
 
-    @OneToMany(mappedBy = "workList")
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "work_list_spare_part",
+            joinColumns = {@JoinColumn(name = "work_list_id")},
+            inverseJoinColumns = {@JoinColumn(name = "spare_part_id")})
     private List<SparePart> sparePart;
 
     @ManyToOne

@@ -20,7 +20,7 @@ public class WorkListDto implements Serializable {
 
     private List<MechanicDto> mechanic;
 
-//    private List<SparePartDto> sparePart;
+    private List<SparePartDto> sparePart;
 
 
 }

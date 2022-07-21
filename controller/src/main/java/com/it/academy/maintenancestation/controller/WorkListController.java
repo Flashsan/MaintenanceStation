@@ -117,22 +117,25 @@ public class WorkListController {
     public String showCreateFormNewWorkList(Model model,
                                             WorkListDto workListDto) {
         List<MechanicDto> mechanicDtoList = mechanicService.listAllMechanics();
-//        List<SparePartDto> sparePartDtoList = sparePartService.listAllSparePart();
+        List<SparePartDto> sparePartDtoList = sparePartService.listAllSparePart();
+
         model.addAttribute(MECHANIC_DTO_LIST, mechanicDtoList);
-//        model.addAttribute(SPARE_PART_DTO_LIST, sparePartDtoList);
+        model.addAttribute(SPARE_PART_DTO_LIST, sparePartDtoList);
         model.addAttribute(WORK_LIST_DTO, workListDto);
         return WORK_LIST_ADD_EDIT;
     }
 
     /**
      * @param workListDto
-     * @param mechanicsList //     * @param sparePartsList
+     * @param mechanicsList
+     * @param sparePartsList
      * @return
      */
-//    @RequestParam("sparePartsList") Integer[] sparePartsList
     @PostMapping(value = "/saveWorkList")
     public String saveWorkList(@ModelAttribute(WORK_LIST_DTO) WorkListDto workListDto,
-                               @RequestParam("mechanicsList") Integer[] mechanicsList) {
+                               @RequestParam("mechanicsList") Integer[] mechanicsList,
+                               @RequestParam("sparePartsList") Integer[] sparePartsList) {
+
         List<Integer> mechanics = new ArrayList<>();
         Collections.addAll(mechanics, mechanicsList);
 
@@ -142,15 +145,15 @@ public class WorkListController {
                 .collect(Collectors.toList());
 
 
-//        List<Integer> spareParts = new ArrayList<>();
-//        Collections.addAll(spareParts, sparePartsList);
+        List<Integer> spareParts = new ArrayList<>();
+        Collections.addAll(spareParts, sparePartsList);
 
-//        List<SparePartDto> sparePartsDtoList = spareParts.stream()
-//                .map(sparePartService::findSparePartById)
-//                .collect(Collectors.toList());
+        List<SparePartDto> sparePartsDtoList = spareParts.stream()
+                .map(sparePartService::findSparePartById)
+                .collect(Collectors.toList());
 
         workListDto.setMechanic(mechanicsDtoList);
-//        workListDto.setSparePart(sparePartsDtoList);
+        workListDto.setSparePart(sparePartsDtoList);
         workListService.addWorkList(workListDto);
         return REDIRECT_WORK_LIST;
     }

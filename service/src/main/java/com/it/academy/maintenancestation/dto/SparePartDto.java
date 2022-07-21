@@ -3,6 +3,7 @@ package com.it.academy.maintenancestation.dto;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,13 +18,5 @@ public class SparePartDto implements Serializable {
 
     private String sparePartCoast;
 
-    @Override
-    public String toString() {
-        return "SparePartDto{" +
-                "sparePartId=" + sparePartId +
-                ", sparePartNamePart='" + sparePartNamePart + '\'' +
-                ", sparePartBrand='" + sparePartBrand + '\'' +
-                ", sparePartCoast='" + sparePartCoast + '\'' +
-                '}';
-    }
+    private List<WorkListDto> workList;
 }

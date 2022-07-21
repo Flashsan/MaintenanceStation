@@ -57,7 +57,7 @@ public class WorkListServiceImpl
     private Page<WorkList> findPaginated(int pageNo, int pageSize, String sortField, String sortDir) {
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize,sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.workListRepository.findAll(pageable);
     }
 
@@ -102,19 +102,19 @@ public class WorkListServiceImpl
     //dto to entity
     public WorkList convertDtoToEntityWorkList(WorkListDto workListDto) {
         WorkList workList = modelMapper.map(workListDto, WorkList.class);
-        List<MechanicDto> mechanicDto = workListDto.getMechanic();
-//        List<SparePartDto> sparePartDto = workListDto.getSparePart();
 
+        List<MechanicDto> mechanicDto = workListDto.getMechanic();
         List<Mechanic> mechanics = mechanicDto.stream()
                 .map(this::convertDtoToEntityMechanic)
                 .collect(Collectors.toList());
 
-//        List<SparePart> spareParts = sparePartDto.stream()
-//                .map(this::convertDtoToEntitySparePart)
-//                .collect(Collectors.toList());
+        List<SparePartDto> sparePartDto = workListDto.getSparePart();
+        List<SparePart> spareParts = sparePartDto.stream()
+                .map(this::convertDtoToEntitySparePart)
+                .collect(Collectors.toList());
 
         workList.setMechanic(mechanics);
-//        workList.setSparePart(spareParts);
+        workList.setSparePart(spareParts);
 
         return workList;
     }

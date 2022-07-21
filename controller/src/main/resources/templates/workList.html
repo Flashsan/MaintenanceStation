@@ -15,14 +15,10 @@
         <thead>
         <tr>
             <th scope="col">№</th>
-            <!--            <th scope="col">Name</th>-->
             <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=workListName&sortDir=' + ${reverseSortDir}}">
                 WorkList Name</a></th>
-
-            <!--            <th scope="col">Coast</th>-->
-            <th>
-                <a th:href="@{'/page/' + ${currentPage} + '?sortField=workListCoast&sortDir=' + ${reverseSortDir}}">
-                    WorkList Coast</a></th>
+            <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=workListCoast&sortDir=' + ${reverseSortDir}}">
+                WorkList Coast</a></th>
             <th scope="col">List spare part</th>
             <th scope="col">Mechanics</th>
             <th scope="col">Actions</th>
@@ -34,16 +30,15 @@
             <td th:text="${workListDto.workListName}">Name</td>
             <td th:text="${workListDto.workListCoast}">Coast</td>
             <td>
-                <!--                            <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">-->
-                <!--                                <span th:text="${sparePartDto.sparePartNamePart}"/>-->
-                <!--                                    <th:block th:if="${!irerStat.last}">,</th:block><br></span>-->
-                <!--            </td>-->
+                <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">
+                    <span th:text="${sparePartDto.sparePartNamePart}"/>
+                    <th:block th:if="${!irerStat.last}">,</th:block><br></span>
+            </td>
             <td>
                 <span th:each="mechanic,irerStat:${workListDto.mechanic}">
                 <span th:text="${mechanic.mechanicName}"/>
                 <span th:text="${mechanic.mechanicLastName}"/>
-                <th:block th:if="${!irerStat.last}">,</th:block>
-                </span>
+                <th:block th:if="${!irerStat.last}">,</th:block><br></span>
             </td>
 
             <td>
@@ -82,7 +77,6 @@
             </div>
         </div>
     </div>
-
 
     <!--         #Modal for removing WorkList -->
     <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"
