@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-create table 'work_list_spare_part'"
+               author="Grigorovich">
+        <sql>
+            create table work_list_spare_part(
+                work_list_id int,
+                spare_part_id  int,
+                constraint work_list_spare_part_pk
+                    primary key (work_list_id, spare_part_id),
+                constraint wl_work_list_pk
+                    foreign key (work_list_id)
+                        references work_list (work_list_id)
+                        ON DELETE CASCADE,
+                constraint spare_part_pk
+                    foreign key (spare_part_id)
+                        references spare_part (spare_part_id)
+                        ON DELETE CASCADE
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

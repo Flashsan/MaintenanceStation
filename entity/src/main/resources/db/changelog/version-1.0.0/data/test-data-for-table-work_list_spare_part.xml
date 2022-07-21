@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1-add test data to table 'work_list_spare_part'"
+               author="Grigorovich">
+        <sql>
+            insert into work_list_spare_part(work_list_id, spare_part_id)
+            VALUES (1, 1),
+                   (2, 2),
+                   (3, 3);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
