@@ -27,4 +27,9 @@ public interface WorkListRepository
      */
     @Query("select e.sparePart from WorkList e where e.workListId = ?1")
     List<Orders> getListSparePartForOrders(Integer workListId);
+//
+//    @Query("select e.mechanic from WorkList e inner join Mechanic where e.workListId = ?1")
+//    List<Orders> getListSparePartForOrders(Integer workListId);
+//
+
 }
