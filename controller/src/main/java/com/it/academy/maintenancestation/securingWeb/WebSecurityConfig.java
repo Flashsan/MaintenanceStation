@@ -1,5 +1,6 @@
 package com.it.academy.maintenancestation.securingWeb;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,20 +31,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/*").hasAnyAuthority("ADMIN")
                 .antMatchers("/", "/orders/").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/").permitAll()
+                .antMatchers("/main").permitAll()
                 .and()
                 .formLogin().permitAll()
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/main", true)
+                .and()
+                .formLogin()
+                .loginPage("/login")
                 .and()
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login");
     }
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
-
 
 }

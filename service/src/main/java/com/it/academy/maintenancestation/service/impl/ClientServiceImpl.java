@@ -1,10 +1,8 @@
 package com.it.academy.maintenancestation.service.impl;
 
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
-import com.it.academy.maintenancestation.dto.ClientDetailsDto;
-import com.it.academy.maintenancestation.dto.ClientDto;
-import com.it.academy.maintenancestation.entity.Client;
-import com.it.academy.maintenancestation.entity.ClientDetails;
+import com.it.academy.maintenancestation.dto.*;
+import com.it.academy.maintenancestation.entity.*;
 import com.it.academy.maintenancestation.repository.ClientRepository;
 import com.it.academy.maintenancestation.service.ClientService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ClientService
@@ -74,6 +73,35 @@ public class ClientServiceImpl
     public void deleteClientById(Integer clientId) {
         clientRepository.deleteById(clientId);
     }
+
+    /**
+     * method - show list own cars
+     *
+     * @param byClientId
+     * @return list
+     */
+    @Override
+    public List<CarDto> listOwnCars(Integer byClientId) {
+        List<Car> carList = clientRepository.getMyCars(byClientId);
+        return carList.stream()
+                .map(this::convertToCarDto)
+                .collect(Collectors.toList());
+    }
+
+    //entity to dto
+    public CarDto convertToCarDto(Car car) {
+        CarDto carDto = modelMapper.map(car, CarDto.class);
+        carDto.setCarDetails(convertToCarDetailsDto(car.getCarDetails()));
+        return carDto;
+    }
+
+    public CarDetailsDto convertToCarDetailsDto(CarDetails carDetails) {
+        CarDetailsDto carDetailsDto = modelMapper.map(carDetails, CarDetailsDto.class);
+        return carDetailsDto;
+    }
+    //end entity to dto
+
+
 
     //entity to dto
     public ClientDto convertToClientDto(Client client) {

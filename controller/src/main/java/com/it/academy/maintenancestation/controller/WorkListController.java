@@ -166,6 +166,10 @@ public class WorkListController {
     @GetMapping("/editWorkList/{id}")
     public String showEditFormWorkList(@PathVariable(name = ID) Integer workListId,
                                        Model model) {
+        List<MechanicDto> mechanicDtoList = mechanicService.listAllMechanics();
+        List<SparePartDto> sparePartDtoList = sparePartService.listAllSparePart();
+        model.addAttribute(MECHANIC_DTO_LIST, mechanicDtoList);
+        model.addAttribute(SPARE_PART_DTO_LIST, sparePartDtoList);
         model.addAttribute(WORK_LIST_DTO, workListService.findWorkListById(workListId));
         return WORK_LIST_ADD_EDIT;
     }

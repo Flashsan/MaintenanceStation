@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * MechanicService
@@ -74,23 +75,27 @@ public class MechanicServiceImpl
         mechanicRepository.deleteById(mechanicId);
     }
 
+    /**
+     * method - show list pinned workList
+     *
+     * @param byMechanicId
+     * @return list
+     */
     @Override
     public List<WorkListDto> listPinnedWorkList(Integer byMechanicId) {
-        return null;
+        List<WorkList> workListList = mechanicRepository.getMechanicTask(byMechanicId);
+        return workListList.stream()
+                .map(this::convertToWorkListDto)
+                .collect(Collectors.toList());
     }
 
+    //entity to dto
+    public WorkListDto convertToWorkListDto(WorkList workList) {
+        WorkListDto workListDto = modelMapper.map(workList, WorkListDto.class);
+        return workListDto;
+    }
+    //end entity to dto
 
-//    /**
-//     * method - show list pinned workList
-//     * @param byMechanicId
-//     * @return list
-//     */
-//    @Override
-//    public List<WorkListDto> listPinnedWorkList(Integer byMechanicId) {
-//        List<WorkList> workListList = mechanicRepository.getMechanicTask(byMechanicId);
-//        return MapperConfiguration.convertList(workListList, this::convertToDto);
-//
-//    }
 
     //entity to dto
     public MechanicDto convertToMechanicDto(Mechanic mechanic) {
@@ -120,9 +125,6 @@ public class MechanicServiceImpl
         return mechanicDetails;
     }
     //end dto to entity
-
-
-
 
 
 }

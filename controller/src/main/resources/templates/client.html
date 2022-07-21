@@ -18,7 +18,7 @@
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
             <th scope="col">Number passport</th>
-            <th scope="col">List own cars </th>
+            <th scope="col">List own cars</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -28,7 +28,7 @@
             <td th:text="${clientDto.clientName}">Name</td>
             <td th:text="${clientDto.clientLastName}">LastName</td>
             <td th:text="${clientDto.clientDetails.clientDetailsNumberPassport}">Number Passport</td>
-            <td></td>
+            <td><a th:href="@{/client/ownCars/{id}(id=${clientDto.clientId})}">Own cars</a></td>
             <td>&nbsp;
                 <a th:href="@{/client/editClient/{id}(id=${clientDto.clientId})}"
                    class="btn btn-primary eBtn">Edit</a>

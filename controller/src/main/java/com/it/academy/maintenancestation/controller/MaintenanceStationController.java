@@ -24,10 +24,15 @@ public class MaintenanceStationController {
      * @param model
      * @return
      */
-    @RequestMapping("/")
+    @RequestMapping("/main")
     public String listAdministrators(Model model) {
         return INDEX;
     }
 
+    @RequestMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
 
+    
 }

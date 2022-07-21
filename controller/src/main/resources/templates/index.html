@@ -2,11 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">>
-
 <head>
     <div th:replace="fragments :: html_head(type='none')"/>
-    <link rel="stylesheet" href="static/videoo-bg.css">
-    <script type="text/javascript" th:src="@{/videoo-bg.css}" src="../static/videoo-bg.css"></script>
 </head>
 
 <body>
@@ -14,19 +11,6 @@
 </div>
 
 <header>
-
-
-    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="src/main/resources/bg/gvidoWorkShop.mp4"></iframe>
-    </div>
-
-    <img src="/bk/Gvido.jpg" />
-    <img th:src="@{~/templates/bk/Gvido.jpg}" alt=""/>
-
     <!-- The header content -->
     <div class="container h-100">
         <div class="d-flex h-100 text-center align-items-center">
@@ -38,24 +22,21 @@
     </div>
 </header>
 
-<h1>Welcome!</h1>
-
-<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
-
 <div class="container">
-<section class="my-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mx-auto">
-                <p>Если Вы оказались здесь, значит, Вам необходима диагностика, ТО или ремонт автомобиля.</p>
-                <p>Наш автосервис работает с любыми марками и моделями автомобилей: немецких, французских, российских,
-                    испанских, японских и американских производителей.</p>
-                <p>Особо отметим наш внушительный опыт работы с автомобилями концерна VAG (Audi, Volkswagen, Skoda,
-                    Seat, Porsche и Bentley).</p>
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <p>Если Вы оказались здесь, значит, Вам необходима диагностика, ТО или ремонт автомобиля.</p>
+                    <p>Наш автосервис работает с любыми марками и моделями автомобилей: немецких, французских,
+                        российских,
+                        испанских, японских и американских производителей.</p>
+                    <p>Особо отметим наш внушительный опыт работы с автомобилями концерна VAG (Audi, Volkswagen, Skoda,
+                        Seat, Porsche и Bentley).</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 </div>
 <div th:replace="fragments::footer"/>
 

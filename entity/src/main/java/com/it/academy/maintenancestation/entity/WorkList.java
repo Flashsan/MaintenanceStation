@@ -33,7 +33,7 @@ public class WorkList implements Serializable {
     @Column(name = "work_list_coast")
     private String workListCoast;
 
-    @ManyToMany(fetch = FetchType.EAGER,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.MERGE)
     @JoinTable(
             name = "work_list_mechanic",

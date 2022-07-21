@@ -8,7 +8,6 @@
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
     <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" th:src="@{/bottom.css}" src="../static/bottom.css"></script>
     <script type="text/javascript" th:src="@{/main.js}" src="../static/main.js"></script>
     <meta charset="utf-8"/>
 </head>
@@ -16,7 +15,7 @@
 
 <div th:fragment="menu">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Maintenance Station</a>
+        <a class="navbar-brand" href="/main">Maintenance Station</a>
         <button class="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
@@ -57,6 +56,16 @@
                     <a class="nav-link" href="/sparePart/">Spare parts</a>
                 </li>
 
+                <li class="nav-item">
+
+                    <a th:href="@{'/login'}">Sing in</a>
+                </li>
+
+                <form method="post" th:action="@{/logout}">
+                    <div>
+                        <button class="btn logout" type="submit">Logout</button>
+                    </div>
+                </form>
             </ul>
         </div>
     </nav>

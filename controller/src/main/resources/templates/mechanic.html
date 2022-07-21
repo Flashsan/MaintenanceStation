@@ -30,7 +30,8 @@
             <td th:text="${mechanicDto.mechanicLastName}">LastName</td>
             <td th:text="${mechanicDto.mechanicDetails.mechanicDetailsExperience}">Experience</td>
             <td th:text="${mechanicDto.mechanicDetails.mechanicDetailsSalary}">Salary</td>
-            <td></td>
+            <td><a th:href="@{/mechanic/acceptedWorkList/{id}(id=${mechanicDto.mechanicId})}">
+            Pinned workLists</a></td>
             <td>&nbsp;
                 <a th:href="@{/mechanic/editMechanic/{id}(id=${mechanicDto.mechanicId})}"
                    class="btn btn-primary eBtn">Edit</a>

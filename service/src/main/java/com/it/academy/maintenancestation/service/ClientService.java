@@ -1,5 +1,6 @@
 package com.it.academy.maintenancestation.service;
 
+import com.it.academy.maintenancestation.dto.CarDto;
 import com.it.academy.maintenancestation.dto.ClientDto;
 
 import java.util.List;
@@ -40,4 +41,11 @@ public interface ClientService {
      * @param clientId
      */
     void deleteClientById(Integer clientId);
+
+    /**
+     * service - show own cars
+     *
+     * @return orders which administrator accepted.
+     */
+    public List<CarDto> listOwnCars(Integer byClientId);
 }

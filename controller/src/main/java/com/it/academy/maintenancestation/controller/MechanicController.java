@@ -1,11 +1,7 @@
 package com.it.academy.maintenancestation.controller;
 
-import com.it.academy.maintenancestation.dto.CarDto;
 import com.it.academy.maintenancestation.dto.MechanicDto;
 import com.it.academy.maintenancestation.service.MechanicService;
-import com.it.academy.maintenancestation.service.OrdersService;
-import com.it.academy.maintenancestation.service.СarService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/mechanic")
-@RequiredArgsConstructor
 public class MechanicController {
 
     /**
@@ -32,10 +27,13 @@ public class MechanicController {
     public static final String MECHANIC_ADD_EDIT = "mechanicAddEdit";
     public static final String REDIRECT_MECHANIC = "redirect:/mechanic/";
     public static final String ID = "id";
+    public static final String MECHANIC_WORK_LIST = "mechanicWorkList";
+    public static final String ACCEPTED_WORK_LIST = "acceptedWorkList";
 
     /**
      *
      */
+    @Autowired
     private MechanicService mechanicService;
 
     /**
@@ -96,5 +94,19 @@ public class MechanicController {
     public String deleteMechanic(@PathVariable(name = ID) Integer mechanicId) {
         mechanicService.deleteMechanicById(mechanicId);
         return REDIRECT_MECHANIC;
+    }
+
+    /**
+     *
+     * @param byMechanicId
+     * @param model
+     * @return
+     */
+    @GetMapping("/acceptedWorkList/{id}")
+    public String listAcceptedOrders(@PathVariable(name = ID) Integer byMechanicId,
+                                     Model model) {
+        model.addAttribute(ACCEPTED_WORK_LIST,
+                mechanicService.listPinnedWorkList(byMechanicId));
+        return MECHANIC_WORK_LIST;
     }
 }

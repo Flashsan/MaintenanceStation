@@ -35,7 +35,6 @@ public class OrdersServiceImpl
         implements OrdersService {
 
     private final OrdersRepository ordersRepository;
-    private final OrdersConverter ordersConverter;
     private final AdministratorServiceImpl administratorServiceImpl;
 
     @Override

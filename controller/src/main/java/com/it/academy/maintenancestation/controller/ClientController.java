@@ -28,13 +28,14 @@ public class ClientController {
     public static final String CLIENT_ADD_EDIT = "clientAddEdit";
     public static final String REDIRECT_CLIENT = "redirect:/client/";
     public static final String ID = "id";
+    public static final String CLIENT_OWN_CARS = "clientOwnCars";
+    public static final String OWN_CARS_LIST = "ownCarsList";
     /**
      *
      */
     private final ClientService clientService;
 
     /**
-     *
      * @param model
      * @return
      */
@@ -45,7 +46,6 @@ public class ClientController {
     }
 
     /**
-     *
      * @param model
      * @param clientDto
      * @return
@@ -58,7 +58,6 @@ public class ClientController {
     }
 
     /**
-     *
      * @param clientDto
      * @return
      */
@@ -70,7 +69,6 @@ public class ClientController {
     }
 
     /**
-     *
      * @param clientId
      * @param model
      * @return
@@ -83,7 +81,6 @@ public class ClientController {
     }
 
     /**
-     *
      * @param clientId
      * @return
      */
@@ -91,6 +88,19 @@ public class ClientController {
     public String deleteClient(@PathVariable(name = ID) Integer clientId) {
         clientService.deleteClientById(clientId);
         return REDIRECT_CLIENT;
+    }
+
+    /**
+     * @param byClientId
+     * @param model
+     * @return
+     */
+    @GetMapping("/ownCars/{id}")
+    public String listOwnCars(@PathVariable(name = ID) Integer byClientId,
+                              Model model) {
+        model.addAttribute(OWN_CARS_LIST,
+                clientService.listOwnCars(byClientId));
+        return CLIENT_OWN_CARS;
     }
 }
 
