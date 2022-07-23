@@ -8,6 +8,9 @@ package com.it.academy.maintenancestation.controller.constant;
  */
 public class AllControllerConstant {
 
+    public static void main(String[] args) {
+
+    }
 
 
 

@@ -47,18 +47,17 @@ public class WorkListServiceImpl
      * @return all workListDto
      */
     @Override
-    public List<WorkListDto> listAllWorkList(int pageNo, int pageSize, String sortField, String sortDir) {
-
-        Page<WorkList> page = findPaginated(pageNo, pageSize, sortField, sortDir);
-        List<WorkList> workList = page.getContent();
-        return MapperConfiguration.convertList(workList, this::convertToWorkListDto);
+    public List<WorkListDto> listAllWorkList(int pageNo, int pageSize) {
+//        return MapperConfiguration.convertList(workList, this::convertToWorkListDto);
+        return null;
     }
 
-    private Page<WorkList> findPaginated(int pageNo, int pageSize, String sortField, String sortDir) {
-        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+    @Override
+    public Page<WorkList> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return this.workListRepository.findAll(pageable);
+        return workListRepository.findAll(pageable);
     }
 
     /**
@@ -91,6 +90,7 @@ public class WorkListServiceImpl
     public void deleteWorkListById(Integer workListId) {
         workListRepository.deleteById(workListId);
     }
+
 
     //entity to dto
     public WorkListDto convertToWorkListDto(WorkList workList) {

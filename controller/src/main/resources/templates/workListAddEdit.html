@@ -45,10 +45,12 @@
                     <div class="col-sm-6 text-left">
                         <th:block th:each="mechanicDto:${mechanicDtoList}">
                             <div>
+                                <!--                                       th:checked="*{workListDto.mechanic}"-->
                                 <input type="checkbox" name="mechanicsList"
                                        th:value="${mechanicDto.mechanicId}"
                                        th:text="${mechanicDto.mechanicName}"
-                                       class="m-2"/>
+                                value="on"
+                                class="m-2"/>
                                 <input type="hidden" th:text="${mechanicDto.mechanicLastName}"
                                        class="m-2"/>
 

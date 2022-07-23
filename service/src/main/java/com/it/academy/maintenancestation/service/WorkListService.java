@@ -15,13 +15,15 @@ import java.util.List;
 
 public interface WorkListService {
 
+    Page<WorkList> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+
     /**
      * service - show all WorkList
      *
      * @return all administrators
      */
 
-    List<WorkListDto> listAllWorkList(int pageNo, int pageSize, String sortField, String sortDir);
+    List<WorkListDto> listAllWorkList(int pageNo, int pageSize);
 
     /**
      * service - find workList by id

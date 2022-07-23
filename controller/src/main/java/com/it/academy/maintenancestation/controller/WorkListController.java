@@ -7,7 +7,9 @@ import com.it.academy.maintenancestation.entity.WorkList;
 import com.it.academy.maintenancestation.service.MechanicService;
 import com.it.academy.maintenancestation.service.SparePartService;
 import com.it.academy.maintenancestation.service.WorkListService;
+import com.it.academy.maintenancestation.service.impl.WorkListServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,47 +66,34 @@ public class WorkListController {
      */
     private final SparePartService sparePartService;
 
-//    /**
-//     * @param model
-//     * @return
-//     */
-//    @GetMapping("/")
-//    public String listWorkList(Model model) {
-//        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.listAllWorkList());
-//        return WORK_LIST;
-//    }
-
     /**
      * @param model
      * @return
      */
     @GetMapping("/")
     public String listWorkList(Model model) {
-        return findPaginated(1, WORK_LIST_NAME, ASC, model);
+        return findPaginated(1, "workListName", "asc", model);
     }
 
-    /**
-     * @param pageNo
-     * @param model
-     * @return
-     */
     @GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = PAGE_NO) int pageNo,
-                                @RequestParam(SORT_FIELD) String sortField,
-                                @RequestParam(SORT_DIR) String sortDir,
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
                                 Model model) {
         int pageSize = 5;
+        Page<WorkList> page = workListService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        List<WorkList> list = page.getContent();
 
-//        Page<WorkList> page = workListService.findPaginated();
-//        List<WorkList> listWorkList = page.getContent();
 
-        model.addAttribute(CURRENT_PAGE, pageNo);
-//        model.addAttribute(TOTAL_PAGES, page.getTotalPages());
-//        model.addAttribute(TOTAL_ITEMS, page.getTotalElements());
-        model.addAttribute(SORT_FIELD, sortField);
-        model.addAttribute(SORT_DIR, sortDir);
-        model.addAttribute(WORK_LIST_DTOS_LIST, workListService.listAllWorkList(pageNo, pageSize, sortField, sortDir));
-//
+        model.addAttribute("pageTitle", "WorkList");
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute(WORK_LIST_DTOS_LIST, list);
         return WORK_LIST;
     }
 
@@ -133,8 +122,14 @@ public class WorkListController {
      */
     @PostMapping(value = "/saveWorkList")
     public String saveWorkList(@ModelAttribute(WORK_LIST_DTO) WorkListDto workListDto,
-                               @RequestParam("mechanicsList") Integer[] mechanicsList,
-                               @RequestParam("sparePartsList") Integer[] sparePartsList) {
+                               @RequestParam(
+                                       value = "mechanicsList",
+                                       required = false,
+                                       defaultValue = "0") Integer[] mechanicsList,
+                               @RequestParam(
+                                       value = "sparePartsList",
+                                       required = false,
+                                       defaultValue = "0") Integer[] sparePartsList) {
 
         List<Integer> mechanics = new ArrayList<>();
         Collections.addAll(mechanics, mechanicsList);

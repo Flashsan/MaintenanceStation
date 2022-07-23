@@ -3,11 +3,10 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: html_head(type='none')"/>
 
-
 <body>
 <div th:replace="fragments::menu">Static header</div>
 <div class="container">
-    <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
+    <div><h2>Maintenance Station | [[${pageTitle}]]</h2></div>
     <button type="button" class="btn btn-success" onclick='location.href="/workList/saveWorkList"'>
         Add New WorkList
     </button>
@@ -15,10 +14,12 @@
         <thead>
         <tr>
             <th scope="col">№</th>
-            <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=workListName&sortDir=' + ${reverseSortDir}}">
-                WorkList Name</a></th>
-            <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=workListCoast&sortDir=' + ${reverseSortDir}}">
-                WorkList Coast</a></th>
+            <th>
+                <a th:href="@{'/workList/page/' + ${currentPage} + '?sortField=workListName&sortDir=' + ${reverseSortDir}}">
+                    WorkList Name</a></th>
+            <th>
+                <a th:href="@{'/workList/page/' + ${currentPage} + '?sortField=workListCoast&sortDir=' + ${reverseSortDir}}">
+                    WorkList Coast</a></th>
             <th scope="col">List spare part</th>
             <th scope="col">Mechanics</th>
             <th scope="col">Actions</th>
@@ -50,6 +51,7 @@
         </tr>
         </tbody>
     </table>
+
     <hr/>
 
     <div th:if="${totalPages > 1}">
@@ -57,22 +59,23 @@
             <div class="col-sm-2">
                 Total Rows: [[${totalItems}]]
             </div>
-            <div class="col-sm-1">
-     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-      <a th:if="${currentPage != i}"
-         th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-      <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-     </span>
-            </div>
+
             <div class="col-sm-1">
                 <a th:if="${currentPage < totalPages}"
-                   th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                   th:href="@{'/workList/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
                 <span th:unless="${currentPage < totalPages}">Next</span>
             </div>
 
             <div class="col-sm-1">
+     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}"
+         th:href="@{'/workList/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;</span>
+            </div>
+
+            <div class="col-sm-1">
                 <a th:if="${currentPage < totalPages}"
-                   th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                   th:href="@{'/workList/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
                 <span th:unless="${currentPage < totalPages}">Last</span>
             </div>
         </div>
