@@ -6,10 +6,9 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-
 public class WorkListDto implements Serializable {
 
     private Integer workListId;

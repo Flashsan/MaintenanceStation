@@ -5,7 +5,10 @@ import com.it.academy.maintenancestation.service.AdministratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 /**
@@ -38,7 +41,6 @@ public class AdministratorController {
     private final AdministratorService administratorService;
 
     /**
-     *
      * @param model
      * @return
      */
@@ -49,7 +51,6 @@ public class AdministratorController {
     }
 
     /**
-     *
      * @param model
      * @param administratorDto
      * @return
@@ -62,19 +63,21 @@ public class AdministratorController {
     }
 
     /**
-     *
      * @param administratorDto
      * @return
      */
     @PostMapping("/saveAdministrator")
     public String saveAdministrator(@ModelAttribute(ADMINISTRATOR_DTO)
-                                            AdministratorDto administratorDto) {
+                                    @Valid AdministratorDto administratorDto,
+                                    BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ADMINISTRATOR_ADD_EDIT;
+        }
         administratorService.addAdministrator(administratorDto);
         return REDIRECT_ADMINISTRATOR;
     }
 
     /**
-     *
      * @param administratorId
      * @param model
      * @return
@@ -88,7 +91,6 @@ public class AdministratorController {
     }
 
     /**
-     *
      * @param administratorId
      * @return
      */
@@ -99,7 +101,6 @@ public class AdministratorController {
     }
 
     /**
-     *
      * @param byAdministratorId
      * @param model
      * @return

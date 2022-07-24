@@ -8,13 +8,13 @@
 <body>
 
 <div class="container text-center">
-        <div th:if="${administratorDto.administratorId == null}">
-            <h1>Create New Administrator</h1>
-        </div>
+    <div th:if="${administratorDto.administratorId == null}">
+        <h1>Create New Administrator</h1>
+    </div>
 
-        <div th:unless="${administratorDto.administratorId == null}">
-            <h1>Edit Administrator</h1>
-        </div>
+    <div th:unless="${administratorDto.administratorId == null}">
+        <h1>Edit Administrator</h1>
+    </div>
 
     <form action="#" th:action="@{/administrator/saveAdministrator}" method="POST">
         <input type="hidden" th:field="*{administratorDto.administratorId}"/>
@@ -24,13 +24,14 @@
                 <label class="col-form-label col-sm-4">Administrator Name:</label>
                 <div class="col-sm-8">
                     <input type="text"
-                           th:field="*{administratorDto.administratorName}"
-                           id="administratorDto.administratorName"
                            class="form-control"
-                           placeholder="Например:Александр" required/>
+                           th:field="*{administratorDto.administratorName}"
+                           name="administratorDto.administratorName"
+                           placeholder="Например:Александр" required>
                     <div class="alert alert-warning"
                          th:if="${#fields.hasErrors('administratorDto.administratorName')}"
-                         th:errors="*{administratorDto.administratorName}"></div>
+                         th:errors="*{administratorDto.administratorName}">Administrator Name Error
+                    </div>
                 </div>
             </div>
 

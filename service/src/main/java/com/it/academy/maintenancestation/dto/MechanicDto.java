@@ -6,9 +6,9 @@ import lombok.*;
 import java.util.List;
 
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class MechanicDto {
 
     private Integer mechanicId;

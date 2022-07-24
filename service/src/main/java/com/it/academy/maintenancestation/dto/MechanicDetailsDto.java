@@ -3,10 +3,9 @@ package com.it.academy.maintenancestation.dto;
 
 import lombok.*;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class MechanicDetailsDto {
 
     private Integer mechanicDetailsId;

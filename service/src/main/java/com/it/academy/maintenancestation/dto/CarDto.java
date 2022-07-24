@@ -7,11 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class CarDto implements Serializable  {
 
     private Integer carId;

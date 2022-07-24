@@ -5,9 +5,9 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class SparePartDto implements Serializable {
 
     private Integer sparePartId;

@@ -5,10 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class ClientDto implements Serializable {
 
     private Integer clientId;

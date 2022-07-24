@@ -6,17 +6,16 @@ import lombok.*;
 
 import java.io.Serializable;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class AdministratorDetailsDto implements Serializable {
 
     private Integer administratorDetailsId;
 
     private String administratorDetailsExperience;
-//    @JsonManagedReference
-@JsonIgnore
+
+    @JsonIgnore
     private AdministratorDto administrator;
 
 }

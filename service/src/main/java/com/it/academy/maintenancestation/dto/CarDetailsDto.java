@@ -3,10 +3,9 @@ package com.it.academy.maintenancestation.dto;
 import lombok.*;
 import java.io.Serializable;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class CarDetailsDto implements Serializable {
 
     private Integer carDetailsId;

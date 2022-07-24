@@ -6,10 +6,9 @@ import lombok.*;
 
 import java.io.Serializable;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class OrdersDto implements Serializable {
 
     private Integer ordersId;

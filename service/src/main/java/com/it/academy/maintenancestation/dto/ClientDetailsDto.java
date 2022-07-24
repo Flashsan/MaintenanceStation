@@ -4,11 +4,9 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class ClientDetailsDto implements Serializable   {
 
     private Integer clientDetailsId;
