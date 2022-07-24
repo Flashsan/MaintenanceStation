@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       lang="en">
 <head th:fragment="html_head (type)" th:remove="${type}">
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
 
 <div th:fragment="menu">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/main">Maintenance Station</a>
+        <a class="navbar-brand" href="/">Maintenance Station</a>
         <button class="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
@@ -56,15 +56,9 @@
                     <a class="nav-link" href="/sparePart/">Spare parts</a>
                 </li>
 
-                <li class="nav-item">
-
-                    <a th:href="@{'/login'}">Sing in</a>
-                </li>
-
-                <form method="post" th:action="@{/logout}">
-                    <div>
-                        <button class="btn logout" type="submit">Logout</button>
-                    </div>
+                <form th:align="right" th:action="@{/logout}" method="post">
+                    <h6 th:inline="text">Profile:Welcome,[[${#httpServletRequest.remoteUser}]].</h6>
+                    <input type="submit" value="Sign Out"/>
                 </form>
             </ul>
         </div>

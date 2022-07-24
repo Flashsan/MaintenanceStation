@@ -31,6 +31,10 @@ public class User {
     @Column(name = "user_password")
     private String userPassword;
 
+    @Column(name = "user_activate")
+    private String userActivate;
+
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},

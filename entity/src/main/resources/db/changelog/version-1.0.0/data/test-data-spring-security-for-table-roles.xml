@@ -10,8 +10,8 @@
                author="Grigorovich">
         <sql>
             insert into roles (role_id, role_name)
-            values ('1', 'CLIENT'),
-                   ('2', 'ADMIN'),
+            values ('1', 'ADMIN'),
+                   ('2', 'CLIENT'),
                    ('3', 'MECHANIC');
         </sql>
     </changeSet>

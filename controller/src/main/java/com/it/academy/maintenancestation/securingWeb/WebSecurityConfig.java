@@ -1,6 +1,5 @@
 package com.it.academy.maintenancestation.securingWeb;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,19 +28,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/*").hasAnyAuthority("ADMIN")
-                .antMatchers("/", "/orders/").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/main").permitAll()
-                .and()
-                .formLogin().permitAll()
-                .defaultSuccessUrl("/main", true)
+                .antMatchers("/", "/administrator/", "/car/", "/orders/", "/workList/", "/sparePart/").hasAnyAuthority("ADMIN")
+                .antMatchers("/client/", "/client/ownCars").hasAnyAuthority("CLIENT", "ADMIN")
+                .antMatchers("/mechanic/", "/mechanic/acceptedWorkList").hasAnyAuthority("MECHANIC", "ADMIN")
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .permitAll()
+                .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
-                .permitAll()
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 
     @Autowired

@@ -9,9 +9,10 @@
     <changeSet id="1-add test data to table 'users'"
                author="Grigorovich">
         <sql>
-            insert into users (user_id, user_name, user_password)
-            values ('1', 'admin', '$2y$12$kjBEvSNH8oN9508Vi8gpLOxzxsfc7H/HLRTQatlR4z3JOzrC4YXB6'),
-                   ('2', 'user', '$2y$12$kjBEvSNH8oN9508Vi8gpLOxzxsfc7H/HLRTQatlR4z3JOzrC4YXB6');
+            insert into users (user_id, user_name, user_password, user_activate)
+            values ('1', 'admin', '$2y$12$kjBEvSNH8oN9508Vi8gpLOxzxsfc7H/HLRTQatlR4z3JOzrC4YXB6', 1),
+                   ('2', 'client', '$2y$12$kjBEvSNH8oN9508Vi8gpLOxzxsfc7H/HLRTQatlR4z3JOzrC4YXB6', 1),
+                   ('3', 'mechanic', '$2y$12$kjBEvSNH8oN9508Vi8gpLOxzxsfc7H/HLRTQatlR4z3JOzrC4YXB6', 1);
         </sql>
     </changeSet>
 </databaseChangeLog>

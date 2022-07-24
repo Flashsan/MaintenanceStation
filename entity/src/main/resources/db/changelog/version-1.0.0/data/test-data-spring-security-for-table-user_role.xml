@@ -10,8 +10,9 @@
                author="Grigorovich">
         <sql>
             insert into user_role (users_user_id, roles_role_id)
-            VALUES ('1', '2'),
-                   ('2', '1');
+            VALUES ('1', '1'),
+                   ('2', '2'),
+                   ('3', '3');
         </sql>
     </changeSet>
 </databaseChangeLog>

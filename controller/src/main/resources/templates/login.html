@@ -2,25 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title>Главная</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Login</title>
+    <div th:replace="fragments :: html_head(type='none')"/>
 </head>
-<body>
 
-<!--<section class="container">-->
-<!--    <div class="login">-->
-<!--        <h1>Войти в личный кабинет</h1>-->
-<!--        <form th:action="@{/login}" method="post">-->
-<!--            <p><input type="text" name="username" value="" placeholder="Логин или Email"></p>-->
-<!--            <p><input type="password" name="password" value="" placeholder="Пароль"></p>-->
-<!--            <p class="remember_me"></p>-->
-<!--            <p class="submit"><input type="submit" name="commit" value="Войти"></p>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--</section>-->
-<div>
-    <a th:href="@{'/login'}">Войти</a>
-</div>
+<section class="vh-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                &#128736;&#65039;
+            </div>
+
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <div th:if="${param.error}">
+                    Invalid username and password.
+                </div>
+
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+
+                <form th:action="@{/login}" method="post">
+                    <!-- login input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label"> User Name : <input type="text" name="username"/> </label>
+                    </div>
+
+                    <!-- password input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label"> Password: <input type="password" name="password"/></label>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                </form>
+            </div>
+</section>
+
 </body>
 </html>
