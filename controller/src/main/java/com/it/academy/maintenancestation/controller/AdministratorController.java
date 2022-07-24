@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static com.it.academy.maintenancestation.controller.constant.AllControllerConstant.*;
 
 /**
  * Administrator controller
@@ -22,18 +23,6 @@ import javax.validation.Valid;
 @RequestMapping("/administrator")
 @RequiredArgsConstructor
 public class AdministratorController {
-
-    /**
-     * Constant(AdministratorController
-     */
-    public static final String ADMINISTRATOR_DTO_LIST = "administratorDtoList";
-    public static final String ADMINISTRATOR = "administrator";
-    public static final String ADMINISTRATOR_DTO = "administratorDto";
-    public static final String ADMINISTRATOR_ADD_EDIT = "administratorAddEdit";
-    public static final String REDIRECT_ADMINISTRATOR = "redirect:/administrator/";
-    public static final String ID = "id";
-    public static final String ACCEPTED_ORDERS_DTO_BY_ADMINISTRATOR_LIST = "acceptedOrdersDtoByAdministratorList";
-    public static final String ADMINISTRATOR_ACCEPTED_LIST_ORDERS = "administratorAcceptedListOrders";
 
     /**
      *
@@ -86,7 +75,7 @@ public class AdministratorController {
     public String showEditFormAdministrator(@PathVariable(name = ID) Integer administratorId,
                                             Model model) {
         AdministratorDto administrator = administratorService.findAdministratorById(administratorId);
-        model.addAttribute(ADMINISTRATOR_DTO, administratorService.findAdministratorById(administratorId));
+        model.addAttribute(ADMINISTRATOR_DTO, administrator);
         return ADMINISTRATOR_ADD_EDIT;
     }
 

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static com.it.academy.maintenancestation.controller.constant.AllControllerConstant.*;
+
 /**
  * SparePartController
  *
@@ -29,15 +31,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SparePartController {
 
-    /**
-     * Constant(SparePartController)
-     */
-    public static final String SPARE_PART_DTO_LIST = "sparePartDtoList";
-    public static final String SPARE_PART = "sparePart";
-    public static final String SPARE_PART_DTO = "sparePartDto";
-    public static final String SPARE_PART_ADD_EDIT = "sparePartAddEdit";
-    public static final String REDIRECT_SPARE_PART = "redirect:/sparePart/";
-    public static final String ID = "id";
     /**
      *
      */

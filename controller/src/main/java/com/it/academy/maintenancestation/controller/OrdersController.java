@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.it.academy.maintenancestation.controller.constant.AllControllerConstant.*;
+
 /**
  * OrdersController
  *
@@ -20,18 +22,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/orders")
 @RequiredArgsConstructor
 public class OrdersController {
-
-    /**
-     * Constant(OrdersController)
-     */
-    public static final String ORDERS_DTO_LIST = "ordersDtoList";
-    public static final String ORDERS = "orders";
-    public static final String ADMINISTRATOR_DTO_LIST = "administratorDtoList";
-    public static final String ORDERS_DTO = "ordersDto";
-    public static final String ORDERS_ADD_EDIT = "ordersAddEdit";
-    public static final String ADMINISTRATOR_ID = "administratorId";
-    public static final String REDIRECT_ORDERS = "redirect:/orders/";
-    public static final String ID = "id";
 
     /**
      *

@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.it.academy.maintenancestation.service.СarService;
 
+import static com.it.academy.maintenancestation.controller.constant.AllControllerConstant.*;
+
 /**
  * CarController
  *
@@ -20,15 +22,7 @@ import com.it.academy.maintenancestation.service.СarService;
 @RequiredArgsConstructor
 public class CarController {
 
-    /**
-     * Constant(CarController)
-     */
-    public static final String CAR = "car";
-    public static final String CAR_DTO_LIST = "carDtoList";
-    public static final String CAR_DTO = "carDto";
-    public static final String CAR_ADD_EDIT = "carAddEdit";
-    public static final String REDIRECT_CAR = "redirect:/car/";
-    public static final String ID = "id";
+
     /**
      *
      */

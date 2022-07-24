@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.it.academy.maintenancestation.controller.constant.AllControllerConstant.*;
+
 /**
  * ClientController
  *
@@ -19,20 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ClientController {
 
-    /**
-     * Constant(ClientController)
-     */
-    public static final String CLIENT_DTO_LIST = "clientDtoList";
-    public static final String CLIENT = "client";
-    public static final String CLIENT_DTO = "clientDto";
-    public static final String CLIENT_ADD_EDIT = "clientAddEdit";
-    public static final String REDIRECT_CLIENT = "redirect:/client/";
-    public static final String ID = "id";
-    public static final String CLIENT_OWN_CARS = "clientOwnCars";
-    public static final String OWN_CARS_LIST = "ownCarsList";
-    /**
-     *
-     */
+
     private final ClientService clientService;
 
     /**

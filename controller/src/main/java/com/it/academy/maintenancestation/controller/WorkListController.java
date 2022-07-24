@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.it.academy.maintenancestation.controller.constant.AllControllerConstant.*;
+
 /**
  * WorkListController
  *
@@ -31,25 +33,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/workList")
 @RequiredArgsConstructor
 public class WorkListController {
-    /**
-     * Constant(WorkListController)
-     */
-    public static final String REDIRECT_WORK_LIST = "redirect:/workList/";
-    public static final String ID = "id";
-    public static final String WORK_LIST_ADD_EDIT = "workListAddEdit";
-    public static final String WORK_LIST_DTO = "workListDto";
-    public static final String MECHANIC_DTO_LIST = "mechanicDtoList";
-    public static final String WORK_LIST = "workList";
-    public static final String WORK_LIST_DTOS_LIST = "workListDtosList";
-    public static final String SPARE_PART_DTO_LIST = "sparePartDtoList";
-    public static final String PAGE_NO = "pageNo";
-    public static final String CURRENT_PAGE = "currentPage";
-    public static final String TOTAL_PAGES = "totalPages";
-    public static final String TOTAL_ITEMS = "totalItems";
-    public static final String SORT_FIELD = "sortField";
-    public static final String SORT_DIR = "sortDir";
-    public static final String WORK_LIST_NAME = "workListName";
-    public static final String ASC = "asc";
 
     /**
      *
@@ -72,27 +55,27 @@ public class WorkListController {
      */
     @GetMapping("/")
     public String listWorkList(Model model) {
-        return findPaginated(1, "workListName", "asc", model);
+        return findPaginated(1, "workListName", ASC, model);
     }
 
     @GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                @RequestParam("sortField") String sortField,
-                                @RequestParam("sortDir") String sortDir,
+    public String findPaginated(@PathVariable(value = PAGE_NO) int pageNo,
+                                @RequestParam(SORT_FIELD) String sortField,
+                                @RequestParam(SORT_DIR) String sortDir,
                                 Model model) {
-        int pageSize = 5;
+        int pageSize = PAGE_SIZE;
         Page<WorkList> page = workListService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<WorkList> list = page.getContent();
 
 
-        model.addAttribute("pageTitle", "WorkList");
-        model.addAttribute("currentPage", pageNo);
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute(PAGE_TITLE, WORK_LIST);
+        model.addAttribute(CURRENT_PAGE, pageNo);
+        model.addAttribute(TOTAL_PAGES, page.getTotalPages());
+        model.addAttribute(TOTAL_ITEMS, page.getTotalElements());
 
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute(SORT_FIELD, sortField);
+        model.addAttribute(SORT_DIR, sortDir);
+        model.addAttribute(REVERSE_SORT_DIR, sortDir.equals(ASC) ? DESC : ASC);
         model.addAttribute(WORK_LIST_DTOS_LIST, list);
         return WORK_LIST;
     }
@@ -123,11 +106,11 @@ public class WorkListController {
     @PostMapping(value = "/saveWorkList")
     public String saveWorkList(@ModelAttribute(WORK_LIST_DTO) WorkListDto workListDto,
                                @RequestParam(
-                                       value = "mechanicsList",
+                                       value = MECHANICS_LIST,
                                        required = false,
                                        defaultValue = "0") Integer[] mechanicsList,
                                @RequestParam(
-                                       value = "sparePartsList",
+                                       value = SPARE_PARTS_LIST,
                                        required = false,
                                        defaultValue = "0") Integer[] sparePartsList) {
 

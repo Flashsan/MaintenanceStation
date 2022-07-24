@@ -18,11 +18,11 @@ public class AdministratorDto implements Serializable {
     private Integer administratorId;
 
     @NotEmpty(message = "Name shouldn't be empty!")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 50 characters!")
+    @Size(min = 2, max = 30, message = "{Size.AdministratorDto.administratorName}")
     private String administratorName;
 
     @NotEmpty(message = "LastName shouldn't be empty!")
-    @Size(min = 2, max = 50, message = "LastName should be between 2 and 50 characters!")
+    @Size(min = 2, max = 50, message = "{Size.AdministratorDto.administratorLastName}")
     private String administratorLastName;
 
     private AdministratorDetailsDto administratorDetails;

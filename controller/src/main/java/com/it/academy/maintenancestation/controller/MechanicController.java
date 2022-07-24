@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static com.it.academy.maintenancestation.controller.constant.AllControllerConstant.*;
+
 /**
  * MechanicController
  *
@@ -17,18 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/mechanic")
 public class MechanicController {
-
-    /**
-     * Constant(MechanicController)
-     */
-    public static final String MECHANIC = "mechanic";
-    public static final String MECHANIC_DTO_LIST = "mechanicDtoList";
-    public static final String MECHANIC_DTO = "mechanicDto";
-    public static final String MECHANIC_ADD_EDIT = "mechanicAddEdit";
-    public static final String REDIRECT_MECHANIC = "redirect:/mechanic/";
-    public static final String ID = "id";
-    public static final String MECHANIC_WORK_LIST = "mechanicWorkList";
-    public static final String ACCEPTED_WORK_LIST = "acceptedWorkList";
 
     /**
      *
