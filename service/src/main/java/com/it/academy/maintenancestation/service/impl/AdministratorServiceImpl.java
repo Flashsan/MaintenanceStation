@@ -1,6 +1,8 @@
 package com.it.academy.maintenancestation.service.impl;
 
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
+import com.it.academy.maintenancestation.converter.impl.AdministratorConverter;
+import com.it.academy.maintenancestation.converter.impl.OrdersConverter;
 import com.it.academy.maintenancestation.dto.AdministratorDetailsDto;
 import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.dto.OrdersDto;
@@ -27,12 +29,20 @@ import java.util.List;
 public class AdministratorServiceImpl
         implements AdministratorService {
 
-    ModelMapper modelMapper = new ModelMapper();
-
     /**
      * Administrator repository.
      */
     private final AdministratorRepository administratorRepository;
+
+    /**
+     *
+     */
+    private final AdministratorConverter administratorConverter;
+
+    /**
+     *
+     */
+    private final OrdersConverter ordersConverter;
 
     /**
      * service - show all administratorsDto
@@ -42,7 +52,7 @@ public class AdministratorServiceImpl
     @Override
     public List<AdministratorDto> listAllAdministrators() {
         List<Administrator> administratorList = administratorRepository.findAll();
-        return MapperConfiguration.convertList(administratorList, this::convertToAdministratorDto);
+        return MapperConfiguration.convertList(administratorList, administratorConverter::entityToDto);
     }
 
     /**
@@ -53,7 +63,7 @@ public class AdministratorServiceImpl
      */
     @Override
     public AdministratorDto findAdministratorById(Integer administratorId) {
-        return convertToAdministratorDto(administratorRepository.findById(administratorId).orElse(null));
+        return administratorConverter.entityToDto(administratorRepository.findById(administratorId).orElse(null));
     }
 
     /**
@@ -63,7 +73,7 @@ public class AdministratorServiceImpl
      */
     @Override
     public void addAdministrator(AdministratorDto administratorDto) {
-        administratorRepository.save(convertDtoToEntityAdministrator(administratorDto));
+        administratorRepository.save(administratorConverter.dtoToEntity(administratorDto));
     }
 
     /**
@@ -78,58 +88,14 @@ public class AdministratorServiceImpl
 
     /**
      * method - show list accepted orders byAdministrator
+     *
      * @param byAdministratorId
      * @return
      */
     @Override
     public List<OrdersDto> listAcceptedOrdersByAdministrator(Integer byAdministratorId) {
         List<Orders> ordersList = administratorRepository.getAdministratorsOrders(byAdministratorId);
-        return MapperConfiguration.convertList(ordersList, this::convertToOrdersDto);
+        return MapperConfiguration.convertList(ordersList, ordersConverter::entityToDto);
     }
-
-    //entity to dto
-    public AdministratorDto convertToAdministratorDto(Administrator administrator) {
-        AdministratorDto administratorDto = modelMapper.map(administrator, AdministratorDto.class);
-        administratorDto.setAdministratorDetails(convertToAdministratorDetailsDto(administrator.getAdministratorDetails()));
-        return administratorDto;
-    }
-
-    public AdministratorDetailsDto convertToAdministratorDetailsDto(AdministratorDetails administratorDetails) {
-        AdministratorDetailsDto administratorDetailsDto = modelMapper.map(administratorDetails, AdministratorDetailsDto.class);
-        return administratorDetailsDto;
-    }
-    //end entity to dto
-
-    //dto to entity
-    public Administrator convertDtoToEntityAdministrator(AdministratorDto administratorDto) {
-        Administrator administrator = modelMapper.map(administratorDto, Administrator.class);
-        AdministratorDetails administratorDetails = convertDtoToEntityAdministratorDetails(administratorDto.getAdministratorDetails());
-        administrator.setAdministratorDetails(administratorDetails);
-        administratorDetails.setAdministrator(administrator);
-        administratorDetails.setAdministratorDetailsId(administrator.getAdministratorId());
-        return administrator;
-    }
-
-    public AdministratorDetails convertDtoToEntityAdministratorDetails(AdministratorDetailsDto administratorDetailsDto) {
-        AdministratorDetails administratorDetails = modelMapper.map(administratorDetailsDto, AdministratorDetails.class);
-        return administratorDetails;
-    }
-    //end dto to entity
-
-    //entity to dto
-    public OrdersDto convertToOrdersDto(Orders orders) {
-        OrdersDto ordersDto = modelMapper.map(orders, OrdersDto.class);
-        ordersDto.setAdministrator(convertToAdministratorDto(orders.getAdministrator()));
-        return ordersDto;
-    }
-    //end entity to dto
-
-    //dto to entity
-    public Orders convertDtoToEntityOrders(OrdersDto ordersDto) {
-        Orders orders = modelMapper.map(ordersDto, Orders.class);
-        orders.setAdministrator(convertDtoToEntityAdministrator(ordersDto.getAdministrator()));
-        return orders;
-    }
-//end dto to entity
 
 }

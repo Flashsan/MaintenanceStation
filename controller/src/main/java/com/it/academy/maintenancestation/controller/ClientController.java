@@ -21,7 +21,6 @@ import static com.it.academy.maintenancestation.controller.constant.AllControlle
 @RequiredArgsConstructor
 public class ClientController {
 
-
     private final ClientService clientService;
 
     /**

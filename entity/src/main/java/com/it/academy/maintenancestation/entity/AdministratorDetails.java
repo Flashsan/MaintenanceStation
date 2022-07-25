@@ -41,6 +41,9 @@ public class AdministratorDetails implements Serializable {
     @Column(name = "administrator_details_experience")
     private String administratorDetailsExperience;
 
+    /**
+     * Administrator which have this detail information.
+     */
     @OneToOne(fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private Administrator administrator;

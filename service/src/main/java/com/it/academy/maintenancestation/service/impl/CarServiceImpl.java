@@ -1,6 +1,7 @@
 package com.it.academy.maintenancestation.service.impl;
 
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
+import com.it.academy.maintenancestation.converter.impl.CarConverter;
 import com.it.academy.maintenancestation.dto.CarDetailsDto;
 import com.it.academy.maintenancestation.dto.CarDto;
 import com.it.academy.maintenancestation.entity.Car;
@@ -24,12 +25,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CarServiceImpl implements СarService {
 
-    ModelMapper modelMapper = new ModelMapper();
-
     /**
      * Car repository.
      */
     private final CarRepository carRepository;
+
+    /**
+     *
+     */
+    private final CarConverter carConverter;
 
     /**
      * service - show all carsDto
@@ -39,7 +43,7 @@ public class CarServiceImpl implements СarService {
     @Override
     public List<CarDto> listAllCars() {
         List<Car> carsList = carRepository.findAll();
-        return MapperConfiguration.convertList(carsList, this::convertToCarDto);
+        return MapperConfiguration.convertList(carsList, carConverter::entityToDto);
     }
 
     /**
@@ -50,8 +54,7 @@ public class CarServiceImpl implements СarService {
      */
     @Override
     public CarDto findCarById(Integer carId) {
-        return convertToCarDto(carRepository.findById(carId).orElse(null));
-
+        return carConverter.entityToDto(carRepository.findById(carId).orElse(null));
     }
 
     /**
@@ -61,7 +64,7 @@ public class CarServiceImpl implements СarService {
      */
     @Override
     public void addCar(CarDto carDto) {
-        carRepository.save(convertDtoToEntityCar(carDto));
+        carRepository.save(carConverter.dtoToEntity(carDto));
     }
 
     /**
@@ -73,36 +76,6 @@ public class CarServiceImpl implements СarService {
     public void deleteCarById(Integer carId) {
         carRepository.deleteById(carId);
     }
-
-
-    //entity to dto
-    public CarDto convertToCarDto(Car car) {
-        CarDto carDto = modelMapper.map(car, CarDto.class);
-        carDto.setCarDetails(convertToCarDetailsDto(car.getCarDetails()));
-        return carDto;
-    }
-
-    public CarDetailsDto convertToCarDetailsDto(CarDetails carDetails) {
-        CarDetailsDto carDetailsDto = modelMapper.map(carDetails, CarDetailsDto.class);
-        return carDetailsDto;
-    }
-    //end entity to dto
-
-    //dto to entity
-    public Car convertDtoToEntityCar(CarDto carDto) {
-        Car car = modelMapper.map(carDto, Car.class);
-        CarDetails carDetails = convertDtoToEntityCarDetails(carDto.getCarDetails());
-        car.setCarDetails(carDetails);
-        carDetails.setCar(car);
-        carDetails.setCarDetailsId(car.getCarId());
-        return car;
-    }
-
-    public CarDetails convertDtoToEntityCarDetails(CarDetailsDto carDetailsDto) {
-        CarDetails carDetails = modelMapper.map(carDetailsDto, CarDetails.class);
-        return carDetails;
-    }
-    //end dto to entity
 
 }
 

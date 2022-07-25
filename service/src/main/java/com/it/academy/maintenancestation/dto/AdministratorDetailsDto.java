@@ -6,6 +6,11 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * AdministratorDetailsDto
+ *
+ * @version 12.07.2022
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

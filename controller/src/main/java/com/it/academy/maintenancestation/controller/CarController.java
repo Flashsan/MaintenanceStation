@@ -22,7 +22,6 @@ import static com.it.academy.maintenancestation.controller.constant.AllControlle
 @RequiredArgsConstructor
 public class CarController {
 
-
     /**
      *
      */

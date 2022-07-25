@@ -1,6 +1,8 @@
 package com.it.academy.maintenancestation.service.impl;
 
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
+import com.it.academy.maintenancestation.converter.impl.CarConverter;
+import com.it.academy.maintenancestation.converter.impl.ClientConverter;
 import com.it.academy.maintenancestation.dto.*;
 import com.it.academy.maintenancestation.entity.*;
 import com.it.academy.maintenancestation.repository.ClientRepository;
@@ -24,12 +26,20 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl
         implements ClientService {
 
-    ModelMapper modelMapper = new ModelMapper();
-
     /**
      * Client repository.
      */
     private final ClientRepository clientRepository;
+
+    /**
+     *
+     */
+    private final ClientConverter clientConverter;
+
+    /**
+     *
+     */
+    private final CarConverter carConverter;
 
     /**
      * service - show all clientsDto
@@ -39,7 +49,7 @@ public class ClientServiceImpl
     @Override
     public List<ClientDto> listAllClients() {
         List<Client> clientList = clientRepository.findAll();
-        return MapperConfiguration.convertList(clientList, this::convertToClientDto);
+        return MapperConfiguration.convertList(clientList, clientConverter::entityToDto);
     }
 
     /**
@@ -50,7 +60,7 @@ public class ClientServiceImpl
      */
     @Override
     public ClientDto findClientById(Integer clientId) {
-        return convertToClientDto(clientRepository.findById(clientId).orElse(null));
+        return clientConverter.entityToDto(clientRepository.findById(clientId).orElse(null));
     }
 
     /**
@@ -60,8 +70,7 @@ public class ClientServiceImpl
      */
     @Override
     public void addClient(ClientDto clientDto) {
-        clientRepository.save(convertDtoToEntityClient(clientDto));
-
+        clientRepository.save(clientConverter.dtoToEntity(clientDto));
     }
 
     /**
@@ -84,53 +93,9 @@ public class ClientServiceImpl
     public List<CarDto> listOwnCars(Integer byClientId) {
         List<Car> carList = clientRepository.getMyCars(byClientId);
         return carList.stream()
-                .map(this::convertToCarDto)
+                .map(carConverter::entityToDto)
                 .collect(Collectors.toList());
     }
-
-    //entity to dto
-    public CarDto convertToCarDto(Car car) {
-        CarDto carDto = modelMapper.map(car, CarDto.class);
-        carDto.setCarDetails(convertToCarDetailsDto(car.getCarDetails()));
-        return carDto;
-    }
-
-    public CarDetailsDto convertToCarDetailsDto(CarDetails carDetails) {
-        CarDetailsDto carDetailsDto = modelMapper.map(carDetails, CarDetailsDto.class);
-        return carDetailsDto;
-    }
-    //end entity to dto
-
-
-
-    //entity to dto
-    public ClientDto convertToClientDto(Client client) {
-        ClientDto clientDto = modelMapper.map(client, ClientDto.class);
-        clientDto.setClientDetails(convertToClientDetailsDto(client.getClientDetails()));
-        return clientDto;
-    }
-
-    public ClientDetailsDto convertToClientDetailsDto(ClientDetails clientDetails) {
-        ClientDetailsDto clientDetailsDto = modelMapper.map(clientDetails, ClientDetailsDto.class);
-        return clientDetailsDto;
-    }
-    //end entity to dto
-
-    //dto to entity
-    public Client convertDtoToEntityClient(ClientDto clientDto) {
-        Client client = modelMapper.map(clientDto, Client.class);
-        ClientDetails clientDetails = convertDtoToEntityClientDetails(clientDto.getClientDetails());
-        client.setClientDetails(clientDetails);
-        clientDetails.setClient(client);
-        clientDetails.setClientDetailsId(client.getClientId());
-        return client;
-    }
-
-    public ClientDetails convertDtoToEntityClientDetails(ClientDetailsDto clientDetailsDto) {
-        ClientDetails clientDetails = modelMapper.map(clientDetailsDto, ClientDetails.class);
-        return clientDetails;
-    }
-    //end dto to entity
 
 }
 

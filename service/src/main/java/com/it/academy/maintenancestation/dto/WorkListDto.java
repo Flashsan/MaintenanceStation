@@ -1,11 +1,15 @@
 package com.it.academy.maintenancestation.dto;
 
-import com.it.academy.maintenancestation.entity.Mechanic;
 import lombok.*;
 
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * WorkListDto
+ *
+ * @version 12.07.2022
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

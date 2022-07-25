@@ -1,6 +1,7 @@
 package com.it.academy.maintenancestation.service.impl;
 
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
+import com.it.academy.maintenancestation.converter.impl.WorkListConverter;
 import com.it.academy.maintenancestation.dto.MechanicDetailsDto;
 import com.it.academy.maintenancestation.dto.MechanicDto;
 import com.it.academy.maintenancestation.dto.SparePartDto;
@@ -38,20 +39,21 @@ public class WorkListServiceImpl
      * WorkList repository.
      */
     private final WorkListRepository workListRepository;
-    private final ModelMapper modelMapper;
-
 
     /**
-     * service - show all workListDto
      *
-     * @return all workListDto
      */
-    @Override
-    public List<WorkListDto> listAllWorkList(int pageNo, int pageSize) {
-//        return MapperConfiguration.convertList(workList, this::convertToWorkListDto);
-        return null;
-    }
+    private final WorkListConverter workListConverter;
 
+    /**
+     * method return list with parameters
+     *
+     * @param pageNo
+     * @param pageSize
+     * @param sortField
+     * @param sortDirection
+     * @return
+     */
     @Override
     public Page<WorkList> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
@@ -68,7 +70,7 @@ public class WorkListServiceImpl
      */
     @Override
     public WorkListDto findWorkListById(Integer workListId) {
-        return convertToWorkListDto(workListRepository.findById(workListId).orElse(null));
+        return workListConverter.entityToDto(workListRepository.findById(workListId).orElse(null));
     }
 
     /**
@@ -78,7 +80,7 @@ public class WorkListServiceImpl
      */
     @Override
     public void addWorkList(WorkListDto workListDto) {
-        workListRepository.save(convertDtoToEntityWorkList(workListDto));
+        workListRepository.save(workListConverter.dtoToEntity(workListDto));
     }
 
     /**
@@ -89,57 +91,6 @@ public class WorkListServiceImpl
     @Override
     public void deleteWorkListById(Integer workListId) {
         workListRepository.deleteById(workListId);
-    }
-
-
-    //entity to dto
-    public WorkListDto convertToWorkListDto(WorkList workList) {
-        WorkListDto workListDto = modelMapper.map(workList, WorkListDto.class);
-        return workListDto;
-    }
-    //end entity to dto
-
-    //dto to entity
-    public WorkList convertDtoToEntityWorkList(WorkListDto workListDto) {
-        WorkList workList = modelMapper.map(workListDto, WorkList.class);
-
-        List<MechanicDto> mechanicDto = workListDto.getMechanic();
-        List<Mechanic> mechanics = mechanicDto.stream()
-                .map(this::convertDtoToEntityMechanic)
-                .collect(Collectors.toList());
-
-        List<SparePartDto> sparePartDto = workListDto.getSparePart();
-        List<SparePart> spareParts = sparePartDto.stream()
-                .map(this::convertDtoToEntitySparePart)
-                .collect(Collectors.toList());
-
-        workList.setMechanic(mechanics);
-        workList.setSparePart(spareParts);
-
-        return workList;
-    }
-//end dto to entity
-
-    //dto to entity
-    public Mechanic convertDtoToEntityMechanic(MechanicDto mechanicDto) {
-        Mechanic mechanic = modelMapper.map(mechanicDto, Mechanic.class);
-        MechanicDetails mechanicDetails = convertDtoToEntityMechanicDetails(mechanicDto.getMechanicDetails());
-        mechanic.setMechanicDetails(mechanicDetails);
-        mechanicDetails.setMechanic(mechanic);
-        mechanicDetails.setMechanicDetailsId(mechanic.getMechanicId());
-        return mechanic;
-    }
-
-    public MechanicDetails convertDtoToEntityMechanicDetails(MechanicDetailsDto mechanicDetailsDto) {
-        MechanicDetails mechanicDetails = modelMapper.map(mechanicDetailsDto, MechanicDetails.class);
-        return mechanicDetails;
-    }
-
-
-    //dto to entity
-    public SparePart convertDtoToEntitySparePart(SparePartDto sparePartDto) {
-        SparePart sparePart = modelMapper.map(sparePartDto, SparePart.class);
-        return sparePart;
     }
 
 }

@@ -5,6 +5,11 @@ import lombok.*;
 
 import java.util.List;
 
+/**
+ * MechanicDto
+ *
+ * @version 12.07.2022
+ */
 
 @Data
 @NoArgsConstructor

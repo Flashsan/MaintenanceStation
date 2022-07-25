@@ -1,11 +1,15 @@
 package com.it.academy.maintenancestation.dto;
 
-import com.it.academy.maintenancestation.entity.CarDetails;
 import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+
+/**
+ * CarDto
+ *
+ * @version 12.07.2022
+ */
 
 @Data
 @NoArgsConstructor

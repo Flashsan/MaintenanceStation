@@ -41,6 +41,9 @@ public class ClientDetails implements Serializable {
     @Column(name = "client_details_num_passport")
     private String clientDetailsNumberPassport;
 
+    /**
+     * Additional information.
+     */
     @OneToOne(fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private Client client;

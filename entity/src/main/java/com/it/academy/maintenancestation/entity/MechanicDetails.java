@@ -48,6 +48,9 @@ public class MechanicDetails implements Serializable {
     @Column(name = "mechanic_details_salary")
     private String mechanicDetailsSalary;
 
+    /**
+     * Mechanic which have this detail information.
+     */
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private Mechanic mechanic;

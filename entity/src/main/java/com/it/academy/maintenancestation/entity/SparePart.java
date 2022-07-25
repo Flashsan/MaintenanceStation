@@ -6,6 +6,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Role entity
+ *
+ * @author Alexander Grigorovich
+ * @version 12.07.2022
+ */
+
 @Entity
 @Table(name = "spare_part")
 @Builder

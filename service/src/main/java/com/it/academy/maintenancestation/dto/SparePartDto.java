@@ -5,6 +5,12 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * SparePartDto
+ *
+ * @version 12.07.2022
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

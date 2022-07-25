@@ -1,14 +1,13 @@
 package com.it.academy.maintenancestation.service.impl;
 
-
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
+import com.it.academy.maintenancestation.converter.impl.MechanicConverter;
+import com.it.academy.maintenancestation.converter.impl.WorkListConverter;
 import com.it.academy.maintenancestation.dto.*;
 import com.it.academy.maintenancestation.entity.*;
-import com.it.academy.maintenancestation.repository.ClientRepository;
 import com.it.academy.maintenancestation.repository.MechanicRepository;
 import com.it.academy.maintenancestation.service.MechanicService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,12 +25,20 @@ import java.util.stream.Collectors;
 public class MechanicServiceImpl
         implements MechanicService {
 
-    ModelMapper modelMapper = new ModelMapper();
-
     /**
      * Mechanic repository.
      */
     private final MechanicRepository mechanicRepository;
+
+    /**
+     *
+     */
+    private final MechanicConverter mechanicConverter;
+
+    /**
+     *
+     */
+    private final WorkListConverter workListConverter;
 
     /**
      * service - show all mechanicDto
@@ -41,7 +48,7 @@ public class MechanicServiceImpl
     @Override
     public List<MechanicDto> listAllMechanics() {
         List<Mechanic> mechanicList = mechanicRepository.findAll();
-        return MapperConfiguration.convertList(mechanicList, this::convertToMechanicDto);
+        return MapperConfiguration.convertList(mechanicList, mechanicConverter::entityToDto);
     }
 
     /**
@@ -52,7 +59,7 @@ public class MechanicServiceImpl
      */
     @Override
     public MechanicDto findMechanicById(Integer mechanicId) {
-        return convertToMechanicDto(mechanicRepository.findById(mechanicId).orElse(null));
+        return mechanicConverter.entityToDto(mechanicRepository.findById(mechanicId).orElse(null));
     }
 
     /**
@@ -62,7 +69,7 @@ public class MechanicServiceImpl
      */
     @Override
     public void addMechanic(MechanicDto mechanicDto) {
-        mechanicRepository.save(convertDtoToEntityMechanic(mechanicDto));
+        mechanicRepository.save(mechanicConverter.dtoToEntity(mechanicDto));
     }
 
     /**
@@ -85,46 +92,8 @@ public class MechanicServiceImpl
     public List<WorkListDto> listPinnedWorkList(Integer byMechanicId) {
         List<WorkList> workListList = mechanicRepository.getMechanicTask(byMechanicId);
         return workListList.stream()
-                .map(this::convertToWorkListDto)
+                .map(workListConverter::entityToDto)
                 .collect(Collectors.toList());
     }
-
-    //entity to dto
-    public WorkListDto convertToWorkListDto(WorkList workList) {
-        WorkListDto workListDto = modelMapper.map(workList, WorkListDto.class);
-        return workListDto;
-    }
-    //end entity to dto
-
-
-    //entity to dto
-    public MechanicDto convertToMechanicDto(Mechanic mechanic) {
-        MechanicDto mechanicDto = modelMapper.map(mechanic, MechanicDto.class);
-        mechanicDto.setMechanicDetails(convertToMechanicDetailsDto(mechanic.getMechanicDetails()));
-        return mechanicDto;
-    }
-
-    public MechanicDetailsDto convertToMechanicDetailsDto(MechanicDetails mechanicDetails) {
-        MechanicDetailsDto mechanicDetailsDto = modelMapper.map(mechanicDetails, MechanicDetailsDto.class);
-        return mechanicDetailsDto;
-    }
-    //end entity to dto
-
-    //dto to entity
-    public Mechanic convertDtoToEntityMechanic(MechanicDto mechanicDto) {
-        Mechanic mechanic = modelMapper.map(mechanicDto, Mechanic.class);
-        MechanicDetails mechanicDetails = convertDtoToEntityMechanicDetails(mechanicDto.getMechanicDetails());
-        mechanic.setMechanicDetails(mechanicDetails);
-        mechanicDetails.setMechanic(mechanic);
-        mechanicDetails.setMechanicDetailsId(mechanic.getMechanicId());
-        return mechanic;
-    }
-
-    public MechanicDetails convertDtoToEntityMechanicDetails(MechanicDetailsDto mechanicDetailsDto) {
-        MechanicDetails mechanicDetails = modelMapper.map(mechanicDetailsDto, MechanicDetails.class);
-        return mechanicDetails;
-    }
-    //end dto to entity
-
 
 }

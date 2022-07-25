@@ -1,14 +1,17 @@
 package com.it.academy.maintenancestation.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
+
+/**
+ * AdministratorDto
+ *
+ * @version 12.07.2022
+ */
 
 @Data
 @NoArgsConstructor

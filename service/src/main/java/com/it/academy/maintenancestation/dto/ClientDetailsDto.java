@@ -4,6 +4,12 @@ import lombok.*;
 
 import java.io.Serializable;
 
+/**
+ * ClientDetailsDto
+ *
+ * @version 12.07.2022
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

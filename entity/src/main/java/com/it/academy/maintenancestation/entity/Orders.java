@@ -1,6 +1,5 @@
 package com.it.academy.maintenancestation.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -56,6 +55,9 @@ public class Orders implements Serializable {
     @JoinColumn(name = "car_id")
     private Car car;
 
+    /**
+     * List tasks for orders.
+     */
     @OneToMany(mappedBy = "orders")
     private Set<WorkList> workList;
 

@@ -65,6 +65,9 @@ public class CarDetails implements Serializable {
     @Column(name = "car_details_year_of_issue")
     private String carDetailsYearOfIssue;
 
+    /**
+     * Client which have this detail information.
+     */
     @OneToOne(fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private Car car;

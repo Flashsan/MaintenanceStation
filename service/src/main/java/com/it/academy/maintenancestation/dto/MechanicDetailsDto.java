@@ -3,6 +3,12 @@ package com.it.academy.maintenancestation.dto;
 
 import lombok.*;
 
+/**
+ * MechanicDetailsDto
+ *
+ * @version 12.07.2022
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

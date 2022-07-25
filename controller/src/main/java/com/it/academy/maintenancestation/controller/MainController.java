@@ -12,20 +12,20 @@ import static com.it.academy.maintenancestation.controller.constant.AllControlle
 @Controller
 public class MainController {
 
-    /**
-     * @return
-     */
-    @GetMapping("/")
-    public String mainPage() {
-        return MAIN;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @GetMapping("/login")
-    public String loginPage() {
-        return LOGIN;
-    }
+//    /**
+//     * @return
+//     */
+//    @GetMapping("/")
+//    public String mainPage() {
+//        return MAIN;
+//    }
+//
+//    /**
+//     *
+//     * @return
+//     */
+//    @GetMapping("/login")
+//    public String loginPage() {
+//        return LOGIN;
+//    }
 }

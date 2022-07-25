@@ -1,26 +1,15 @@
 package com.it.academy.maintenancestation.service.impl;
 
-
 import com.it.academy.maintenancestation.converter.MapperConfiguration;
 import com.it.academy.maintenancestation.converter.impl.OrdersConverter;
-import com.it.academy.maintenancestation.dto.AdministratorDetailsDto;
-import com.it.academy.maintenancestation.dto.AdministratorDto;
 import com.it.academy.maintenancestation.dto.OrdersDto;
-import com.it.academy.maintenancestation.dto.WorkListDto;
-import com.it.academy.maintenancestation.entity.Administrator;
-import com.it.academy.maintenancestation.entity.AdministratorDetails;
 import com.it.academy.maintenancestation.entity.Orders;
 import com.it.academy.maintenancestation.repository.OrdersRepository;
 import com.it.academy.maintenancestation.service.OrdersService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * OrdersService
@@ -33,58 +22,57 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrdersServiceImpl
         implements OrdersService {
-
+    /**
+     *
+     */
     private final OrdersRepository ordersRepository;
-    private final AdministratorServiceImpl administratorServiceImpl;
 
+    /**
+     *
+     */
+    private final OrdersConverter ordersConverter;
+
+    /**
+     * service - show all ordersDto
+     *
+     * @return all ordersDto
+     */
     @Override
     public List<OrdersDto> listAllOrders() {
         List<Orders> ordersList = ordersRepository.findAll();
-        return MapperConfiguration.convertList(ordersList, this::convertToOrdersDto);
+        return MapperConfiguration.convertList(ordersList, ordersConverter::entityToDto);
     }
 
-
-//    @Override
-//    public List<OrdersDto> listAllOrders() {
-//        return (ordersRepository.findAll()).stream()
-//                .map(ordersConverter::toDto)
-//                .collect(Collectors.toList());
-//    }
-
+    /**
+     * method -  find orders by id from db
+     *
+     * @param orderId
+     * @return ordersDto by id
+     */
     @Override
     public OrdersDto findOrderById(Integer orderId) {
-        return null;
+        return ordersConverter.entityToDto(ordersRepository.findById(orderId).orElse(null));
     }
 
+    /**
+     * method - add orders in db
+     *
+     * @param ordersDto
+     */
     @Override
     public void addOrder(OrdersDto ordersDto) {
-        ordersRepository.save(convertDtoToEntityOrders(ordersDto));
+        ordersRepository.save(ordersConverter.dtoToEntity(ordersDto));
     }
 
+    /**
+     * method - delete order from db by id
+     *
+     * @param orderId
+     */
     @Override
     public void deleteOrdersById(Integer orderId) {
         ordersRepository.deleteById(orderId);
     }
-
-
-    private final ModelMapper modelMapper;
-
-    //entity to dto
-    public OrdersDto convertToOrdersDto(Orders orders) {
-        OrdersDto ordersDto = modelMapper.map(orders, OrdersDto.class);
-        ordersDto.setAdministrator(administratorServiceImpl.convertToAdministratorDto(orders.getAdministrator()));
-        return ordersDto;
-    }
-    //end entity to dto
-
-    //dto to entity
-    public Orders convertDtoToEntityOrders(OrdersDto ordersDto) {
-        Orders orders = modelMapper.map(ordersDto, Orders.class);
-        orders.setAdministrator(administratorServiceImpl.convertDtoToEntityAdministrator(ordersDto.getAdministrator()));
-        return orders;
-    }
-//end dto to entity
-
 }
 
 

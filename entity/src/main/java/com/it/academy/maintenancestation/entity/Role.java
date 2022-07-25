@@ -21,14 +21,23 @@ import java.util.Set;
 @Getter
 @Setter
 public class Role {
+    /**
+     * id role
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id", nullable = false)
     private Integer roleId;
 
+    /**
+     * name role
+     */
     @Column(name = "role_name")
     private String name;
 
+    /**
+     * list role for each user
+     */
     @ManyToMany(mappedBy = "roles",
             fetch = FetchType.EAGER)
     private Set<User> userSet;
