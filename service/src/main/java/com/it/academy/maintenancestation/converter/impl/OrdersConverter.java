@@ -22,6 +22,7 @@ public class OrdersConverter implements Converter<Orders, OrdersDto> {
      *
      */
     private final ModelMapper modelMapper;
+    private final AdministratorConverter administratorConverter;
 
     /**
      *

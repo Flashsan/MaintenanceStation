@@ -24,6 +24,7 @@ public class AdministratorConverter implements Converter<Administrator, Administ
      *
      */
     private final ModelMapper modelMapper;
+    private final AdministratorDetailsConverter administratorDetailsConverter;
 
     /**
      *
