@@ -72,7 +72,6 @@ public class CarController {
     @GetMapping("/editCar/{id}")
     public String showEditFormCar(@PathVariable(name = ID) Integer carId,
                                             Model model) {
-        CarDto carDto = carService.findCarById(carId);
         model.addAttribute(CAR_DTO, carService.findCarById(carId));
         return CAR_ADD_EDIT;
     }

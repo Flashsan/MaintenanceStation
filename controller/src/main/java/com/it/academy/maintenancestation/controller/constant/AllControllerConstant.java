@@ -14,13 +14,6 @@ public class AllControllerConstant {
     public static final String ID = "id";
 
     /**
-     * Constant(MainController)
-     */
-
-    public static final String MAIN = "main";
-    public static final String LOGIN = "login";
-
-    /**
      * Constant(AdministratorController)
      */
     public static final String ADMINISTRATOR_DTO_LIST = "administratorDtoList";
