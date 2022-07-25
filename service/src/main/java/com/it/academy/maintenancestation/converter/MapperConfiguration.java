@@ -18,12 +18,6 @@ public class MapperConfiguration {
     @Bean
     public ModelMapper modelMapper(){
         ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration()
-                .setMatchingStrategy(MatchingStrategies.STRICT)
-                .setFieldMatchingEnabled(true)
-                .setSkipNullEnabled(true)
-                .setFieldAccessLevel(PRIVATE)
-                .setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
         return new ModelMapper();
     }
 

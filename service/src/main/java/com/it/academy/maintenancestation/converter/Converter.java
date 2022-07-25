@@ -1,8 +1,8 @@
 package com.it.academy.maintenancestation.converter;
 
-public interface Mapper<E,D> {
-
-    E dtoToEntity(D dto);
+public interface Converter<E,D> {
 
     D entityToDto(E entity);
+
+    E dtoToEntity(D dto);
 }
