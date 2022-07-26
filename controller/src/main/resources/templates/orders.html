@@ -20,6 +20,7 @@
             <th scope="col">Car number</th>
             <th scope="col">Inspection result</th>
             <th scope="col">Administrator</th>
+            <th scope="col">WorkList</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -31,6 +32,11 @@
             <td th:text="${ordersDto.ordersInspectionResult}">Inspection Result</td>
             <td th:text="${ordersDto.administrator.administratorLastName}">Inspection Result</td>
             <td>
+                <span th:each="workListDto,irerStat:${ordersDto.workList}">
+                <span th:text="${workListDto.workListName}"/>
+                <th:block th:if="${!irerStat.last}">,</th:block><br></span>
+            </td>
+            <td>
                 <a th:href="@{/orders/editOrders/{id}(id=${ordersDto.ordersId})}"
                    class="btn btn-primary eBtn">Edit</a>
                 <a th:href="@{/administrator/deleteAdministrator/{id}(id=${ordersDto.ordersId})}"
@@ -40,6 +46,7 @@
         </tbody>
     </table>
     <hr/>
+
     <!--         #Modal for removing Order -->
     <div class="modal fade"
          id="removeModalCenter"

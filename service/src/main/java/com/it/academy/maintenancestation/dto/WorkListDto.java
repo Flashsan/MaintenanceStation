@@ -25,5 +25,7 @@ public class WorkListDto implements Serializable {
 
     private List<SparePartDto> sparePart;
 
+    private OrdersDto orders;
+
 
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * OrderDto
@@ -23,9 +24,10 @@ public class OrdersDto implements Serializable {
 
     private String ordersInspectionResult;
 
+    private List<WorkListDto> workList;
+
     @JsonIgnore
     private AdministratorDto administrator;
 
     private CarDto car;
-
 }

@@ -1,10 +1,9 @@
 package com.it.academy.maintenancestation.controller;
 
-import com.it.academy.maintenancestation.dto.MechanicDto;
-import com.it.academy.maintenancestation.dto.SparePartDto;
-import com.it.academy.maintenancestation.dto.WorkListDto;
+import com.it.academy.maintenancestation.dto.*;
 import com.it.academy.maintenancestation.entity.WorkList;
 import com.it.academy.maintenancestation.service.MechanicService;
+import com.it.academy.maintenancestation.service.OrdersService;
 import com.it.academy.maintenancestation.service.SparePartService;
 import com.it.academy.maintenancestation.service.WorkListService;
 import com.it.academy.maintenancestation.service.impl.WorkListServiceImpl;
@@ -50,6 +49,11 @@ public class WorkListController {
     private final SparePartService sparePartService;
 
     /**
+     *
+     */
+    private final OrdersService ordersService;
+
+    /**
      * @param model
      * @return
      */
@@ -90,9 +94,11 @@ public class WorkListController {
                                             WorkListDto workListDto) {
         List<MechanicDto> mechanicDtoList = mechanicService.listAllMechanics();
         List<SparePartDto> sparePartDtoList = sparePartService.listAllSparePart();
+        List<OrdersDto> ordersDtoList = ordersService.listAllOrders();
 
         model.addAttribute(MECHANIC_DTO_LIST, mechanicDtoList);
         model.addAttribute(SPARE_PART_DTO_LIST, sparePartDtoList);
+        model.addAttribute(ORDERS_DTO_LIST, ordersDtoList);
         model.addAttribute(WORK_LIST_DTO, workListDto);
         return WORK_LIST_ADD_EDIT;
     }
@@ -112,7 +118,8 @@ public class WorkListController {
                                @RequestParam(
                                        value = SPARE_PARTS_LIST,
                                        required = false,
-                                       defaultValue = "0") Integer[] sparePartsList) {
+                                       defaultValue = "0") Integer[] sparePartsList,
+                               @RequestParam(ORDER_ID) Integer orderId) {
 
         List<Integer> mechanics = new ArrayList<>();
         Collections.addAll(mechanics, mechanicsList);
@@ -130,8 +137,11 @@ public class WorkListController {
                 .map(sparePartService::findSparePartById)
                 .collect(Collectors.toList());
 
+        OrdersDto ordersDto = ordersService.findOrderById(orderId);
+
         workListDto.setMechanic(mechanicsDtoList);
         workListDto.setSparePart(sparePartsDtoList);
+        workListDto.setOrders(ordersDto);
         workListService.addWorkList(workListDto);
         return REDIRECT_WORK_LIST;
     }
@@ -146,8 +156,11 @@ public class WorkListController {
                                        Model model) {
         List<MechanicDto> mechanicDtoList = mechanicService.listAllMechanics();
         List<SparePartDto> sparePartDtoList = sparePartService.listAllSparePart();
+        List<OrdersDto> ordersDtoList = ordersService.listAllOrders();
+
         model.addAttribute(MECHANIC_DTO_LIST, mechanicDtoList);
         model.addAttribute(SPARE_PART_DTO_LIST, sparePartDtoList);
+        model.addAttribute(ORDERS_DTO_LIST, ordersDtoList);
         model.addAttribute(WORK_LIST_DTO, workListService.findWorkListById(workListId));
         return WORK_LIST_ADD_EDIT;
     }

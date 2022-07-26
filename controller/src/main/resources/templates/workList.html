@@ -22,6 +22,7 @@
                     WorkList Coast</a></th>
             <th scope="col">List spare part</th>
             <th scope="col">Mechanics</th>
+            <th scope="col">Order name</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -41,7 +42,7 @@
                 <span th:text="${mechanic.mechanicLastName}"/>
                 <th:block th:if="${!irerStat.last}">,</th:block><br></span>
             </td>
-
+            <td th:text="${workListDto.orders.ordersDescription}">Coast</td>
             <td>
                 <a th:href="@{/workList/editWorkList/{id}(id=${workListDto.workListId})}"
                    class="btn btn-primary eBtn">Edit</a>

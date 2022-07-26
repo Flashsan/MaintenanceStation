@@ -41,6 +41,11 @@ public class WorkListConverter implements Converter<WorkList, WorkListDto> {
     private final SparePartConverter sparePartConverter;
 
     /**
+     *
+     */
+    private final OrdersConverter ordersConverter;
+
+    /**
      * WorkList convert to WorkListDto
      *
      * @param entity
@@ -49,6 +54,7 @@ public class WorkListConverter implements Converter<WorkList, WorkListDto> {
     @Override
     public WorkListDto entityToDto(WorkList entity) {
         WorkListDto workListDto = modelMapper.map(entity, WorkListDto.class);
+        workListDto.setOrders(ordersConverter.entityToDto(entity.getOrders()));
         return workListDto;
     }
 
@@ -74,6 +80,7 @@ public class WorkListConverter implements Converter<WorkList, WorkListDto> {
 
         workList.setMechanic(mechanics);
         workList.setSparePart(spareParts);
+        workList.setOrders(ordersConverter.dtoToEntity(dto.getOrders()));
 
         return workList;
     }

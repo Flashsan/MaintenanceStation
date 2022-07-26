@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Order entity
@@ -59,7 +59,7 @@ public class Orders implements Serializable {
      * List tasks for orders.
      */
     @OneToMany(mappedBy = "orders")
-    private Set<WorkList> workList;
+    private List<WorkList> workList;
 
 
 }
