@@ -1,9 +1,11 @@
 package com.it.academy.maintenancestation.controller;
 
 import com.it.academy.maintenancestation.dto.AdministratorDto;
+import com.it.academy.maintenancestation.dto.CarDto;
 import com.it.academy.maintenancestation.dto.OrdersDto;
 import com.it.academy.maintenancestation.service.AdministratorService;
 import com.it.academy.maintenancestation.service.OrdersService;
+import com.it.academy.maintenancestation.service.СarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,10 @@ public class OrdersController {
 
     /**
      *
+     */
+    private final СarService carsService;
+
+    /**
      * @param model
      * @return
      */
@@ -45,7 +51,6 @@ public class OrdersController {
     }
 
     /**
-     *
      * @param model
      * @param ordersDto
      * @return
@@ -53,12 +58,12 @@ public class OrdersController {
     @GetMapping("/saveOrder")
     public String showCreateFormNewOrders(Model model, OrdersDto ordersDto) {
         model.addAttribute(ADMINISTRATOR_DTO_LIST, administratorService.listAllAdministrators());
+        model.addAttribute(CAR_DTO_LIST, carsService.listAllCars());
         model.addAttribute(ORDERS_DTO, ordersDto);
         return ORDERS_ADD_EDIT;
     }
 
     /**
-     *
      * @param ordersDto
      * @param administratorId
      * @return
@@ -66,15 +71,17 @@ public class OrdersController {
     @PostMapping("/saveOrder")
     public String saveOrders(@ModelAttribute(ORDERS_DTO)
                                      OrdersDto ordersDto,
+                             @RequestParam(CAR_ID) Integer carId,
                              @RequestParam(ADMINISTRATOR_ID) Integer administratorId) {
         AdministratorDto administratorDtoToOrder = administratorService.findAdministratorById(administratorId);
+        CarDto carDtoToOrder = carsService.findCarById(carId);
         ordersDto.setAdministrator(administratorDtoToOrder);
+        ordersDto.setCar(carDtoToOrder);
         ordersService.addOrder(ordersDto);
         return REDIRECT_ORDERS;
     }
 
     /**
-     *
      * @param orderId
      * @param model
      * @return
@@ -82,12 +89,13 @@ public class OrdersController {
     @GetMapping("/editOrders/{id}")
     public String showEditFormOrders(@PathVariable(name = ID) Integer orderId,
                                      Model model) {
+        model.addAttribute(ADMINISTRATOR_DTO_LIST, administratorService.listAllAdministrators());
+        model.addAttribute(CAR_DTO_LIST, carsService.listAllCars());
         model.addAttribute(ORDERS_DTO, ordersService.findOrderById(orderId));
         return ORDERS_ADD_EDIT;
     }
 
     /**
-     *
      * @param orderId
      * @return
      */

@@ -20,6 +20,7 @@
         <input type="hidden" th:field="*{ordersDto.ordersId}"/>
 
         <div class="m-3">
+
             <div class="form-group row">
                 <label class="col-form-label col-sm-4">Order description:</label>
                 <div class="col-sm-8">
@@ -34,15 +35,29 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4">Administrator:</label>
+                <div class="col-sm-6">
+                    <select name="carId" class="form-control" required>
+                        <th:block th:each="carDto:${carDtoList}">
+                            <option th:text="${carDto.carNumber}"
+                                    th:value="${carDto.carId}"/>
+                        </th:block>
+                    </select>
+                </div>
+            </div>
+
             <div class=" form-group row">
                 <label class="col-form-label col-sm-4">Order inspection result:</label>
+                <div>
+                    <textarea
+                            class="form-control"
+                            id="col-form-label col-sm-4"
+                            rows="6"
+                            th:field="*{ordersDto.ordersInspectionResult}"></textarea>
+                </div>
+
                 <div class="col-sm-8">
-                    <input type="text"
-                           th:field="*{ordersDto.ordersInspectionResult}"
-                           id="administratorDto.administratorLastName"
-                           class="form-control"
-                           placeholder="Например:В результате осмотра было выявленно,что причиной шума являеться грымыхание моторной цепи."
-                           required/>
                     <div class="alert alert-warning"
                          th:if="${#fields.hasErrors('ordersDto.ordersInspectionResult')}"
                          th:errors="*{ordersDto.ordersInspectionResult}"></div>
@@ -54,7 +69,7 @@
                 <div class="col-sm-6">
                     <select name="administratorId" class="form-control" required>
                         <th:block th:each="administratorDto:${administratorDtoList}">
-                            <option  th:text="${administratorDto.administratorName}"
+                            <option th:text="${administratorDto.administratorName}"
                                     th:value="${administratorDto.administratorId}"/>
                         </th:block>
                     </select>

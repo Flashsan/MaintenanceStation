@@ -17,10 +17,9 @@
         <tr>
             <th scope="col">№</th>
             <th scope="col">Description</th>
-            <th scope="col">car_id</th>
+            <th scope="col">Car number</th>
             <th scope="col">Inspection result</th>
-            <th scope="col">List accepted orders</th>
-            <th scope="col">administrator_id</th>
+            <th scope="col">Administrator</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -28,9 +27,9 @@
         <tr th:each="ordersDto, countLine:${ordersDtoList}">
             <td th:text="${countLine.index + 1}">Count Line</td>
             <td th:text="${ordersDto.ordersDescription}">Description</td>
+            <td th:text="${ordersDto.car.carNumber}">Car number</td>
             <td th:text="${ordersDto.ordersInspectionResult}">Inspection Result</td>
-            <!--            <td th:text="${ordersDto.administrator.administratorName}">Administrator Name</td>-->
-            <!--            <td th:text="${ordersDto.administrator.administratorLastName}">Administrator LastName</td>-->
+            <td th:text="${ordersDto.administrator.administratorLastName}">Inspection Result</td>
             <td>
                 <a th:href="@{/orders/editOrders/{id}(id=${ordersDto.ordersId})}"
                    class="btn btn-primary eBtn">Edit</a>
@@ -41,30 +40,35 @@
         </tbody>
     </table>
     <hr/>
+    <!--         #Modal for removing Order -->
+    <div class="modal fade"
+         id="removeModalCenter"
+         tabindex="-1" role="dialog"
+         aria-labelledby="removeModalCenterTitle"
+         aria-hidden="true">
 
-    <!--    &lt;!&ndash;         #Modal for removing Administrator &ndash;&gt;-->
-    <!--    <div class="modal fade" id="removeModalCenter" tabindex="-1" role="dialog" aria-labelledby="removeModalCenterTitle"-->
-    <!--         aria-hidden="true">-->
-    <!--        <div class="modal-dialog modal-dialog-centered" role="document">-->
-    <!--            <div class="modal-content">-->
-    <!--                <div class="modal-header">-->
-    <!--                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>-->
-    <!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-    <!--                        <span aria-hidden="true">&times;</span>-->
-    <!--                    </button>-->
-    <!--                </div>-->
-    <!--                <div class="modal-body">-->
-    <!--                    <p class="alert alert-danger">-->
-    <!--                        Are You sure You want to delete this Administrator?-->
-    <!--                    </p>-->
-    <!--                </div>-->
-    <!--                <div class="modal-footer">-->
-    <!--                    <a href="" class="btn btn-danger" id="delRef">Delete</a>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--    &lt;!&ndash;     #End modal form for removing WorkList &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="removeModalCenterTitle">Attention!!!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-danger">
+                        Are You sure You want to delete this Order?
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="" class="btn btn-danger" id="delRef">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--     #End modal form for removing Order-->
 
 </div>
 <div th:replace="fragments::footer">Static footer</div>

@@ -63,12 +63,13 @@ public class AllControllerConstant {
     public static final String ORDERS_DTO = "ordersDto";
     public static final String ORDERS_ADD_EDIT = "ordersAddEdit";
     public static final String ADMINISTRATOR_ID = "administratorId";
+    public static final String CAR_ID = "carId";
     public static final String REDIRECT_ORDERS = "redirect:/orders/";
 
     /**
      * Constant(SparePartController)
      */
-    public static final String SPARE_PART_DTO_LIST = "sparePartDtoList";
+    public static final String SPARE_PART_DTO_LIST = "sparePartDtosList";
     public static final String SPARE_PART = "sparePart";
     public static final String SPARE_PART_DTO = "sparePartDto";
     public static final String SPARE_PART_ADD_EDIT = "sparePartAddEdit";
@@ -95,10 +96,6 @@ public class AllControllerConstant {
     public static final String DESC = "desc";
     public static final String MECHANICS_LIST = "mechanicsList";
     public static final String SPARE_PARTS_LIST = "sparePartsList";
-
-
-
-
 
 
 }

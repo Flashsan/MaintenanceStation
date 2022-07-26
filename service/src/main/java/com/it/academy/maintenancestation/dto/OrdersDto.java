@@ -26,4 +26,6 @@ public class OrdersDto implements Serializable {
     @JsonIgnore
     private AdministratorDto administrator;
 
+    private CarDto car;
+
 }

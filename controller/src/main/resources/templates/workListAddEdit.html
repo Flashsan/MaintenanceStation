@@ -62,7 +62,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-sm-4">Spare parts:</label>
                     <div class="col-sm-6 text-left">
-                        <th:block th:name="sparePartList" th:each="sparePartDto:${sparePartDtoList}">
+                        <th:block th:each="sparePartDto:${sparePartDtosList}">
                             <div>
                                 <input type="checkbox" name="sparePartsList"
                                        th:value="${sparePartDto.sparePartId}" class="m-2"/>
