@@ -7,33 +7,6 @@
 
 <div class="container">
     <!--    <div><h2>Maintenance Station | [[${pageTitle}</h2></div>-->
-
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">№</th>
-            <th cope="col">WorkList Name</th>
-            <th scope="col">WorkList Coast</th>
-            <th scope="col">List spare part</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="workListDto, countLine:${acceptedWorkList}">
-            <td th:text="${countLine.index + 1}">Count Line</td>
-            <td th:text="${workListDto.workListName}">Name</td>
-            <td th:text="${workListDto.workListCoast}">Coast</td>
-            <td>
-                <span th:each="sparePartDto,irerStat:${workListDto.sparePart}">
-                    <span th:text="${sparePartDto.sparePartNamePart}"/>
-                    <th:block th:if="${!irerStat.last}">,</th:block><br></span>
-            </td>
-            <td>
-                <a th:href="@{/workList/editWorkList/{id}(id=${workListDto.workListId})}"
-                   class="btn btn-primary eBtn">Edit</a>
-            </td>
-        </tr>
-        </tbody>
     </table>
     <table class="table table-hover">
         <thead>
@@ -48,11 +21,10 @@
             <th scope="col">Type body</th>
             <th scope="col">Year of issue</th>
             <th scope="col">Order list for car</th>
-            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="carDto, countLine:${carDtoList}">
+        <tr th:each="carDto, countLine:${ownCarsList}">
             <td th:text="${countLine.index + 1}">Count Line</td>
             <td th:text="${carDto.carModel}">Model</td>
             <td th:text="${carDto.carColor}">Color</td>
@@ -62,13 +34,6 @@
             <td th:text="${carDto.carDetails.carDetailsTypeTransmission}">Type transmission</td>
             <td th:text="${carDto.carDetails.carDetailsTypeBody}">Type body</td>
             <td th:text="${carDto.carDetails.carDetailsYearOfIssue}">Year of issue</td>
-            <td></td>
-            <td>
-                <a th:href="@{/car/editCar/{id}(id=${carDto.carId})}"
-                   class="btn btn-primary eBtn">Edit</a>
-                <a th:href="@{/car/deleteCar/{id}(id=${carDto.carId})}"
-                   class="btn btn-danger delBtn">Delete</a>
-            </td>
         </tr>
         </tbody>
     </table>
