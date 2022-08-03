@@ -50,17 +50,15 @@ public class User {
      * status for user
      */
     @Column(name = "user_activate")
-    private String userActivate;
+    private boolean userActivate;
 
     /**
      * Role which user have
      */
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
-            fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "users_user_id"),
-            inverseJoinColumns = @JoinColumn(name = "roles_role_id"))
-    private Set<Role> roles = new LinkedHashSet<>();
+//
+    @Column(name = "user_roles")
+    @ElementCollection(targetClass= Role.class, fetch =FetchType.LAZY)
+    @CollectionTable(name="user_role", joinColumns = @JoinColumn(name= "users_user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 }

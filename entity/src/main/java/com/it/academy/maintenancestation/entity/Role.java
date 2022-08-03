@@ -1,44 +1,32 @@
 package com.it.academy.maintenancestation.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 /**
- * Role entity
+ * Role enum
  *
  * @author Alexander Grigorovich
  * @version 12.07.2022
  */
+public enum Role implements GrantedAuthority {
+    ADMIN("admin"),
+    ADMINISTRATOR("administrator"),
+    CLIENT("client"),
+    MECHANIC("mechanic");
 
-@Entity
-@Table(name = "roles")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-public class Role {
-    /**
-     * id role
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id", nullable = false)
-    private Integer roleId;
+    Role(String role) {
+        this.role = role;
+    }
 
-    /**
-     * name role
-     */
-    @Column(name = "role_name")
-    private String name;
+    private String role;
 
-    /**
-     * list role for each user
-     */
-    @ManyToMany(mappedBy = "roles",
-            fetch = FetchType.EAGER)
-    private Set<User> userSet;
+    @Override
+    public String getAuthority() {
+        return role;
+    }
 }
